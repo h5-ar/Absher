@@ -4,9 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
 
-class ChangeLang
+class CheckUserPlatform
 {
     /**
      * Handle an incoming request.
@@ -15,7 +16,9 @@ class ChangeLang
      */
     public function handle(Request $request, Closure $next): Response
     {
-        app()->setLocale(session('lang', 'ar'));
+        if (request()->header('platform') == 'ios') {
+            return to_route(Route::currentRouteName() . 'ios');
+        }
         return $next($request);
     }
 }

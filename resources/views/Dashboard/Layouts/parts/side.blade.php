@@ -26,10 +26,10 @@
             </x-side.naveItem>
             <x-side.naveItem name="Buses" data_fether="layers">
                 <x-side.menuContent name="All Buses"
-                    routeName="dashboard" />
+                    routeName="bus.index" />
 
                 <x-side.menuContent name="Add New Bus"
-                    routeName="dashboard" />
+                    routeName="add.bus" />
             </x-side.naveItem>
             <x-side.naveItem name="Subscribtions" data_fether="layers">
                 <x-side.menuContent name="Add New Subscribtion"

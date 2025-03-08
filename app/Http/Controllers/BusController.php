@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;  // إضافة هذه السطر
 use App\Models\Bus;
+use App\Models\Company;
 use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
 
 class BusController extends Controller
 {
@@ -12,7 +15,7 @@ class BusController extends Controller
      */
     public function index()
     {
-        //
+        return view('Dashboard.Admin.Bus.index');
     }
 
     /**
@@ -20,7 +23,8 @@ class BusController extends Controller
      */
     public function create()
     {
-        //
+        $companies = Company::all();
+        return view('Dashboard.Admin.Bus.create', compact('companies'));
     }
 
     /**
@@ -28,8 +32,18 @@ class BusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // هنا تحصل على ID الشركة من الجلسة
+        $companyId = Auth::user()->company_id;  // تصحيح هنا
+        Bus::insert(
+            [
+                'type' => $request->type,
+                'company_id' => $companyId,  // استخدام الاسم الصحيح للعمود
+                'seats_count' => $request->seats_count
+            ]
+        );
+        return redirect()->route('bus.index');
     }
+
 
     /**
      * Display the specified resource.

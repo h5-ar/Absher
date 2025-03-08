@@ -1,5 +1,5 @@
 @extends('Dashboard.Layouts.adminLayout')
-@use('App\Enums\Permission')
+
 @section('title')
 {{ translate('Add Trip') }}
 @endsection

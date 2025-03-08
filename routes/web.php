@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TripController;
+use App\Http\Controllers\BusController;
+
 
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Bus;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +32,12 @@ Route::post('change-lang', [DashboardController::class, 'switchLang'])->name('da
 Route::get('add', [TripController::class, 'create'])->name('add');
 Route::get('index', [TripController::class, 'index'])->name('index');
 Route::post('store', [TripController::class, 'store'])->name('trip.store');
+Route::get('add.bus', [BusController::class, 'create'])->name('add.bus');
+Route::post('store', [BusController::class, 'store'])->name('bus.store');
+Route::get('bus.index', [BusController::class, 'index'])->name('bus.index');
+
+
+
 
 
 

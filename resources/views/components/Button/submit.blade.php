@@ -23,3 +23,4 @@
     ]) }}>
     {{ translate($label) }}
 </button>
+
