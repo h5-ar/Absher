@@ -12,7 +12,7 @@ class SubscribtionController extends Controller
      */
     public function index()
     {
-        //
+        return 76543;
     }
 
     /**
@@ -20,8 +20,7 @@ class SubscribtionController extends Controller
      */
     public function create()
     {
-        //
-    }
+        return view('Dashboard.Admin.Subscribtion.create');}
 
     /**
      * Store a newly created resource in storage.

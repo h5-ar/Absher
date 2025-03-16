@@ -1,18 +1,17 @@
 @extends('Dashboard.Layouts.adminLayout')
 
 @section('title')
-{{ translate('Buses') }}
+{{ translate('Plans') }}
 @endsection
 @section('content')
     <x-Content.normal>
         <div class="card shadow">
-      
                 <div class="card-header">
-                    <x-Button.add name="Add Bus" route="{{ route('add.bus') }}" />
+                    <x-Button.add name="Add Plan" route="{{ route('add.plan') }}" />
                 </div>
             <div class="card-body ">
                 <div id="page-data">
-                    @include('Dashboard.Admin.Bus.Section.indexTable',['buses' => $buses])
+                    @include('Dashboard.Admin.Plan.Section.indexTable',['plans' => $plans])
                 </div>
             </div>
         </div>

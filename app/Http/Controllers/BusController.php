@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;  // إضافة هذه السطر
+use App\Http\Requests\CreateBusRequest;
+use App\Http\Requests\UpdateBusRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Bus;
 use App\Models\Company;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Session;
+
 
 class BusController extends Controller
 {
@@ -15,7 +18,11 @@ class BusController extends Controller
      */
     public function index()
     {
-        return view('Dashboard.Admin.Bus.index');
+        $buses = Bus::paginate();
+        if (request()->ajax()) {
+            return view('Dashboard.Admin.Bus.Section.indexTable', compact('buses'));
+        }
+        return view('Dashboard.Admin.Bus.index', compact('buses'));
     }
 
     /**
@@ -30,50 +37,69 @@ class BusController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateBusRequest $request)
     {
-        // هنا تحصل على ID الشركة من الجلسة
-        $companyId = Auth::user()->company_id;  // تصحيح هنا
+
+        $companyId = $this->getLoggedInCompanyId();
+
         Bus::insert(
             [
                 'type' => $request->type,
-                'company_id' => $companyId,  // استخدام الاسم الصحيح للعمود
+                'company_id' => $companyId,
                 'seats_count' => $request->seats_count
             ]
         );
+        Session::flash('successMessage', translate('add successfully'));
+
         return redirect()->route('bus.index');
     }
+
+    function getLoggedInCompanyId()
+    {
+        return Auth::id();
+    }
+
 
 
     /**
      * Display the specified resource.
      */
-    public function show(Bus $bus)
-    {
-        //
-    }
+    public function show(Bus $bus) {}
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Bus $bus)
+    public function edit($id)
     {
-        //
+        $bus = Bus::findOrFail($id);
+        return view('Dashboard.Admin.Bus.edit', compact('bus'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Bus $bus)
+    public function update(UpdateBusRequest $request, $id)
     {
-        //
+        $bus = Bus::findOrFail($id);
+
+        $bus->update([
+            'type' => $request->validated('type'),
+            'seats_count' => $request->validated('seats_count')
+        ]);
+        Session::flash('successMessage', translate('updated successfully'));
+        return to_route('bus.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Bus $bus)
+    public function destroy($id)
     {
-        //
+        $bus = Bus::findOrFail($id);
+        
+        $bus->delete();
+
+        Session::flash('successMessage', translate('Deleted successfully'));
+        return to_route('bus.index');
     }
 }

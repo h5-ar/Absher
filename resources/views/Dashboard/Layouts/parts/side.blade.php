@@ -20,9 +20,11 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <x-side.naveItem name="Trips" data_fether="layers">
                 <x-side.menuContent name="All Trips"
-                    routeName="index" />
-                <x-side.menuContent name="Add New Trip"
-                    routeName="add" />
+                    routeName="trip.index" />
+                <x-side.menuContent name="Add A Quick Trip"
+                    routeName="add.quick" />
+                <x-side.menuContent name="Add A Vehicle Trip"
+                    routeName="add.vehicle" />
             </x-side.naveItem>
             <x-side.naveItem name="Buses" data_fether="layers">
                 <x-side.menuContent name="All Buses"
@@ -31,11 +33,12 @@
                 <x-side.menuContent name="Add New Bus"
                     routeName="add.bus" />
             </x-side.naveItem>
-            <x-side.naveItem name="Subscribtions" data_fether="layers">
-                <x-side.menuContent name="Add New Subscribtion"
-                    routeName="dashboard" />
-                <x-side.menuContent name="All Subscribtions"
-                    routeName="dashboard" />
+            <x-side.naveItem name="plan" data_fether="layers">
+                <x-side.menuContent name="All Plan"
+                    routeName="index.plan" />
+                <x-side.menuContent name="Add New Plan"
+                    routeName="add.plan" />
+
             </x-side.naveItem>
         </ul>
     </div>

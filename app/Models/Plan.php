@@ -10,6 +10,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Plan extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'trips_number',
+        'type_bus',
+        'available',
+        'price',
+    ];
+
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);

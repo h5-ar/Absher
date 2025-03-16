@@ -7,10 +7,10 @@
 <style>
     :root {
         --nav-item-selected-background: #50535340;
-        --nav-item-sub-selected-background:  #7ABEB9;
-        --nav-item-sub-selected-color: #505353  !important;
+        --nav-item-sub-selected-background: #7ABEB9;
+        --nav-item-sub-selected-color: #505353 !important;
         --nav-item-selected-color: #FFFFFF;
-        --side-background-color:#65B1AB;
+        --side-background-color: #65B1AB;
     }
 </style>
 <!-- BEGIN: Vendor CSS-->

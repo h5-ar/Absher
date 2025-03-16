@@ -19,13 +19,14 @@
 <x-Content.normal>
     <div class="card">
         <div class="card-body">
-            <form id="createForm" class="form form-horizontal" method="POST"
-                action="{{ route('bus.store') }}">
+            <form method="POST" id="createUserForm" action="{{ route('bus.update', $bus->id) }}"
+                enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="row">
-                    <x-inputs.h-gender-select namefor="type" id="type" description="Select Type Bus" />
 
-                    <x-inputs.Multi-Vertical.input label="Seats Count" name="seats_count"
+                    <x-inputs.h-gender namefor="type" id="type" typeValue="{{ $bus->type }}" description="Select Type Bus" />
+                    <x-inputs.Multi-Vertical.input value="{{ $bus->seats_count }}" label="Seats Count" name="seats_count"
                         placeholder="Seats Count" inputId="seats_count" required isRequired="true"
                         description="Enter Seats Count" />
                 </div>
@@ -37,3 +38,6 @@
     </div>
 </x-Content.normal>
 @endsection
+@push('layout-scripts')
+
+@endpush
