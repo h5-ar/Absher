@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\BusType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Enums\Governorates;
+use App\Enums\Days;
+
 
 class UpdateTripRequest extends FormRequest
 {
@@ -17,15 +19,16 @@ class UpdateTripRequest extends FormRequest
     {
         return [
 
-            'price' => ['required'],
+            'price' => ['required', 'numeric'],
             'Bus' => ['required'],
             'datetime' => ['required'],
-            'from' => ['required'],
-            'to1' => ['required'],
-            'to2' => ['required'],
-            'to3' => ['nullable'],
-            'to4' => ['nullable'],
-            'to5' => ['nullable']
+            'day' => ['required', Rule::enum(Days::class)],
+            'from' => ['required', Rule::enum(Governorates::class)],
+            'to1' => ['required', Rule::enum(Governorates::class)],
+            'to2' => ['nullable', Rule::enum(Governorates::class)],
+            'to3' => ['nullable', Rule::enum(Governorates::class)],
+            'to4' => ['nullable', Rule::enum(Governorates::class)],
+            'to5' => ['nullable', Rule::enum(Governorates::class)]
         ];
     }
 }

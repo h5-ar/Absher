@@ -19,6 +19,12 @@
                     {{ translate('Price') }}
                 </th>
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
+                    {{ translate('From') }}
+                </th>
+                <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
+                    {{ translate('To') }}
+                </th>
+                <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('Actions') }}
                 </th>
             </tr>
@@ -44,6 +50,12 @@
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ $plan->price }}
                 </td>
+                <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
+                    {{ $plan->form }}
+                </td>
+                <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
+                    {{ $plan->to }}
+                </td>
                 <td class="text-nowrap w-30 text-capitalize fs-5 fw-bolder text-center">
                     <x-Button.edit route="{{ route('plan.edit', $plan->id) }}" />
                     <x-Button.delete route="{{ route('plan.delete',$plan->id) }}" />
@@ -51,7 +63,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="8" class="text-center fs-4 fw-bolder"> {{ translate('No Data') }} </td>
+                <td colspan="10" class="text-center fs-4 fw-bolder"> {{ translate('No Data') }} </td>
             </tr>
             @endforelse
         </tbody>

@@ -61,7 +61,9 @@ class TripController extends Controller
             'price' => $request->price,
             'bus_id' => $request->Bus,
             'company_id' => $companyId,
-            'take_off_at' => date('Y-m-d H:i:s', strtotime($request->datetime))
+            'take_off_at' => date('Y-m-d H:i:s', strtotime($request->datetime)),
+            'day' => $request->day
+
         ]);
 
         Path::insert([
@@ -80,7 +82,8 @@ class TripController extends Controller
             'price' => $request->price,
             'bus_id' => $request->Bus,
             'company_id' => $companyId,
-            'take_off_at' => date('Y-m-d H:i:s', strtotime($request->datetime))
+            'take_off_at' => date('Y-m-d H:i:s', strtotime($request->datetime)),
+            'day' => $request->day
         ]);
 
         Path::insert([
@@ -131,7 +134,9 @@ class TripController extends Controller
         $trip->update([
             'price' => $request->get('price'),
             'bus_id' => $request->get('Bus'),
-            'take_off_at' => date('Y-m-d H:i:s', strtotime($request->get('datetime')))
+            'take_off_at' => date('Y-m-d H:i:s', strtotime($request->get('datetime'))),
+            'day' => $request->get('day')
+
         ]);
         $trip->path()->update([
             'from' => $request->get('from'),

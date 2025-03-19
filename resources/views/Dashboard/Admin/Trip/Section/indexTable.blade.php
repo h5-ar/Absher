@@ -13,6 +13,9 @@
                     {{ translate('Date') }}
                 </th>
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
+                    {{ translate('Day') }}
+                </th>
+                <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('From') }}
                 </th>
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
@@ -51,6 +54,9 @@
                     {{ $trip->take_off_at }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
+                    {{ $trip->day }}
+                </td>
+                <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ $trip->path->from ?? '---' }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
@@ -75,7 +81,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="11" class="text-center fs-4 fw-bolder"> {{ translate('No Data') }} </td>
+                <td colspan="12" class="text-center fs-4 fw-bolder"> {{ translate('No Data') }} </td>
             </tr>
             @endforelse
         </tbody>

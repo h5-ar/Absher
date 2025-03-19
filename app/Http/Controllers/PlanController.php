@@ -41,7 +41,6 @@ class PlanController extends Controller
     public function store(CreatePlanRequest $request)
     {
         $companyId = $this->getLoggedInCompanyId();
-
         Plan::insert(
             [
                 'name' => $request->name,
@@ -49,7 +48,10 @@ class PlanController extends Controller
                 'company_id' => $companyId,
                 'type_bus' => $request->TypeBusOfPlan,
                 'available' => $request->available,
-                'price' => $request->price
+                'price' => $request->price,
+                'to' => $request->to,
+                'form' => $request->from
+
             ]
         );
         Session::flash('successMessage', translate('Add successfully'));
@@ -91,7 +93,10 @@ class PlanController extends Controller
             'trips_number' => $request['trips_number'],
             'type_bus' => $request['select2-type-container'],
             'available' => $request['available'],
-            'price' => $request['price']
+            'price' => $request['price'],
+            'form' => $request('from'),
+            'to' => $request['to']
+
         ]);
         Session::flash('successMessage', translate('Updated successfully'));
         return to_route('index.plan');

@@ -47,6 +47,9 @@
                             <x-inputs.h-input inputName="price" inputId="price" lable="Price"
                                 description="Enter Price Plan" placeholder="{{ translate('Price Plan') }}"
                                 isRequired="true" />
+                            <x-inputs.governorates-select namefor="from" id="from" label="From" description="Select Governorates" isRequired="true" />
+                            <x-inputs.governorates-select namefor="to" id="to" label="To " description="Select Governorates" isRequired="true" />
+
                         </div>
 
                         <div class="col-sm-9 offset-sm-3">
@@ -60,4 +63,3 @@
     </div>
 </x-Content.normal>
 @endsection
-

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\Governorates;
 use App\Enums\BusType;
 use App\Enums\Available;
 
@@ -18,11 +19,14 @@ class UpdatePlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
+            'name' => ['required', 'string', 'max:50'],
             'select2-type-container'  => ['required', 'string', Rule::enum(BusType::class)],
             'trips_number'  => ['required', 'integer', 'min:3'],
             'available' => ['required', 'string', Rule::enum(Available::class)],
-            'price' => ['required', 'integer']
+            'price' => ['required', 'numeric'],
+            'from' => ['required', Rule::enum(Governorates::class)],
+            'to' => ['required', Rule::enum(Governorates::class), 'different:from']
+
         ];
     }
 }

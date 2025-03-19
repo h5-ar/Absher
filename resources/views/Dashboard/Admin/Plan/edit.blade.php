@@ -28,12 +28,15 @@
                         description="Enter Category Name" value="{{ $plan->name }}" isRequired='true' />
                     <x-inputs.h-input inputName="trips_number" inputId="trips_number" lable="Trips Number"
                         description="Enter Trips Number" value="{{ $plan->trips_number }}" isRequired='true' />
-                        <x-inputs.h-gender namefor="select2-type-container" id="select2-type-container" typeValue="{{ $plan->type_bus }}" description="Select Type Bus" />
+                    <x-inputs.h-gender namefor="select2-type-container" id="select2-type-container" typeValue="{{ $plan->type_bus }}" description="Select Type Bus" />
 
                     <x-inputs.available-select typeValue="{{ $plan->available }}" label="Status" description="Select Status Of Plan" />
                     <x-inputs.h-input inputName="price" inputId="price" lable="Price"
                         description="Enter Price Plan" value="{{ $plan->price}}"
                         isRequired="true" />
+                    <x-inputs.governorates-select typeValue="{{$plan->from}}" namefor="from" id="from" label="From" description="Select Governorates" isRequired="true" />
+                    <x-inputs.governorates-select typeValue="{{ $plan->to }}" namefor="to" id="to" label="To " description="Select Governorates" isRequired="true" />
+
                 </div>
 
 

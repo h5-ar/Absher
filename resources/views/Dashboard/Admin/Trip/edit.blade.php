@@ -64,6 +64,7 @@
                             description="Select Offer Start Date" enableTime="true"
                             time_24hr="false"
                             dateFormat="Y-m-d h:i K" />
+                        <x-inputs.h-day-select typeValue="{{$trip->day}}" description="Select Day" />
 
 
                         <x-inputs.governorates-select typeValue="{{$trip->path->from}}" namefor="from" id="from" label="From" description="Select Governorates" isRequired="true" />
@@ -89,7 +90,3 @@
     </div>
 </x-Content.normal>
 @endsection
-
-@push('layout-scripts')
-
-@endpush
