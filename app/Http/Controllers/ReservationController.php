@@ -36,7 +36,9 @@ class ReservationController extends Controller
      */
     public function show(Reservation $reservation)
     {
-        //
+       //
+      // $Reservation=Reservation:: get();
+      // return view ('reservation.index',compact('reservation'));
     }
 
     /**

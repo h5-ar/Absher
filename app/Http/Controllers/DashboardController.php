@@ -157,7 +157,7 @@ class DashboardController extends Controller
     {
         return 11;
     }
-    
+
     public function settings()
     {
         return 11;

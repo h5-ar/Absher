@@ -1,15 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PlanController;
-use App\Http\Controllers\TripController;
-use App\Http\Controllers\BusController;
-
-
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BusController;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PlanController;
+
+
+use App\Http\Controllers\TripController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,15 +23,20 @@ use Illuminate\Support\Facades\Bus;
 |
 */
 
-Route::get('/', function () {
-    return view('Auth.login');
-});
+
+// Route::get('/', function () {
+//     return view('Auth.login');
+// });
+Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.submit');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::middleware('auth:company')->group(function(){
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+});
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('dashboard.profile.show', [DashboardController::class, 'profile'])->name('dashboard.profile.show');
 Route::get('settings', [DashboardController::class, 'settings'])->name('settings');
-Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('change-lang', [DashboardController::class, 'switchLang'])->name('dashboard.set.lang');
 Route::get('add.quick', [TripController::class, 'createQuick'])->name('add.quick');
 Route::get('add.vehicle', [TripController::class, 'createVehicle'])->name('add.vehicle');
@@ -64,5 +70,5 @@ Route::post('store.plan',[PlanController::class,'store'])->name('store.plan');
 Route::get('plan.edit/{id}', [PlanController::class, 'edit'])->name('plan.edit');
 Route::put('plan.update/{id}', [PlanController::class, 'update'])->name('plan.update');
 Route::delete('plan.delete/{id}', [PlanController::class, 'destroy'])->name('plan.delete');
-
+//Route::get('/reservation',[ReservationController::class,'index']);
 
