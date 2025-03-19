@@ -46,7 +46,7 @@ class PlanController extends Controller
                 'name' => $request->name,
                 'trips_number' => $request->trips_number,
                 'company_id' => $companyId,
-                'type_bus' => $request->TypeBusOfPlan,
+                'type_bus' => $request->bustype,
                 'available' => $request->available,
                 'price' => $request->price,
                 'to' => $request->to,
@@ -91,10 +91,10 @@ class PlanController extends Controller
         $plan->update([
             'name' => $request['name'],
             'trips_number' => $request['trips_number'],
-            'type_bus' => $request['select2-type-container'],
+            'type_bus' => $request['bustype'],
             'available' => $request['available'],
             'price' => $request['price'],
-            'form' => $request('from'),
+            'form' => $request['from'],
             'to' => $request['to']
 
         ]);

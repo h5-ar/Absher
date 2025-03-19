@@ -41,7 +41,7 @@
                             <x-inputs.h-input inputName="trips_number" inputId="trips_number" lable="Trips Number"
                                 description="Enter Trips Number" placeholder="{{ translate('Trips Number') }}"
                                 isRequired="true" />
-                            <x-inputs.h-gender-select namefor="TypeBusOfPlan" id="TypeBusOfPlan" description="Select Type Bus" />
+                            <x-inputs.h-bustype-select description="Select Type Bus" />
 
                             <x-inputs.available-select label="Status" description="Select Status Of Plan" />
                             <x-inputs.h-input inputName="price" inputId="price" lable="Price"
