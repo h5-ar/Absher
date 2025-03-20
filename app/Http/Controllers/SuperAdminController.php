@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\SuperAdmin;
 use Illuminate\Http\Request;
+use App\Models\Manager;
+use App\Models\Company;
 
 class SuperAdminController extends Controller
 {
@@ -12,7 +14,12 @@ class SuperAdminController extends Controller
      */
     public function index()
     {
-        return view('Dashboard.SuperAdmin.dashboard');
+        $companies = Company::all();
+        $managers = Manager::all();
+
+    
+        return view('Dashboard.SuperAdmin.dashboard', compact('managers', 'companies'));
+    
     }
 
     /**

@@ -63,7 +63,6 @@ Route::middleware('auth:company')->group(function () {
     Route::put('plan/update/{id}', [PlanController::class, 'update'])->name('plan.update');
     Route::delete('plan/delete/{id}', [PlanController::class, 'destroy'])->name('plan.delete');
 });
-//Route::get('/reservation',[ReservationController::class,'index']);
 Route::post('set-theme', function () {
     Session::put('theme', request()->get('theme'));
     return true;
