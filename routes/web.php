@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PlanController;
 
+use App\Http\Controllers\SuperAdminController;
+
 
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\DashboardController;
@@ -24,15 +26,17 @@ use App\Http\Controllers\ReservationController;
 */
 
 
-// Route::get('/', function () {
-//     return view('Auth.login');
-// });
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.submit');
+Route::middleware('auth:super_admin')->group(function () {
+    Route::get('dashboard/superadmin', [SuperAdminController::class, 'index'])->name('super_admin.dashboard');
+
+});
+
 
 Route::middleware('auth:company')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard/admin', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('dashboard/profile/show', [DashboardController::class, 'profile'])->name('dashboard.profile.show');
     Route::get('settings', [DashboardController::class, 'settings'])->name('settings');
     Route::post('change-lang', [DashboardController::class, 'switchLang'])->name('dashboard.set.lang');
