@@ -2,7 +2,7 @@
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item me-auto">
-                <a class="navbar-brand" href="{{ route('dashboard') }}">
+                <a class="navbar-brand" href="{{ route('super_admin.dashboard') }}">
                     <h2 class="brand-text">{{ translate('Absher') }}</h2>
                 </a>
             </li>
@@ -18,27 +18,19 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <x-side.naveItem name="Trips" data_fether="layers">
-                <x-side.menuContent name="All Trips"
-                    routeName="trip.index" />
-                <x-side.menuContent name="Add A Quick Trip"
-                    routeName="add.quick" />
-                <x-side.menuContent name="Add A Vehicle Trip"
-                    routeName="add.vehicle" />
-            </x-side.naveItem>
-            <x-side.naveItem name="Buses" data_fether="layers">
-                <x-side.menuContent name="All Buses"
-                    routeName="bus.index" />
+            <x-side.naveItem name="Companies" data_fether="layers">
+                <x-side.menuContent name="All Companies"
+                    routeName="company.index" />
+                <x-side.menuContent name="Add Company"
+                    routeName="add.company" />
 
-                <x-side.menuContent name="Add New Bus"
-                    routeName="add.bus" />
             </x-side.naveItem>
-            <x-side.naveItem name="Plans" data_fether="layers">
-                <x-side.menuContent name="All Plan"
-                    routeName="index.plan" />
-                <x-side.menuContent name="Add New Plan"
-                    routeName="add.plan" />
+            <x-side.naveItem name="Managers" data_fether="layers">
+                <x-side.menuContent name="All Managers"
+                    routeName="manager.index" />
 
+                <x-side.menuContent name="Add Manager"
+                    routeName="add.manager" />
             </x-side.naveItem>
         </ul>
     </div>

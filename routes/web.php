@@ -6,6 +6,8 @@ use App\Http\Controllers\BusController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ManagerController;
 
 use App\Http\Controllers\SuperAdminController;
 
@@ -29,8 +31,23 @@ use App\Http\Controllers\ReservationController;
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login.submit');
 Route::middleware('auth:super_admin')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('dashboard/superadmin', [SuperAdminController::class, 'index'])->name('super_admin.dashboard');
+    Route::post('change-lang', [SuperAdminController::class, 'switchLang'])->name('dashboard.set.lang');
 
+    Route::get('company/index', [CompanyController::class, 'index'])->name('company.index');
+    Route::get('company/add', [CompanyController::class, 'create'])->name('add.company');
+    Route::post('company/store', [CompanyController::class, 'store'])->name('store.company');
+    Route::get('company/edit/{id}', [CompanyController::class, 'edit'])->name('edit.company');
+    Route::put('company/update/{id}', [CompanyController::class, 'update'])->name('update.company');
+    Route::delete('company/delete/{id}', [CompanyController::class, 'destroy'])->name('delete.company');
+
+    Route::get('manager/index', [ManagerController::class, 'index'])->name('manager.index');
+    Route::get('manager/add', [ManagerController::class, 'create'])->name('add.manager');
+    Route::post('manager/store', [ManagerController::class, 'store'])->name('store.manager');
+    Route::get('manager/edit/{id}', [ManagerController::class, 'edit'])->name('edit.manager');
+    Route::put('manager/update/{id}', [ManagerController::class, 'update'])->name('update.manager');
+    Route::delete('manager/delete/{id}', [ManagerController::class, 'destroy'])->name('delete.manager');
 });
 
 

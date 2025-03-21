@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use App\Models\SuperAdmin;
 use Illuminate\Http\Request;
 use App\Models\Manager;
 use App\Models\Company;
+
 
 class SuperAdminController extends Controller
 {
@@ -18,10 +20,20 @@ class SuperAdminController extends Controller
         $managers = Manager::all();
 
     
-        return view('Dashboard.SuperAdmin.dashboard', compact('managers', 'companies'));
+        return view('DashboardSuperAdmin.SuperAdmin.dashboard', compact('managers', 'companies'));
     
     }
 
+    public function switchLang()
+    {
+        $lang = match (app()->getLocale()) {
+            'ar'    => 'en',
+            'en'    => 'ar',
+        };
+
+        Session::put('lang', $lang);
+        return redirect()->route('super_admin.dashboard');
+    }
     /**
      * Show the form for creating a new resource.
      */

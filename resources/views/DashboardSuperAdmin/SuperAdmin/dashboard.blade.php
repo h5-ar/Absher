@@ -1,4 +1,4 @@
-@extends('Dashboard.Layouts.adminLayout')
+@extends('DashboardSuperAdmin.Layouts.adminLayout')
 @section('title')
 {{ translate('Dashboard') }}
 @endsection
@@ -34,7 +34,7 @@
                     <div class="card-body p-0">
                         <div class="table-responsive overflow-y-scroll custom-content-style" style="height: 400px">
                             <h4 class="text-center m-1 sticky-top w-100 fs-2 fw-bolder">
-                                {{ translate('Mangers') }}
+                                {{ translate('Managers') }}
                             </h4>
                             <table class="table">
                                 <thead>

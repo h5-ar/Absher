@@ -4,13 +4,8 @@
         <!-- bookmark-wrapper div -->
         <div class="bookmark-wrapper d-flex align-items-center">
             <ul class="nav navbar-nav d-xl-none">
-                <li class="nav-item">
-                    <a class="nav-link menu-toggle" href="#">
-                        <i class="ficon" data-feather="menu">
-
-                        </i>
-                    </a>
-                </li>
+                <li class="nav-item"><a class="nav-link menu-toggle" href="#"><i class="ficon"
+                            data-feather="menu"></i></a></li>
             </ul>
         </div>
         <ul class="nav navbar-nav align-items-center ms-auto">
@@ -20,34 +15,18 @@
                     {{ translate('EN') }}
                 </a>
             </li>
-            <li class="nav-item d-none d-lg-block" title="{{ translate('Theme', 'descriptions') }}">
-                <a class="nav-link nav-link-style">
-                    <i class="ficon" data-feather="moon">
-                    </i>
-                </a>
-            </li>
-            <li class="nav-item nav-search">
-                <a class="nav-link nav-link-search">
-                    <i class="ficon" data-feather="search">
-
-                    </i>
-                </a>
+            <li class="nav-item d-none d-lg-block" title="{{ translate('Theme', 'descriptions') }}"><a
+                    class="nav-link nav-link-style"><i class="ficon" data-feather="moon"></i></a></li>
+            {{-- <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon"
+                        data-feather="search"></i></a>
                 <div class="search-input">
-                    <div class="search-input-icon"><i data-feather="search">
-
-                        </i>
-                    </div>
-                    <input class="form-control input" type="text" placeholder="search..." tabindex="-1" data-search="search">
-                    <div class="search-input-close">
-                        <i data-feather="x">
-
-                        </i>
-                    </div>
-                    <ul class="search-list search-list-main">
-
-                    </ul>
+                    <div class="search-input-icon"><i data-feather="search"></i></div>
+                    <input class="form-control input" type="text" placeholder="search..." tabindex="-1"
+                        data-search="search">
+                    <div class="search-input-close"><i data-feather="x"></i></div>
+                    <ul class="search-list search-list-main"></ul>
                 </div>
-            </li>
+            </li> --}}
             <!-- dropdown-cart li-->
             <li class="nav-item dropdown dropdown-notification me-25"><a class="nav-link" href="#"
                     title="{{ translate('Notifications', 'descriptions') }}" data-bs-toggle="dropdown"><i class="ficon"
