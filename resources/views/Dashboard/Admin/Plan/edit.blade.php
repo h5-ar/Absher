@@ -24,12 +24,12 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
-                
+
                     <x-inputs.h-input inputName="name" inputId="name" lable="Name" placeholder="Category Name"
                         description="Enter Category Name" value="{{ $plan->name }}" isRequired='true' />
                     <x-inputs.h-input inputName="trips_number" inputId="trips_number" lable="Trips Number"
                         description="Enter Trips Number" value="{{ $plan->trips_number }}" isRequired='true' />
-                    <x-inputs.h-bustype-select  typeValue="{{ $plan->type_bus }}" description="Select Type Bus" />
+                    <x-inputs.h-bustype-select typeValue="{{$plan->type_bus}}" description="Select Type Bus" />
 
                     <x-inputs.available-select typeValue="{{ $plan->available }}" label="Status" description="Select Status Of Plan" />
                     <x-inputs.h-input inputName="price" inputId="price" lable="Price"

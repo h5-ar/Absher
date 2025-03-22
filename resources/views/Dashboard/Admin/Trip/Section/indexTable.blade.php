@@ -48,7 +48,8 @@
                     {{ $trip->price }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{ $trip->bus_id }}
+                    {{ $trip->bus_id }} {{ $trip->bus->type }}
+
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ $trip->take_off_at }}
@@ -75,8 +76,8 @@
                     {{ $trip->path->to5 ?? '---' }}
                 </td>
                 <td class="text-nowrap w-30 text-capitalize fs-5 fw-bolder text-center">
-                <x-Button.edit route="{{ route('trip.edit', $trip->id) }}" />
-                <x-Button.delete route="{{ route('trip.delete',$trip->id) }}" />
+                    <x-Button.edit route="{{ route('trip.edit', $trip->id) }}" />
+                    <x-Button.delete route="{{ route('trip.delete',$trip->id) }}" />
                 </td>
             </tr>
             @empty

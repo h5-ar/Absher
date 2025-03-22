@@ -18,7 +18,7 @@ class BusController extends Controller
      */
     public function index()
     {
-        $buses = Bus::paginate();
+        $buses = Bus::where('Company_id', Auth::id())->paginate(10);
         if (request()->ajax()) {
             return view('Dashboard.Admin.Bus.Section.indexTable', compact('buses'));
         }
@@ -44,7 +44,7 @@ class BusController extends Controller
 
         Bus::insert(
             [
-                'type' => $request->type,
+                'type' => $request->bustype,
                 'company_id' => $companyId,
                 'seats_count' => $request->seats_count
             ]
@@ -83,8 +83,8 @@ class BusController extends Controller
         $bus = Bus::findOrFail($id);
 
         $bus->update([
-            'type' => $request->validated('type'),
-            'seats_count' => $request->validated('seats_count')
+            'type' => $request['bustype'],
+            'seats_count' => $request['seats_count']
         ]);
         Session::flash('successMessage', translate('updated successfully'));
         return to_route('bus.index');
@@ -96,7 +96,7 @@ class BusController extends Controller
     public function destroy($id)
     {
         $bus = Bus::findOrFail($id);
-        
+
         $bus->delete();
 
         Session::flash('successMessage', translate('Deleted successfully'));

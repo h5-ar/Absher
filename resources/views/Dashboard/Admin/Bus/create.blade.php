@@ -23,14 +23,16 @@
                 action="{{ route('bus.store') }}">
                 @csrf
                 <div class="row">
-                    <x-inputs.h-gender-select namefor="type" id="type" description="Select Type Bus" />
+                    <x-inputs.h-bustype-select description="Select Type Bus" />
+                    <x-inputs.h-input inputName="seats_count" inputId="seats_count" lable="Seats Count"
+                        description="Enter Seats Count" placeholder="{{ translate('Enter Seats Count') }}"
+                        isRequired="true" />
+                    <div class="col-sm-9 offset-sm-3">
 
-                    <x-inputs.Multi-Vertical.input label="Seats Count" name="seats_count"
-                        placeholder="Seats Count" inputId="seats_count" required isRequired="true"
-                        description="Enter Seats Count" />
+                        <x-Button.submit />
+                        <x-Button.rest />
+                    </div>
                 </div>
-                <x-Button.submit />
-                <x-Button.rest />
 
             </form>
         </div>

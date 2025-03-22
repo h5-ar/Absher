@@ -24,15 +24,16 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
+                    <x-inputs.h-bustype-select typeValue="{{ $bus->type }}" description="Select Type Bus" />
 
-                    <x-inputs.h-gender namefor="type" id="type" typeValue="{{ $bus->type }}" description="Select Type Bus" />
-                    <x-inputs.Multi-Vertical.input value="{{ $bus->seats_count }}" label="Seats Count" name="seats_count"
-                        placeholder="Seats Count" inputId="seats_count" required isRequired="true"
-                        description="Enter Seats Count" />
+                    <x-inputs.h-input value="{{ $bus->seats_count }}" inputName="seats_count" inputId="seats_count" lable="Seats Count"
+                        description="Enter Seats Count" placeholder="{{ translate('Enter Seats Count') }}"
+                        isRequired="true" />
+                    <div class="col-sm-9 offset-sm-3">
+                        <x-Button.submit />
+                        <x-Button.rest />
+                    </div>
                 </div>
-                <x-Button.submit />
-                <x-Button.rest />
-
             </form>
         </div>
     </div>

@@ -19,7 +19,7 @@ class PlanController extends Controller
      */
     public function index()
     {
-        $plans = Plan::paginate();
+        $plans = Plan::where('Company_id', Auth::id())->paginate(10);
         if (request()->ajax()) {
             return view('Dashboard.Admin.plan.Section.indexTable', compact('plans'));
         }

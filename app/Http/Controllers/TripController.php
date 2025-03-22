@@ -22,8 +22,7 @@ class TripController extends Controller
      */
     public function index()
     {
-
-        $trips = Trip::with('path')->paginate();
+        $trips = Trip::where('Company_id', Auth::id())->with('path')->paginate(10);
         if (request()->ajax()) {
             return view(
                 'Dashboard.Admin.Trip.Section.indexTable',
@@ -132,19 +131,19 @@ class TripController extends Controller
 
 
         $trip->update([
-            'price' => $request->get('price'),
-            'bus_id' => $request->get('Bus'),
-            'take_off_at' => date('Y-m-d H:i:s', strtotime($request->get('datetime'))),
-            'day' => $request->get('day')
+            'price' => $request['price'],
+            'bus_id' => $request['Bus'],
+            'take_off_at' => date('Y-m-d H:i:s', strtotime($request['datetime'])),
+            'day' => $request['day']
 
         ]);
         $trip->path()->update([
-            'from' => $request->get('from'),
-            'to1' => $request->get('to1'),
-            'to2' => $request->get('to2'),
-            'to3' => $request->get('to3'),
-            'to4' => $request->get('to4'),
-            'to5' => $request->get('to5')
+            'from' => $request['from'],
+            'to1' => $request['to1'],
+            'to2' => $request['to2'],
+            'to3' => $request['to3'],
+            'to4' => $request['to4'],
+            'to5' => $request['to5']
         ]);
         Session::flash('successMessage', translate('updated successfully'));
 

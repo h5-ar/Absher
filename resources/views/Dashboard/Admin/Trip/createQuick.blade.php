@@ -40,37 +40,22 @@
                                 description="Enter Price Trip" placeholder="{{ translate('Price Trip') }}"
                                 isRequired="true" />
 
-                        </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="mb-1 row">
-                                    <div class="col-2 col-sm-3">
-                                        <label class="col-form-label fs-5 fw-bolder isRequired">{{ translate('Bus') }}</label>
-                                    </div>
-                                    <div class="col-10 col-sm-9">
-                                        <select class="select2 form-select rounded" name="Bus" id="default-select">
-                                            <option value="" disabled selected>{{ translate('Select Bus') }}</option>
-                                            @foreach ($buses as $bus)
-                                            <option class="form-control" value="{{ $bus->id }}">{{$bus->id}} {{$bus->type}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
+
+                            <x-inputs.h-bus-select description="Select Bus" />
+
+                            <x-Date.time-input
+                                name="datetime" dateId="datetime" label="History And Time" isRequired="true"
+                                description="Select Offer Start Date" enableTime="true"
+                                time_24hr="false"
+                                dateFormat="Y-m-d h:i K" />
+                            <x-inputs.h-day-select description="Select Day" />
+                            <x-inputs.governorates-select namefor="from" id="from" label="From" description="Select Governorates" isRequired="true" />
+                            <x-inputs.governorates-select namefor="to" id="to" label="To" description="Select Governorates" isRequired="true" />
+                            <div class="col-sm-9 offset-sm-3">
+                                <x-Button.submit />
+                                <x-Button.rest />
                             </div>
-                        </div>
-
-                        <x-Date.time-input
-                            name="datetime" dateId="datetime" label="History And Time" isRequired="true"
-                            description="Select Offer Start Date" enableTime="true"
-                            time_24hr="false"
-                            dateFormat="Y-m-d h:i K" />
-                        <x-inputs.h-day-select description="Select Day" />
-                        <x-inputs.governorates-select namefor="from" id="from" label="From" description="Select Governorates" isRequired="true" />
-                        <x-inputs.governorates-select namefor="to" id="to" label="To" description="Select Governorates" isRequired="true" />
-                        <div class="col-sm-9 offset-sm-3">
-                            <x-Button.submit />
-                            <x-Button.rest />
                         </div>
                     </form>
                 </div>

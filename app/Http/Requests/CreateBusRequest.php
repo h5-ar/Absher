@@ -16,8 +16,8 @@ class CreateBusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
-            'type'  => ['required', 'string', Rule::enum(BusType::class)],
+
+            'bustype'  => ['required', 'string', Rule::enum(BusType::class)],
             'seats_count'  => ['required', 'integer', 'min:20', 'max:80']
         ];
     }

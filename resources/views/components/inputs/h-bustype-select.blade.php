@@ -16,9 +16,10 @@
 
             <div class="col-10 col-sm-9">
                 <select class="select2 form-select rounded" name="bustype" id="bustype">
+                <option value="" disabled selected>{{ translate('Select Type Of Bus') }}</option>
                     @foreach (BusType::cases() as $bustype)
                     <option class="form-control" @selected($bustype->value == $typeValue)
-                        value="{{($bustype->value) }}">{{ translate($bustype->name) }}</option>
+                        value="{{($bustype->value)}}">{{ translate($bustype->name) }}</option>
                     @endforeach
                 </select>
             </div>
