@@ -35,6 +35,7 @@ Route::middleware('auth:super_admin')->group(function () {
     Route::get('dashboard/superadmin', [SuperAdminController::class, 'index'])->name('super_admin.dashboard');
     Route::post('change-lang', [SuperAdminController::class, 'switchLang'])->name('dashboard.set.lang');
 
+
     Route::get('company/index', [CompanyController::class, 'index'])->name('company.index');
     Route::get('company/add', [CompanyController::class, 'create'])->name('add.company');
     Route::post('company/store', [CompanyController::class, 'store'])->name('store.company');
@@ -55,7 +56,9 @@ Route::middleware('auth:company')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('dashboard/admin', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('dashboard/profile/show', [DashboardController::class, 'profile'])->name('dashboard.profile.show');
-    Route::get('settings', [DashboardController::class, 'settings'])->name('settings');
+    Route::get('dashboard/profile/edit/{id}', [DashboardController::class, 'editprofile'])->name('dashboard.profile.edit');
+    Route::put('dashboard/profile/update/{id}', [DashboardController::class, 'updateprofile'])->name('dashboard.profile.update');
+
     Route::post('change-lang', [DashboardController::class, 'switchLang'])->name('dashboard.set.lang');
     Route::get('add/quick', [TripController::class, 'createQuick'])->name('add.quick');
     Route::get('add/vehicle', [TripController::class, 'createVehicle'])->name('add.vehicle');

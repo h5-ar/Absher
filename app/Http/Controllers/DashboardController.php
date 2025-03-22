@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UpdateCompanyRequest;
+
 
 class DashboardController extends Controller
 {
@@ -21,67 +26,32 @@ class DashboardController extends Controller
         Session::put('lang', $lang);
         return redirect()->route('dashboard');
     }
+
     public function profile()
     {
-        return 11;
+        $user = Auth::user();
+        return view('Dashboard.Admin.Profile.show', compact('user'));
     }
-
-    public function settings()
+    public function editprofile($id)
     {
-        return 11;
+        $company = Company::findOrFail($id);
+        return view('Dashboard.Admin.Profile.edit', compact('company'));
     }
 
-    // public function settings()
-    // {
-    //     $settings = Setting::paginate();
-    //     return view('Dashboard.Admin.Settings.index', compact('settings'));
-    // }
+    public function updateprofile(UpdateCompanyRequest $request, $id)
+    {
+        $company = Company::findOrFail($id);
 
-    // public function updateSettings(Request $request, string $settingId)
-    // {
-    //     $setting =  Setting::findOrFail($settingId);
-
-    //     $setting->update(['value' => $request->value]);
-
-    //     Session::flash('successMessage', translate('Updated successfully'));
-    //     return redirect()->back();
-    // }
-
-
-    // public function backupDatabase()
-    // {
-    //     // Set the database credentials
-    //     $host     = env('DB_HOST');
-    //     $database = env('DB_DATABASE');
-    //     $username = env('DB_USERNAME');
-    //     $password = env('DB_PASSWORD');
-
-    //     // Set the path for the exported file
-    //     $filename = env('APP_NAME') . '_' . date('Y-m-d_H-i-s') . '.sql';
-    //     $path = storage_path('app/' . $filename);
-
-    //     // Use mysqldump to export the database
-    //     $command = sprintf(
-    //         'mysqldump -h%s -u%s -p%s %s',
-    //         $host,
-    //         $username,
-    //         $password,
-    //         $database
-    //     );
-
-    //     $process = Process::fromShellCommandline($command);
-
-    //     try {
-    //         // Run the command
-    //         $output = $process->mustRun()->getOutput();
-
-    //         // Write the output to the file
-    //         file_put_contents($path, $output);
-
-    //         // Return the file for download
-    //         return response()->download($path, $filename)->deleteFileAfterSend(true);
-    //     } catch (ProcessFailedException $exception) {
-    //         throw new \RuntimeException($exception->getMessage());
-    //     }
-    // }
+        $company->update([
+            'name' => $request['name'],
+            'phone' => $request['phone'],
+            'email' => $request['email'],
+            'username' => $request['username'],
+            'password' => Hash::make($request->input('password')),
+            'Description' => $request['description'],
+            'manager_id' => $request['manager']
+        ]);
+        Session::flash('successMessage', translate('Updated successfully'));
+        return to_route('dashboard.profile.show');
+    }
 }
