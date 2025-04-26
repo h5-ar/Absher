@@ -33,7 +33,7 @@
             @forelse ($plans as $key => $plan)
             <tr>
                 <td class="text-nowrap w-10 fs-5 fw-bolder text-center">
-                {{ ++$key + ($plans->currentPage() - 1) * $plans->perPage() }}
+                    {{ ++$key + ($plans->currentPage() - 1) * $plans->perPage() }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ $plan->name }}
@@ -42,19 +42,19 @@
                     {{ $plan->trips_number}}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{ $plan->type_bus }}
+                    {{ translate($plan->type_bus) }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{ $plan->available }}
+                    {{ translate($plan->available) }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ $plan->price }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{ $plan->form }}
+                    {{ translate($plan->form )}}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{ $plan->to }}
+                    {{ translate($plan->to) }}
                 </td>
                 <td class="text-nowrap w-30 text-capitalize fs-5 fw-bolder text-center">
                     <x-Button.edit route="{{ route('plan.edit', $plan->id) }}" />

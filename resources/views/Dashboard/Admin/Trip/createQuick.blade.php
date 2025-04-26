@@ -38,20 +38,20 @@
                         <div class="row">
                             <x-inputs.h-input inputName="price" inputId="price" lable="Price"
                                 description="Enter Price Trip" placeholder="{{ translate('Price Trip') }}"
-                                isRequired="true" />
+                                    />
 
 
 
                             <x-inputs.h-bus-select description="Select Bus" />
 
                             <x-Date.time-input
-                                name="datetime" dateId="datetime" label="History And Time" isRequired="true"
+                                name="datetime" dateId="datetime" label="Date"    
                                 description="Select Offer Start Date" enableTime="true"
                                 time_24hr="false"
                                 dateFormat="Y-m-d h:i K" />
                             <x-inputs.h-day-select description="Select Day" />
-                            <x-inputs.governorates-select namefor="from" id="from" label="From" description="Select Governorates" isRequired="true" />
-                            <x-inputs.governorates-select namefor="to" id="to" label="To" description="Select Governorates" isRequired="true" />
+                            <x-inputs.governorates-select namefor="from" id="from" label="From" description="Select Governorates"     />
+                            <x-inputs.governorates-select namefor="to" id="to" label="To" description="Select Governorates"     />
                             <div class="col-sm-9 offset-sm-3">
                                 <x-Button.submit />
                                 <x-Button.rest />

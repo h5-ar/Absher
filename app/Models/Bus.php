@@ -19,6 +19,7 @@ class Bus extends Model
     {
         return $this->belongsTo(Company::class);
     }
+    
     public function trip(): HasMany
     {
         return $this->hasMany(Trip::class);

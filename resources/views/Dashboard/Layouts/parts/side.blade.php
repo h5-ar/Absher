@@ -18,7 +18,7 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <x-side.naveItem name="Trips" data_fether="layers">
+            <x-side.naveItem name="Trips" data_fether="map-pin">
                 <x-side.menuContent name="All Trips"
                     routeName="trip.index" />
                 <x-side.menuContent name="Add A Quick Trip"
@@ -26,18 +26,25 @@
                 <x-side.menuContent name="Add A Vehicle Trip"
                     routeName="add.vehicle" />
             </x-side.naveItem>
-            <x-side.naveItem name="Buses" data_fether="layers">
+            <x-side.naveItem name="Buses" data_fether="truck">
                 <x-side.menuContent name="All Buses"
                     routeName="bus.index" />
 
                 <x-side.menuContent name="Add New Bus"
                     routeName="add.bus" />
             </x-side.naveItem>
-            <x-side.naveItem name="Plans" data_fether="layers">
-                <x-side.menuContent name="All Plan"
+            <x-side.naveItem name="Plans" data_fether="file-text">
+                <x-side.menuContent name=" All Plans"
                     routeName="index.plan" />
                 <x-side.menuContent name="Add New Plan"
                     routeName="add.plan" />
+
+            </x-side.naveItem>
+
+            <x-side.naveItem name="Reservations" data_fether="file-text">
+                <x-side.menuContent name=" All Reservations"
+                    routeName="index.reservation" />
+                
 
             </x-side.naveItem>
         </ul>

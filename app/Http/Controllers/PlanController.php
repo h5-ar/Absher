@@ -40,7 +40,7 @@ class PlanController extends Controller
     public function store(CreatePlanRequest $request)
     {
         $companyId = $this->getLoggedInCompanyId();
-        Plan::insert(
+        Plan::create(
             [
                 'name' => $request->name,
                 'trips_number' => $request->trips_number,
@@ -50,7 +50,6 @@ class PlanController extends Controller
                 'price' => $request->price,
                 'to' => $request->to,
                 'form' => $request->from
-
             ]
         );
         Session::flash('successMessage', translate('Add successfully'));

@@ -24,9 +24,9 @@
                 @csrf
                 <div class="row">
                     <x-inputs.h-bustype-select description="Select Type Bus" />
-                    <x-inputs.h-input inputName="seats_count" inputId="seats_count" lable="Seats Count"
-                        description="Enter Seats Count" placeholder="{{ translate('Enter Seats Count') }}"
-                        isRequired="true" />
+                    <x-inputs.h-input inputName="seats_count" inputId="seats_count" lable="Number Of Seats"
+                        description="Enter Seats Count" placeholder="{{ translate('Enter Number Of Seats') }}"
+                            />
                     <div class="col-sm-9 offset-sm-3">
 
                         <x-Button.submit />

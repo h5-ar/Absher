@@ -11,7 +11,7 @@ enum Governorates: string
     case Latakia = 'Latakia';
     case Tartus = 'Tartus';
     case Idlib = 'Idlib';
-    case DeirEzZor = 'Deir Ez Zor';
+    case Deir_Ez_Zor = 'Deir Ez Zor';
     case Raqqa = 'Raqqa';
     case Hasakah = 'Hasakah';
     case Daraa = 'Daraa';

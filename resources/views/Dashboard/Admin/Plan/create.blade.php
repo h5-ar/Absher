@@ -36,19 +36,19 @@
                         @csrf
                         <div class="row">
                             <x-inputs.h-input inputName="name" inputId="name" lable="Plan Name"
-                                description="Enter Plan Name" placeholder="{{ translate('Plan Name') }}"
-                                isRequired="true" />
+                                description="Enter Plan Name" value="{{old('name')}}" placeholder="{{ translate('Plan Name') }}"
+                                    />
                             <x-inputs.h-input inputName="trips_number" inputId="trips_number" lable="Trips Number"
                                 description="Enter Trips Number" placeholder="{{ translate('Trips Number') }}"
-                                isRequired="true" />
+                                    />
                             <x-inputs.h-bustype-select description="Select Type Bus" />
 
                             <x-inputs.available-select label="Status" description="Select Status Of Plan" />
                             <x-inputs.h-input inputName="price" inputId="price" lable="Price"
                                 description="Enter Price Plan" placeholder="{{ translate('Price Plan') }}"
-                                isRequired="true" />
-                            <x-inputs.governorates-select namefor="from" id="from" label="From" description="Select Governorates" isRequired="true" />
-                            <x-inputs.governorates-select namefor="to" id="to" label="To " description="Select Governorates" isRequired="true" />
+                                    />
+                            <x-inputs.governorates-select namefor="from" id="from" label="From" description="Select Governorates"     />
+                            <x-inputs.governorates-select namefor="to" id="to" label="To " description="Select Governorates"     />
 
                         </div>
 

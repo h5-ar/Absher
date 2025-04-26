@@ -20,7 +20,6 @@ class CreateTripQuickRequest extends FormRequest
     public function rules(): array
     {
         return [
-
             'price' => ['required', 'numeric'],
             'Bus' => ['required', 'exists:buses,id'],
             'datetime' => ['required', 'date'],

@@ -15,9 +15,7 @@
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('Username') }}
                 </th>
-                <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
-                    {{ translate('Password') }}
-                </th>
+               
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('Description') }}
                 </th>
@@ -47,9 +45,7 @@
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ $company->username}}
                 </td>
-                <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{ $company->password}}
-                </td>
+              
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ $company->Description}}
                 </td>
@@ -63,7 +59,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="8" class="text-center fs-4 fw-bolder"> {{ translate('No Data') }} </td>
+                <td colspan="7" class="text-center fs-4 fw-bolder"> {{ translate('No Data') }} </td>
             </tr>
             @endforelse
         </tbody>

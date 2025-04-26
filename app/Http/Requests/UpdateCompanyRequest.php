@@ -19,7 +19,7 @@ class UpdateCompanyRequest extends FormRequest
             'phone' => ['required', 'numeric', 'digits:10'],
             'email' => ['required', 'email', 'max:255', 'unique:users', 'email'],
             'username' => ['required', 'alpha_num', 'min:3', 'max:20', 'unique:users,username'],
-            'password' => ['required', 'min:8','confirmed'],
+            'password' => ['sometimes', 'min:8','confirmed'],
             'description' => ['required', 'string'],
             'manager' => ['required', 'exists:managers,id'],
 

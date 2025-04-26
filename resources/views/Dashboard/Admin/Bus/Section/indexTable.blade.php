@@ -7,7 +7,7 @@
                     {{ translate('Type') }}
                 </th>
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
-                    {{ translate('Set Count') }}
+                    {{ translate('Number Of Seats') }}
                 </th>
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('Actions') }}
@@ -21,7 +21,7 @@
                     {{ ++$key + ($buses->currentPage() - 1) * $buses->perPage() }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{ $bus->type }}
+                    {{ translate($bus->type)}}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ $bus->seats_count }}

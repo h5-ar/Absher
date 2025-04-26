@@ -27,28 +27,27 @@
 
                     <x-inputs.h-input inputName="name" inputId="name" lable="Company Name"
                         description="Enter Company Name" placeholder="{{ translate('Company Name') }}"
-                        value="{{ $company->name }}" isRequired="true" />
+                        value="{{ $company->name }}" />
 
                     <x-inputs.h-input inputName="phone" inputId="phone" lable="Phone Number"
                         description="Enter Company Name" placeholder="09XXXXXXXX" onkeypress="return isNumberKey(event,10)"
-                        description="Enter Phone Number" value="{{ $company->phone }}" isRequired="true" />
+                        description="Enter Phone Number" value="{{ $company->phone }}" />
                     <x-inputs.h-input inputName="email" inputId="email" lable="Company Email"
                         description="Enter Company Email" placeholder="{{ translate('Company Email') }}"
-                        type="email" value="{{ $company->email }}" isRequired="true" />
+                        type="email" value="{{ $company->email }}" />
 
                     <x-inputs.h-input inputName="username" inputId="username" lable="Username"
                         description="Enter Username" placeholder="{{ translate('Username') }}"
-                        value="{{ $company->username }}" isRequired="true" />
+                        value="{{ $company->username }}" />
                     <x-inputs.h-input inputName="password" inputId="password" lable="Password"
                         description="Enter Password" placeholder="{{ translate('Password') }}"
                         type="password" value="{{ $company->password }}" isRequired="true" />
                     <x-inputs.h-input inputName="password_confirmation" inputId="password_confirmation" lable="Confirm Password"
-                        description="Enter User Password Again" placeholder="{{ translate('Company Password') }}"
+                        description="Enter User Password Again" placeholder="{{ translate('User Password') }}"
                         type="password" value="{{ $company->password }}" isRequired="true" />
-
                     <x-inputs.Multi-Vertical.textarea name="description" id="description" label="Description"
                         placeholder="{{ translate('Description') }}"
-                        value="{{ $company->Description }}" isRequired="true" />
+                        value="{{ $company->Description }}" />
 
                     <x-inputs.h-manager-select typeValue="{{ $company->manager_id }}" description="Select Manager" />
                 </div>

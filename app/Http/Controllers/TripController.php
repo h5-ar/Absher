@@ -20,6 +20,31 @@ class TripController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function getTripDetails(Request $request)
+    {
+        $trip = Trip::with(['path', 'bus'])->find($request->trip_id);
+
+        if (!$trip) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Trip not found'
+            ], 404);
+        }
+
+
+        return response()->json([
+            'success' => true,
+            'trip' => [
+                'id'=>$trip->id,
+                'from' => $trip->path->from,
+                'to' => $trip->path->getLastDestinationAttribute(), // أو to حسب ما تستخدم
+                'date' => $trip->take_off_at,
+                'day'=>$trip->day,
+                'bus_number' => $trip->bus_id,
+                'price' => $trip->price,
+            ],
+        ]);
+    }
     public function index()
     {
         $trips = Trip::where('Company_id', Auth::id())->with('path')->paginate(10);

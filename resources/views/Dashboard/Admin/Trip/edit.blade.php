@@ -44,19 +44,19 @@
                             <x-inputs.h-bus-select typeValue="{{$trip->bus_id}} " description="Select Bus" />
 
                             <x-Date.time-inputU
-                                typeValue="{{$trip->take_off_at}}" name="datetime" dateId="datetime" label="History And Time" isRequired="true"
+                                typeValue="{{$trip->take_off_at}}" name="datetime" dateId="datetime" label="Date"    
                                 description="Select Offer Start Date" enableTime="true"
                                 time_24hr="false"
                                 dateFormat="Y-m-d h:i K" />
                             <x-inputs.h-day-select typeValue="{{$trip->day}}" description="Select Day" />
 
 
-                            <x-inputs.governorates-select typeValue="{{$trip->path->from}}" namefor="from" id="from" label="From" description="Select Governorates" isRequired="true" />
-                            <x-inputs.governorates-select typeValue="{{$trip->path->to1}}" namefor="to1" id="to1" label="To 1" description="Select Governorates" isRequired="true" />
-                            <x-inputs.governorates-select typeValue="{{$trip->path?->to2}}" namefor="to2" id="to2" label="To 2" description="Select Governorates" isRequired="true" />
-                            <x-inputs.governorates-select typeValue="{{$trip->path?->to3}}" namefor="to3" id="to3" label="To 3" description="Select Governorates" isRequired="true" />
-                            <x-inputs.governorates-select typeValue="{{$trip->path?->to4}}" namefor="to4" id="to4" label="To 4" description="Select Governorates" isRequired="true" />
-                            <x-inputs.governorates-select typeValue="{{$trip->path?->to5}}" namefor="to5" id="to5" label="To 5" description="Select Governorates" isRequired="true" />
+                            <x-inputs.governorates-select typeValue="{{$trip->path->from}}" namefor="from" id="from" label="From" description="Select Governorates"     />
+                            <x-inputs.governorates-select typeValue="{{$trip->path->to1}}" namefor="to1" id="to1" label="To 1" description="Select Governorates"     />
+                            <x-inputs.governorates-select typeValue="{{$trip->path?->to2}}" namefor="to2" id="to2" label="To 2" description="Select Governorates"     />
+                            <x-inputs.governorates-select typeValue="{{$trip->path?->to3}}" namefor="to3" id="to3" label="To 3" description="Select Governorates"     />
+                            <x-inputs.governorates-select typeValue="{{$trip->path?->to4}}" namefor="to4" id="to4" label="To 4" description="Select Governorates"     />
+                            <x-inputs.governorates-select typeValue="{{$trip->path?->to5}}" namefor="to5" id="to5" label="To 5" description="Select Governorates"     />
 
 
                             <div class="col-sm-9 offset-sm-3">

@@ -28,7 +28,7 @@
 
                     <x-inputs.h-input value="{{ $bus->seats_count }}" inputName="seats_count" inputId="seats_count" lable="Seats Count"
                         description="Enter Seats Count" placeholder="{{ translate('Enter Seats Count') }}"
-                        isRequired="true" />
+                            />
                     <div class="col-sm-9 offset-sm-3">
                         <x-Button.submit />
                         <x-Button.rest />

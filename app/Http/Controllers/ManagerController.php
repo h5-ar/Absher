@@ -19,7 +19,7 @@ class ManagerController extends Controller
         if (request()->ajax()) {
             return view('DashboardSuperAdmin.SuperAdmin.Manager.Section.indexTable', compact('managers'));
         }
-        return view('DashboardSuperAdmin.SuperAdmin.Manager.index', compact('managers'));;
+        return view('DashboardSuperAdmin.SuperAdmin.Manager.index', compact('managers'));
     }
 
     /**

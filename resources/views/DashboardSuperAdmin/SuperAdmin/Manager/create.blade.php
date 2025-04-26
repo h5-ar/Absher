@@ -38,14 +38,14 @@
                         <div class="row">
                             <x-inputs.h-input inputName="first_name" inputId="first_name" lable="First Name"
                                 description="Enter First Name" placeholder="{{ translate('First Name') }}"
-                                isRequired="true" />
+                                    />
                             <x-inputs.h-input inputName="last_name" inputId="last_name" lable="Last Name"
                                 description="Enter Last Name" placeholder="{{ translate('Last Name') }}"
-                                isRequired="true" />
+                                    />
 
                                 <x-inputs.h-input inputName="phone" inputId="phone" lable="Phone Number"
                                 description="Enter Company Name" placeholder="09XXXXXXXX" onkeypress="return isNumberKey(event,10)"
-                                description="Enter Phone Number" isRequired="true" />
+                                description="Enter Phone Number"     />
 
                             <div class="col-sm-9 offset-sm-3">
                                 <x-Button.submit />

@@ -36,7 +36,7 @@
                                 description="Enter last Name" value="{{ $manager->last_name }}" isRequired='true' />
                             <x-inputs.h-input inputName="phone" inputId="phone" lable="Phone Number"
                                 placeholder="09XXXXXXXX" onkeypress="return isNumberKey(event,10)"
-                                description="Enter Phone Number" value="{{ $manager->phone }}" isRequired="true" />
+                                description="Enter Phone Number" value="{{ $manager->phone }}"     />
                             <div class="col-sm-9 offset-sm-3">
                                 <x-Button.submit />
                                 <x-Button.rest />

@@ -17,7 +17,7 @@
             <!-- dropdown-language li-->
             <li id="switch-lang" title="{{ translate('Language', 'descriptions') }}">
                 <a class="fs-4">
-                    {{ translate('EN') }}
+                    {{ translate('English') }}
                 </a>
             </li>
             <li class="nav-item d-none d-lg-block" title="{{ translate('Theme', 'descriptions') }}">
@@ -108,6 +108,14 @@
     </li> --}}
     </ul>
     </li>
+    <li class="nav-item d-none d-lg-block" title="{{ translate('Theme', 'descriptions') }}">
+
+        <a class="nav-link " href="{{ route('logout') }}">
+            <i class="ficon" data-feather="power">
+            </i>
+        </a>
+
+    </li>
     <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link"
             id="dropdown-user" href="" data-bs-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
@@ -115,16 +123,10 @@
                 <span class="user-name fw-bolder"></span>
                 <span class="user-status"></span>
             </div><span class="avatar"><img class="round"
-                    src="{{ asset(auth()->user()->attache?->upload?->url) }}" alt="avatar" height="40"
+                    src="https://ui-avatars.com/api/?name={{auth()->user()->username}}" alt="avatar" height="40"
                     width="40"><span class="avatar-status-online"></span></span>
         </a>
-        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
-            <a class="dropdown-item" href="{{ route('dashboard.profile.show') }}"><i class="me-50"
-                    data-feather="user"></i> {{ translate('Profile') }}</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ route('logout') }}"><i class="me-50"
-                    data-feather="power"></i>{{ translate('Logout') }}</a>
-        </div>
+
     </li>
     </ul>
     </div>

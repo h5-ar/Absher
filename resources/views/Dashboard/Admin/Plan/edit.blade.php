@@ -34,9 +34,9 @@
                     <x-inputs.available-select typeValue="{{ $plan->available }}" label="Status" description="Select Status Of Plan" />
                     <x-inputs.h-input inputName="price" inputId="price" lable="Price"
                         description="Enter Price Plan" value="{{ $plan->price}}"
-                        isRequired="true" />
-                    <x-inputs.governorates-select typeValue="{{$plan->form}}" namefor="from" id="from" label="From" description="Select Governorates" isRequired="true" />
-                    <x-inputs.governorates-select typeValue="{{ $plan->to }}" namefor="to" id="to" label="To " description="Select Governorates" isRequired="true" />
+                            />
+                    <x-inputs.governorates-select typeValue="{{$plan->form}}" namefor="from" id="from" label="From" description="Select Governorates"     />
+                    <x-inputs.governorates-select typeValue="{{ $plan->to }}" namefor="to" id="to" label="To " description="Select Governorates"     />
 
                 </div>
 

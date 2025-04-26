@@ -32,7 +32,7 @@
                             </li>
                             <hr>
                             <li class="price-detail">
-                                <div class="detail-title fw-bolder">{{ translate('Number') }} {{ translate('Phone') }}:</div>
+                                <div class="detail-title fw-bolder">{{ translate('Phone Number') }}:</div>
                                 <div class="detail-amt discount-amt "> {{ $user->phone }}</div>
                             </li>
                             <hr>
@@ -44,11 +44,6 @@
                             <li class="price-detail">
                                 <div class="detail-title fw-bolder">{{ translate('Username') }}:</div>
                                 <div class="detail-amt">{{ $user->username}}</div>
-                            </li>
-                            <hr>
-                            <li class="price-detail">
-                                <div class="detail-title fw-bolder">{{ translate('Password') }}:</div>
-                                <div class="detail-amt">{{ $user->password}}</div>
                             </li>
                             <hr>
                             <li class="price-detail">
