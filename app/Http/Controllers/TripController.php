@@ -35,16 +35,19 @@ class TripController extends Controller
         return response()->json([
             'success' => true,
             'trip' => [
-                'id'=>$trip->id,
+                'id' => $trip->id,
                 'from' => $trip->path->from,
-                'to' => $trip->path->getLastDestinationAttribute(), // أو to حسب ما تستخدم
+                'to' => $trip->path->getLastDestinationAttribute(),
                 'date' => $trip->take_off_at,
-                'day'=>$trip->day,
+                'day' => $trip->day,
                 'bus_number' => $trip->bus_id,
                 'price' => $trip->price,
             ],
         ]);
     }
+
+
+
     public function index()
     {
         $trips = Trip::where('Company_id', Auth::id())->with('path')->paginate(10);
@@ -132,10 +135,7 @@ class TripController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Trip $trip)
-    {
-        //
-    }
+    public function show($id) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -185,5 +185,23 @@ class TripController extends Controller
         $trip->delete();
         Session::flash('successMessage', translate('Deleted successfully'));
         return to_route('trip.index');
+    }
+
+    public function filter(Request $request)
+    {
+        $type = $request->query('type', 'quick'); // القيمة الافتراضية 'quick'
+    
+        $trips = Trip::where('Company_id', Auth::id())
+            ->with('path')
+            ->whereHas('path', function ($query) use ($type) {
+                if ($type === 'vehicle') {
+                    $query->whereNotNull('to2'); // رحلات مركبة
+                } else {
+                    $query->whereNull('to2'); // رحلات مباشرة
+                }
+            })
+            ->get();
+    
+        return response()->json(['trips' => $trips]);
     }
 }

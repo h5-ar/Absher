@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Path extends Model
 {
     use HasFactory;
+
+    protected $appends = ['last_destination'];
+
     public function trip(): BelongsTo
     {
         return $this->belongsTo(Trip::class);

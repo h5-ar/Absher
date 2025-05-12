@@ -41,10 +41,11 @@
 
             </x-side.naveItem>
 
-            <x-side.naveItem name="Reservations" data_fether="file-text">
+            <x-side.naveItem name="Reservations" data-feather="file">
                 <x-side.menuContent name=" All Reservations"
                     routeName="index.reservation" />
-                
+                <x-side.menuContent name="Add New Reservations"
+                    routeName="add.reservation" />
 
             </x-side.naveItem>
         </ul>

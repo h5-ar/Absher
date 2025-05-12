@@ -13,6 +13,7 @@
                     {{ translate('Seats Count') }}
                 </th>
 
+
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('Actions') }}
                 </th>
@@ -26,9 +27,9 @@
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center user-name-btn"
                     style="cursor: pointer; color: #65B1AB;"
-                    data-user-id="{{ $reservation->user->id }}"
+                    data-user-id="{{ $reservation->user ? $reservation->user->id : '--' }}"
                     title="{{ translate('View User Details') }}">
-                    {{ $reservation->user->first_name}} {{ $reservation->user->last_name}}
+                    {{ $reservation->user ? $reservation->user->first_name . ' ' . $reservation->user->last_name : '--' }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center trip-info-btn"
                     style="cursor: pointer; color: #65B1AB;"
@@ -198,7 +199,9 @@
             $('#passengersTableBody').html(`
             <tr>
                 <td colspan="8" class="text-center py-4">
-                   
+                    <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
                 </td>
             </tr>
             `);
@@ -335,14 +338,14 @@
                 success: function(response) {
                     if (response.success) {
                         let tripHtml = `
-                    <tr>
-                        <td class="text-nowrap fs-5 fw-bolder text-center">${response.trip.id}</td>
-                        <td class="text-nowrap fs-5 fw-bolder text-center">${response.trip.from}</td>
-                        <td class="text-nowrap fs-5 fw-bolder text-center">${response.trip.to}</td>
-                        <td class="text-nowrap fs-5 fw-bolder text-center">${response.trip.date}</td>
-                        <td class="text-nowrap fs-5 fw-bolder text-center">${response.trip.day}</td>
-                        <td class="text-nowrap fs-5 fw-bolder text-center">${response.trip.bus_number}</td>
-                    </tr>
+                                   <tr>
+                                      <td class="text-nowrap fs-5 fw-bolder text-center">${response.trip.id}</td>
+                                      <td class="text-nowrap fs-5 fw-bolder text-center">${response.trip.from}</td>
+                                      <td class="text-nowrap fs-5 fw-bolder text-center">${response.trip.to}</td>
+                                      <td class="text-nowrap fs-5 fw-bolder text-center">${response.trip.date}</td>
+                                      <td class="text-nowrap fs-5 fw-bolder text-center">${response.trip.day}</td>
+                                      <td class="text-nowrap fs-5 fw-bolder text-center">${response.trip.bus_number}</td>
+                                    </tr>
                 `;
                         $('#tripDetailsContent').html(tripHtml);
                     } else {

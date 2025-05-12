@@ -12,7 +12,7 @@
 @endpush
 
 @section('title')
-{{ translate('Edit Bus') }}
+{{ translate('Create Bus') }}
 @endsection
 
 @section('content')

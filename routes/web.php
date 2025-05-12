@@ -104,6 +104,8 @@ Route::middleware('auth:company')->group(function () {
     Route::post('trip/storeQuick', [TripController::class, 'storeQuick'])->name('trip.storeQuick');
     Route::post('trip/storeVehicle', [TripController::class, 'storeVehicle'])->name('trip.storeVehicle');
 
+    Route::get('/trips/filter', [TripController::class, 'filter'])->name('trips.filter');
+
     Route::get('add/bus', [BusController::class, 'create'])->name('add.bus');
     Route::post('store', [BusController::class, 'store'])->name('bus.store');
     Route::get('bus/index', [BusController::class, 'index'])->name('bus.index');
@@ -125,10 +127,23 @@ Route::middleware('auth:company')->group(function () {
     Route::get('reservation/edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
     Route::put('reservation/update/{id}', [ReservationController::class, 'update'])->name('reservation.update');
     Route::delete('reservation/delete/{id}', [ReservationController::class, 'destroy'])->name('reservation.delete');
+    Route::get('reservation/add', [ReservationController::class, 'create'])->name('add.reservation');
+    Route::post('reservation/store', [ReservationController::class, 'storeAdmin'])->name('storeAdmin.reservation');
+
+    // routes/web.php
+    Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
+    Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+
+    Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
+        Route::get('/trips', [App\Http\Controllers\TripController::class, 'getTrips'])->name('trips');
+    });
+    Route::get('/trips', [TripController::class, 'getTrips']);
 
     Route::get('passenger/index', [PassengerController::class, 'index'])->name('index.passenger');
     Route::get('passenger/edit/{id}', [PassengerController::class, 'edit'])->name('passenger.edit');
     Route::delete('passenger/delete/{id}', [PassengerController::class, 'destroy'])->name('passenger.delete');
+
+
 
     // للحصول على تفاصيل المستخدم
     Route::get('/user/details', [UserController::class, 'getUserDetails'])->name('user.details');
