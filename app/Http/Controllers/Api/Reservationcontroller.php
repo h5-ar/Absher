@@ -46,6 +46,8 @@ class Reservationcontroller extends Controller
     }
      public function edit(Reservation $reservation)
      {
-       
+
      }
+     
+
 }
