@@ -15,7 +15,7 @@ class ChangeLang
      */
     public function handle(Request $request, Closure $next): Response
     {
-        app()->setLocale((session('lang')));
+        app()->setLocale(session('lang', 'ar'));
         return $next($request);
     }
 }

@@ -1,14 +1,14 @@
 @props([
-    'inputSize' => 'col-12',
-    'type' => 'text',
-    'lable' => '',
-    'inputId' => '',
-    'inputName' => '',
-    'placeholder' => '',
-    'value' => '',
-    'isRequired' => false,
-    'disabled' => '',
-    'description' => false,
+'inputSize' => 'col-12',
+'type' => 'text',
+'lable' => '',
+'inputId' => '',
+'inputName' => '',
+'placeholder' => '',
+'value' => '',
+'isRequired' => false,
+'disabled' => '',
+'description' => false,
 ])
 
 <div class="{{ $inputSize }}">
@@ -17,7 +17,7 @@
             <label class="col-form-label fs-5 fw-bolder @if ($isRequired) isRequired @endif"
                 for="{{ $inputId }}">{{ translate($lable) }}</label>
             @if ($description)
-                <x-SVG.alert-circle stroke="2" description="{{ $description }}" />
+            <x-SVG.alert-circle stroke="2" description="{{ $description }}" />
             @endif
 
         </div>
@@ -26,10 +26,10 @@
             <input autocomplete="off" type="{{ $type }}" id="{{ $inputId }}" {{ $attributes->merge([]) }}
                 class="form-control @error($inputName) is-invalid @enderror rounded"
                 value="{{ $value ?? old($inputName) }}" name="{{ $inputName }}" {{ $disabled }}
-                placeholder="{{ translate($placeholder) }}" @if ($isRequired == 'true') required @endif>
+                placeholder="{{ translate($placeholder) }}" @if ($isRequired=='true' ) required @endif>
 
             @error($inputName)
-                <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
     </div>

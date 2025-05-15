@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class Reservationcontroller extends Controller
 {
-    //
+    // 
     public function store(Request $request)
     {
         //
@@ -48,6 +48,6 @@ class Reservationcontroller extends Controller
      {
 
      }
-     
+
 
 }

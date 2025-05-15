@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'company',
         'passwords' => 'users',
     ],
 
@@ -36,11 +36,16 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'company' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'companies',
+        ],
+        'super_admin' => [
+            'driver' => 'session',
+            'provider' => 'super_admins',
         ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -60,17 +65,21 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'companies' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Company::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'super_admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\SuperAdmin::class,
+    ],
     ],
 
+    // 'users' => [
+    //     'driver' => 'database',
+    //     'table' => 'users',
+    // ],
+    //],
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
@@ -91,8 +100,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'companies' => [
+            'provider' => 'companies',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

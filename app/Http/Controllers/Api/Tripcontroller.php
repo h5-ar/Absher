@@ -99,7 +99,7 @@ class Tripcontroller extends Controller
     protected function getTripStops($path)
     {
         $stops = [];
-
+ 
         foreach (['to1', 'to2', 'to3', 'to4', 'to5'] as $stop) {
             if (!empty($path->$stop)) {
                 $stops[] = $path->$stop;

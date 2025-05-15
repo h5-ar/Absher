@@ -3,8 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ReservationController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,10 +13,7 @@ use App\Http\Controllers\ReservationController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::middleware('auth:sanctum')->group(function() {
-Route::get('/user', function (Request $request) { return $request->user();});
-//راوت الحجز
-Route::post('/reservations', [ReservationController::class, 'store']);
-  Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy']); 
-Route::get('/trips/available', [ReservationController::class, 'availableTrips']);
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
 });
