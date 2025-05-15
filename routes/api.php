@@ -19,6 +19,6 @@ Route::middleware('auth:sanctum')->group(function() {
 Route::get('/user', function (Request $request) { return $request->user();});
 //راوت الحجز
 Route::post('/reservations', [ReservationController::class, 'store']);
-  Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy']);
+  Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy']); 
 Route::get('/trips/available', [ReservationController::class, 'availableTrips']);
 });
