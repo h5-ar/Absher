@@ -16,7 +16,7 @@
     @include('Dashboard.Layouts.parts.headStyle')
     @stack('styles')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-   
+
 </head>
 <!-- END: Head-->
 
@@ -290,7 +290,7 @@
                     },
                 });
 
-                
+
             }
 
 

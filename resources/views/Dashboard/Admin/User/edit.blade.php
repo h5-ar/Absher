@@ -26,22 +26,22 @@
                     @method('PUT')
                     <div class="row">
                         <x-inputs.Multi-Vertical.input value="{{ $user->name }}" label="Name" name="name"
-                            placeholder="First Name" inputId="name" required    
+                            placeholder="First Name" inputId="name" required
                             description="Enter User Name" />
                         <x-inputs.Multi-Vertical.input value="{{ $user->last_name }}" label="last Name" name="last_name"
                             placeholder="last Name" inputId="last_name" required description="Enter User Last Name" />
 
                         <x-inputs.Multi-Vertical.input value="{{ $user->email }}" label="Email" name="email"
-                            placeholder="Email" inputId="email" type="email" required    
+                            placeholder="Email" inputId="email" type="email" required
                             description="Enter User Email" />
 
                         <x-inputs.Multi-Vertical.input value="{{ $user->username }}" label="Username" name="username"
-                            placeholder="Username" inputId="username" required    
+                            placeholder="Username" inputId="username" required
                             description="Enter Username" />
 
                         <x-inputs.Multi-Vertical.input value="{{ $user->phone_number }}" label="Phone Number"
                             name="phone_number" placeholder="09XXXXXXXX" inputId="phone_number"
-                            onkeypress="return isNumberKey(event,10)" required    
+                            onkeypress="return isNumberKey(event,10)" required
                             description="Enter Phone Number" />
 
                         <div class="col-md-6 col-12">

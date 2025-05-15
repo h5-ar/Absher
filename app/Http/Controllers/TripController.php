@@ -190,7 +190,7 @@ class TripController extends Controller
     public function filter(Request $request)
     {
         $type = $request->query('type', 'quick'); // القيمة الافتراضية 'quick'
-    
+
         $trips = Trip::where('Company_id', Auth::id())
             ->with('path')
             ->whereHas('path', function ($query) use ($type) {
@@ -201,7 +201,7 @@ class TripController extends Controller
                 }
             })
             ->get();
-    
+
         return response()->json(['trips' => $trips]);
     }
 }
