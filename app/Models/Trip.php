@@ -12,6 +12,13 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Trip extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'price',
+        'bus_id',
+        'company_id',
+        'take_off_at',
+
+    ];
     public function bus(): BelongsTo
     {
         return $this->belongsTo(Bus::class);
@@ -32,5 +39,4 @@ class Trip extends Model
     {
         return $this->belongsTo(Company::class);
     }
-    
 }

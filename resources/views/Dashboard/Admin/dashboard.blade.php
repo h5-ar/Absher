@@ -41,8 +41,8 @@
                         <div class="col-lg-3 col-md-3 col-6">
                             <div class="card">
                                 <div class="card-body pb-50">
-                                    <h6>{{ translate('Orders') }}</h6>
-                                    <h2 class="fw-bolder mb-1">holle</h2>
+                                    <h6>{{ translate('Buses') }}</h6>
+                                    <h2 class="fw-bolder mb-1"></h2>
                                     <div id="statistics-order-chart"></div>
                                 </div>
                             </div>
@@ -50,8 +50,8 @@
                         <div class="col-lg-3 col-md-3 col-6">
                             <div class="card card-tiny-line-stats">
                                 <div class="card-body pb-50">
-                                    <h6 class="nowrap">holle</h6>
-                                    <h2 class="fw-bolder mb-1">hello</h2>
+                                    <h6 class="nowrap">Trips</h6>
+                                    <h2 class="fw-bolder mb-1"></h2>
                                     <div id="statistics-profit-chart"></div>
                                 </div>
                             </div>
@@ -59,8 +59,8 @@
                         <div class="col-lg-3 col-md-3 col-6">
                             <div class="card card-tiny-line-stats">
                                 <div class="card-body pb-50">
-                                    <h6>holle</h6>
-                                    <h2 class="fw-bolder mb-1">holle</h2>
+                                    <h6>Subscribtion</h6>
+                                    <h2 class="fw-bolder mb-1"></h2>
                                     <div id="statistics-profit-chart"></div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                             <div class="card card-tiny-line-stats">
                                 <div class="card-body pb-50">
                                     <h6>{{ translate('Total Profits') }}</h6>
-                                    <h2 class="fw-bolder mb-1">holle</h2>
+                                    <h2 class="fw-bolder mb-1"></h2>
                                     <div id="statistics-profit-chart"></div>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                             <div class="card">
                                 <div class="card-body pb-50">
                                     <h6>{{ translate('Active Products') }}</h6>
-                                    <h2 class="fw-bolder mb-1">holle</h2>
+                                    <h2 class="fw-bolder mb-1"></h2>
                                     <div id="statistics-order-chart"></div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                             <div class="card card-tiny-line-stats">
                                 <div class="card-body pb-50">
                                     <h6 class="nowrap">{{ translate('Active Offers') }}</h6>
-                                    <h2 class="fw-bolder mb-1">holle</h2>
+                                    <h2 class="fw-bolder mb-1"></h2>
                                     <div id="statistics-profit-chart"></div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                             <div class="card card-tiny-line-stats">
                                 <div class="card-body pb-50">
                                     <h6>{{ translate('Active Coupons') }}</h6>
-                                    <h2 class="fw-bolder mb-1">holle</h2>
+                                    <h2 class="fw-bolder mb-1"></h2>
                                     <div id="statistics-profit-chart"></div>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                             <div class="card card-tiny-line-stats">
                                 <div class="card-body pb-50">
                                     <h6>{{ translate('Users') }}</h6>
-                                    <h2 class="fw-bolder mb-1">holle</h2>
+                                    <h2 class="fw-bolder mb-1"></h2>
                                     <div id="statistics-profit-chart"></div>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@
                             <div class="card card-tiny-line-stats">
                                 <div class="card-body pb-50">
                                     <h6>{{ translate('Sellers') }}</h6>
-                                    <h2 class="fw-bolder mb-1">holle</h2>
+                                    <h2 class="fw-bolder mb-1"></h2>
                                     <div id="statistics-profit-chart"></div>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                             <div class="card card-tiny-line-stats">
                                 <div class="card-body pb-50">
                                     <h6>{{ translate('Staffs') }}</h6>
-                                    <h2 class="fw-bolder mb-1">holle</h2>
+                                    <h2 class="fw-bolder mb-1"></h2>
                                     <div id="statistics-profit-chart"></div>
                                 </div>
                             </div>
@@ -179,10 +179,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       
+
                                         <tr>
                                             <td class="text-center">
-                                               
+
                                             </td>
                                             <td class="text-center">
                                                 <span>holle</span>
@@ -197,7 +197,7 @@
                                                     class="fw-bolder me-1">holle</span>
                                             </td>
                                         </tr>
-                                      
+
                                     </tbody>
                                 </table>
                             </div>
@@ -227,7 +227,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -263,7 +263,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                     </tbody>
                                 </table>
                             </div>

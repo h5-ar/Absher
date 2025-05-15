@@ -26,18 +26,18 @@
                     @csrf
                     <div class="row">
                         <x-inputs.Multi-Vertical.input label="Name" name="name" placeholder="First Name" inputId="name"
-                            required isRequired="true" description="Enter User Name" />
+                            required     description="Enter User Name" />
                         <x-inputs.Multi-Vertical.input label="last Name" name="last_name" placeholder="last Name"
                             inputId="last_name" required description="Enter User Last Name" />
 
                         <x-inputs.Multi-Vertical.input label="Email" name="email" placeholder="Email" inputId="email"
-                            type="email" required isRequired="true" description="Enter User Email" />
+                            type="email" required     description="Enter User Email" />
 
                         <x-inputs.Multi-Vertical.input label="Username" name="username" placeholder="Username"
-                            inputId="username" required isRequired="true" description="Enter Username" />
+                            inputId="username" required     description="Enter Username" />
 
                         <x-inputs.Multi-Vertical.input label="Phone Number" name="phone_number" placeholder="09XXXXXXXX"
-                            inputId="phone_number" onkeypress="return isNumberKey(event,10)" required isRequired="true"
+                            inputId="phone_number" onkeypress="return isNumberKey(event,10)" required
                             description="Enter Phone Number" />
 
                         <div class="col-md-6 col-12">
@@ -57,18 +57,18 @@
                         <x-inputs.Multi-Vertical.input label="Join Code" name="join_code" placeholder="Join Code"
                             inputId="join_code" description="Enter Join Code" />
 
-                        <x-Date.picker-h name="birth_date" dateId="birth_date" label="Birth Date" required isRequired="true"
+                        <x-Date.picker-h name="birth_date" dateId="birth_date" label="Birth Date" required
                             description="select User Birth Date" />
 
                         <x-inputs.Multi-Vertical.input label="Password" name="password" placeholder="Enter Password"
-                            inputId="password" type="password" isRequired="true" description="Enter User Password" />
+                            inputId="password" type="password"     description="Enter User Password" />
 
                         <x-inputs.Multi-Vertical.input label="Confirm Password" name='password_confirmation'
-                            placeholder="Enter Password" inputId="confirm_password" type="password" isRequired="true"
-                            description="Enter User Password" isRequired="true" description="Enter User Password Again" />
+                            placeholder="Enter Password" inputId="confirm_password" type="password"
+                            description="Enter User Password"     description="Enter User Password Again" />
 
                         <x-inputs.Multi-Vertical.input label="Profile Image" name="profile" inputId="profile" type="file"
-                            accept="image/*" size="col-md-6 col-12" isRequired="true" description="Upload User Profile" />
+                            accept="image/*" size="col-md-6 col-12"     description="Upload User Profile" />
                     </div>
 
                     <x-Button.submit />

@@ -23,6 +23,9 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);
             }
+            if (empty($guards)) {
+                return abort(403, 'Unauthorized access');
+            }
         }
 
         return $next($request);

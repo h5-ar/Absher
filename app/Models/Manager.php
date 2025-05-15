@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Manager extends Model
 {
     use HasFactory;
-    public function company(): HasOne
+    public function company(): HasMany
     {
-        return $this->hasOne(Company::class);
+        return $this->HasMany(Company::class);
     }
 }

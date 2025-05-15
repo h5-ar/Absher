@@ -55,13 +55,13 @@
             <div class="content-body">
                 <div class="auth-wrapper auth-cover">
                     <div class="auth-inner row m-0">
-                    
-                        
+
+
                         <h2 class="brand-logo ms-1" style="color:rgb(225,127,38)">
-                        <a class="brand-text ms-1" href="#"> Absher</a>
+                            <a class="brand-text ms-1" href="#"> Absher</a>
                         </h2>
-                        
-                    
+
+
                         <!-- /Brand logo-->
                         <!-- Left Text-->
                         <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
@@ -74,12 +74,12 @@
                         <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                             <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
                                 <h2 class="card-title fw-bold mb-1" style="direction: rtl">
-                                    {{ translate('Welcome to Absher') }}! 👋
+                                    {{ translate('Welcome') }}! 👋
                                 </h2>
                                 <p class="card-text mb-2" style="direction: rtl">
                                     {{ translate('Please sign-in to your Company') }}
                                 </p>
-                                
+
                                 <form class="auth-login-form mt-2" action="{{ route('login.submit') }}"
                                     method="post">
                                     @csrf
@@ -123,7 +123,7 @@
                         <button class="btn w-100" style="background:rgb(225,127,38);color:white"
                             tabindex="4">{{ translate('Sign in') }}</button>
                         </form>
-                        
+
                     </div>
                 </div>
                 <!-- /Login-->

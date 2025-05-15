@@ -10,11 +10,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Reservation extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'trip_id',
+        'user_id', // يمكن أن يكون null
+        'count_seats',
+        'company_id',
+        'source'
+    ];
     public function trip(): BelongsTo
     {
         return $this->belongsTo(Trip::class);
     }
-    public function passenger(): HasMany
+    public function passengers(): HasMany
     {
         return $this->HasMany(Passenger::class);
     }
