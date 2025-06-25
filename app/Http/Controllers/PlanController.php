@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Plan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -17,6 +18,7 @@ class PlanController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $plans = Plan::where('Company_id', Auth::id())->paginate(10);
@@ -109,5 +111,36 @@ class PlanController extends Controller
         $plan->delete();
         Session::flash('successMessage', translate('Deleted successfully'));
         return to_route('index.plan');
+    }
+
+    public function getPlanDetails(Request $request)
+    {
+        $plan = Plan::find($request->plan_id);
+
+        if (!$plan) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Trip not found'
+            ], 404);
+        }
+
+
+        return response()->json([
+            'success' => true,
+            'plan' => [
+                'id' => $plan->id,
+                'name' => $plan->name,
+                'trips_number' => $plan->trips_number,
+                'type_bus' => $plan->type_bus,
+                'price' => $plan->price,
+                'to' => $plan->to,
+                'form' => $plan->form,
+            ],
+        ]);
+    }
+     public function getAllPlan()
+    {
+        $plans = Plan::where('Company_id', Auth::id())->get();
+        return response()->json(['plans' => $plans]);
     }
 }

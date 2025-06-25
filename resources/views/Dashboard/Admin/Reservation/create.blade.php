@@ -14,7 +14,6 @@
 
                 <div class="row">
                     <div class="col-12">
-
                         <div class="mb-1 row">
                             <div class="col-sm-3">
                                 <label class="col-form-label fs-5 fw-bolder" for="trip_select">{{ translate('Select Trip') }}</label>
@@ -23,7 +22,7 @@
                             <div class="col-sm-9">
                                 <div class="input-group">
                                     <input type="text" id="trip_select" class="form-control trip-input" readonly
-                                        placeholder="{{ translate('Click to select trip') }}" onclick="showTripsModal()">
+                                        placeholder="{{ translate('Enter To Select Trip') }}"onclick="showTripsModal()">
                                 </div>
                             </div>
                         </div>
@@ -34,8 +33,8 @@
                                 <label class="col-form-label fs-5 fw-bolder" for="seats_count">{{ translate('Count Of Seats') }}</label>
                             </div>
                             <div class="col-sm-9">
-                                <input type="number" id="seatsCount" class="form-control"
-                                    name="seats_count" placeholder="{{ translate('Enter Number Of Seats') }}">
+                                <input type="number" inputName="count_seats" id="seatsCount" class="form-control"
+                                    name="seats_count" placeholder="{{ translate('Enter number of passengers') }}">
                             </div>
                         </div>
                     </div>
@@ -261,6 +260,7 @@
                             inputId="passenger_${passengerNumber}_first_name"
                             lable="{{ translate('First Name') }}"
                             type="text"
+                            
                              />
               
                         <x-inputs.h-input
@@ -284,12 +284,7 @@
                             type="number"
                              />
                  
-                        <x-inputs.h-input
-                            inputName="passengers[${passengerNumber}][subscribtion_id]"
-                            inputId="passenger_${passengerNumber}_subscribtion_id"
-                            lable="{{ translate('Subscription Number') }}"
-                            type="number"
-                             />
+                      
                         
                         <!-- نقطة المغادرة -->
                         <div class="col-12">
@@ -304,7 +299,7 @@
                                     autocomplete="off" class="select2 
                                     form-select rounded"
                                     name="passengers[${passengerNumber}][departure_point]">
-                                   <option value="${path.from}" selected>${path.from}</option>
+                                                           <option value="from" selected>${path.from}</option>
                                    ${generateArrivalOptions(path)}
                                    </select>
                                 </div>
@@ -345,18 +340,6 @@
         if (path.to4) options += `<option value="to4">${path.to4}</option>`;
         if (path.to5) options += `<option value="to5">${path.to5}</option>`;
         return options;
-    }
-    //التحقق من الكرسي 
-    function checkSeatAvailability(tripId, seatNumber) {
-        fetch(`/check-seat/${tripId}/${seatNumber}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.available) {
-                    alert('المقعد متاح');
-                } else {
-                    alert('المقعد محجوز مسبقاً!');
-                }
-            });
     }
 </script>
 @endpush
