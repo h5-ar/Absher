@@ -12,10 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('shippings', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->change();
-            $table->string('sender_national_number', 30);
-            $table->string('sender_phone', 15);
-            $table->string('sender_name', 100);
+             $table->enum('shipment_status', [
+                'قيد المراجعة',
+                'بانتظار الرحلة',
+                'تم الشحن',
+                'تم التوصيل',
+                'ملغاة'
+            ])->default('قيد المراجعة')->change();
         });
     }
 
