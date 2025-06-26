@@ -25,6 +25,6 @@ class Plan extends Model
     }
     public function subscribtion(): HasMany
     {
-        return $this->hasMany(Subscribtion::class);
+        return $this->hasMany(Subscription::class);
     }
 }

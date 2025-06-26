@@ -134,9 +134,9 @@ Route::middleware('auth:company')->group(function () {
     Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
     Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
 
-    Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
-        Route::get('/trips', [App\Http\Controllers\TripController::class, 'getTrips'])->name('trips');
-    });
+    // Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
+    //     Route::get('/trips', [App\Http\Controllers\TripController::class, 'getTrips'])->name('trips');
+    // });
     Route::get('/trips', [TripController::class, 'getTrips']);
 
     Route::get('passenger/index', [PassengerController::class, 'index'])->name('index.passenger');

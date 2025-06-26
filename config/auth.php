@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'company',
+        'guard' => 'web',
         'passwords' => 'users',
     ],
 
@@ -43,6 +43,17 @@ return [
         'super_admin' => [
             'driver' => 'session',
             'provider' => 'super_admins',
+        ],
+
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        'api' => [
+            'driver' => 'sanctum',
+            'provider' => 'users',
+            'hash' => false,
         ],
     ],
 
@@ -73,6 +84,10 @@ return [
         'driver' => 'eloquent',
         'model' => App\Models\SuperAdmin::class,
     ],
+            'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
     ],
 
     // 'users' => [
@@ -102,6 +117,13 @@ return [
     'passwords' => [
         'companies' => [
             'provider' => 'companies',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+                'users' => [
+            'provider' => 'users',
+            'email' => 'auth.emails.password',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

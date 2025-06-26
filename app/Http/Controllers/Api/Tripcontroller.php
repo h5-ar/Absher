@@ -5,21 +5,25 @@ namespace App\Http\Controllers\Api;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
-class Tripcontroller extends Controller
+class TripController extends Controller
 {
     //
     public function index()
     {
         $trips = Trip::with(['bus', 'company'])->get();
 
-        return response()->json($trips);
+        return response()->json(['data'=>$trips]);
     }
-    public function show( Request $request)
+    public function show( Request $request,)
      {
+        // $user= Auth::user();
+        // user_id==$user->id;
          $request->validate([
-            'from' => 'required|string',
-            'to' => 'required|string',
+        
+            'from' => 'required|string|different:to',
+            'to' => 'required|string|different:form',
             'to1'=> 'string',
             'to2'=> 'string',
             'to3'=> 'string',
@@ -38,7 +42,7 @@ class Tripcontroller extends Controller
                             ->orWhere('to5', $to);
                       });
             })
-             ->where('take_off_at', '>', now())
+             ->where('take_off_at', '>', now($time='take_off_at'))
             ->with(['path', 'reservations', 'bus', 'company'])
             ->get();
             $availableTrips = $trips->map(function($trip) use ($from, $to) {
@@ -99,7 +103,7 @@ class Tripcontroller extends Controller
     protected function getTripStops($path)
     {
         $stops = [];
- 
+
         foreach (['to1', 'to2', 'to3', 'to4', 'to5'] as $stop) {
             if (!empty($path->$stop)) {
                 $stops[] = $path->$stop;

@@ -16,14 +16,15 @@ return new class extends Migration
             $table->foreignId('reservation_id')->constrained();
             $table->string('first_name');
             $table->string('father_name');
-            $table->string('last_name'); 
+            $table->string('last_name');
             $table->integer('seat_number')->unique();
             $table->foreignId('subscribtion_id')->constrained()->nullable();
+            $table->integer('National_number',30)->require()->uniqid();
             $table->string('from', 100);
             $table->string('to', 100);
             $table->timestamps();
         });
-    } 
+    }
 
     /**
      * Reverse the migrations.

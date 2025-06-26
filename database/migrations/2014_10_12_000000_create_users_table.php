@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('username');
             $table->string('password');
+            $table->integer('otp');
+            $table->datetime('otp_expired_at');
             $table->rememberToken();
             $table->timestamps();
         });

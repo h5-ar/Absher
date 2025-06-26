@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('trip_id')->constrained();
             $table->integer('count_seats');
+            $table->enum('paidwy',['cach','subscription'])->default('cach');
             $table->timestamps();
         });
     }

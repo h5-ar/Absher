@@ -12,7 +12,9 @@ class Path extends Model
     use HasFactory;
 
     protected $appends = ['last_destination'];
-
+protected $casts = [
+        'type' => 'string',
+    ];
     public function trip(): BelongsTo
     {
         return $this->belongsTo(Trip::class);

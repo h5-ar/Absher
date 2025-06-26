@@ -15,6 +15,16 @@ class Company extends Authenticatable
     protected $casts = [
         'password' => "hashed"
     ];
+    protected $fillable = [
+        'name',
+        'phone',
+        'email',
+        'username',
+        'password',
+        'description',
+        'image',
+        'manager_id',
+    ];
     use HasFactory;
     public function manager(): BelongsTo
     {
@@ -31,5 +41,9 @@ class Company extends Authenticatable
     public function trip(): HasMany
     {
         return $this->hasMany(Trip::class);
+    }
+    public function subscriptions()
+    {
+        return $this->hasManyThrough(Subscription::class, Plan::class);
     }
 }

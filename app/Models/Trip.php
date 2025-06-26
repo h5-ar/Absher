@@ -39,4 +39,8 @@ class Trip extends Model
     {
         return $this->belongsTo(Company::class);
     }
+    public function reservedSeatsCount()
+    {
+        return $this->reservations()->sum('count_seat');
+    }
 }
