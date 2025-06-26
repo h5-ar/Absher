@@ -1,15 +1,16 @@
 @extends('Dashboard.Layouts.adminLayout')
 
 @section('title')
-{{ translate('Trips') }}
+{{ translate('Subscription') }}
 @endsection
 
 @section('content')
 <x-Content.normal>
     <div class="card shadow">
+
         <div class="card-body ">
             <div id="page-data">
-                @include('Dashboard.Admin.Trip.Section.indexTable',['trips' => $trips])
+                @include('Dashboard.Admin.Subscription.Section.indexTable',['subscriptions' => $subscriptions])
 
             </div>
         </div>
@@ -18,7 +19,7 @@
 @endsection
 
 @section('modal')
-<x-Modals.delete message="Are you sure to delete this trip ?"></x-Modals.delete>
+<x-Modals.delete message="Are you sure to delete this Subscription ?"></x-Modals.delete>
 @endsection
 
 @push('layout-scripts')

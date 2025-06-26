@@ -18,9 +18,9 @@ class Passenger extends Model
         'subscribtion_id',
         'seat_number'
     ];
-    public function subscribtion(): BelongsTo
+    public function subscription(): BelongsTo
     {
-        return $this->belongsTo(Subscribtion::class);
+        return $this->belongsTo(Subscription::class);
     }
     public function reservation(): BelongsTo
     {

@@ -39,7 +39,7 @@
                                 value="{{ $company->name }}" isRequired="true" />
 
                             <x-inputs.h-input inputName="phone" inputId="phone" lable="Phone Number"
-                                description="Enter Company Name" placeholder="09XXXXXXXX" onkeypress="return isNumberKey(event,10)"
+                                " placeholder="09XXXXXXXX" onkeypress="return isNumberKey(event,10)"
                                 description="Enter Phone Number" value="{{ $company->phone }}" isRequired="true" />
                             <x-inputs.h-input inputName="email" inputId="email" lable="Company Email"
                                 description="Enter Company Email" placeholder="{{ translate('Company Email') }}"

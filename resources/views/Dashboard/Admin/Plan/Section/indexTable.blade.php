@@ -69,3 +69,6 @@
         </tbody>
     </table>
 </div>
+<div class="px-1 mt-3">
+    {{ $plans->links('components.Pagination.ajax') }}
+</div>

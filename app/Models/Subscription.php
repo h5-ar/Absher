@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Subscription extends Model
 {
+
+    protected $table = 'subscriptions';
+
     use HasFactory;
     public function plan(): BelongsTo
     {

@@ -48,32 +48,32 @@
                     {{ $trip->price }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{ $trip->bus_id }} {{  translate($trip->bus->type) }}
+                    {{ $trip->bus_id }} {{ translate($trip->bus->type) }}
 
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ $trip->take_off_at }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{  translate($trip->day) }}
+                    {{ translate($trip->day) }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{  translate($trip->path->from) ?? '---' }}
+                    {{ translate($trip->path->from) ?? '---' }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{  translate($trip->path->to1) ?? '---' }}
+                    {{ translate($trip->path->to1) ?? '---' }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{  translate($trip->path->to2 )?? '---' }}
+                    {{ translate($trip->path->to2 )?? '---' }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{  translate($trip->path->to3) ?? '---' }}
+                    {{ translate($trip->path->to3) ?? '---' }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{  translate($trip->path->to4 )?? '---' }}
+                    {{ translate($trip->path->to4 )?? '---' }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{  translate($trip->path->to5) ?? '---' }}
+                    {{ translate($trip->path->to5) ?? '---' }}
                 </td>
                 <td class="text-nowrap w-30 text-capitalize fs-5 fw-bolder text-center">
                     <x-Button.edit route="{{ route('trip.edit', $trip->id) }}" />
@@ -88,4 +88,7 @@
         </tbody>
 
     </table>
+</div>
+<div class="px-1 mt-3">
+    {{ $trips->links('components.Pagination.ajax') }}
 </div>

@@ -59,6 +59,9 @@
         </tbody>
     </table>
 </div>
+<div class="px-1 mt-3">
+    {{ $reservations->links('components.Pagination.ajax') }}
+</div>
 
 <!-- Passengers Modal -->
 <div class="modal fade" id="passengersModal" tabindex="-1" aria-labelledby="passengersModalLabel" aria-hidden="true">
@@ -232,8 +235,7 @@
                                 <td class="text-nowrap fs-5 fw-bolder text-center">${passenger.to}</td>
                                 <td class="text-nowrap w-30 text-capitalize fs-5 fw-bolder text-center">
                                    <x-Button.edit route="{{ route('passenger.edit', '') }}/${passenger.id}" />
-                                   <x-Button.delete route="{{ route('passenger.delete', '') }}/${passenger.id}" />
-                                </td>
+                                   <x-Button.delete route="/passenger/delete/${passenger.id}/${passenger.reservation_id}" />
                             </tr>
                         `;
                         });
@@ -298,7 +300,7 @@
                         $('#userDetailsContent').html(`
                     <tr>
                         <td colspan="6" class="text-center fs-4 fw-bolder py-4">
-                            ${response.message || '{{ translate('No User Data Found') }}'}
+                            ${response.message} || {{ translate('No User Data Found') }}
                         </td>
                     </tr>
                 `);
@@ -352,7 +354,7 @@
                         $('#tripDetailsContent').html(`
                     <tr>
                         <td colspan="6" class="text-center fs-4 fw-bolder py-4">
-                            ${response.message || '{{ translate('No Trip Data Found') }}'}
+                            ${response.message} || {{ translate('No Trip Data Found') }}
                         </td>
                     </tr>
                 `);

@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::table('reservations', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
-
             // تعديل العمود
             $table->unsignedBigInteger('user_id')->nullable()->change();
-
             // إعادة إضافة القيد مع تحديد السلوك
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
