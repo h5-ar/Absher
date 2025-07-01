@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\SACreatePlanRequest;
 use App\Http\Requests\UpdatePlanRequest;
+use Illuminate\Http\Request;
+
 
 
 
@@ -17,9 +19,15 @@ class SAPlanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $plans = Plan::paginate(10);
+        $plans = Plan::with('company')
+        ->when($request->name, function ($query, $name) {
+            return $query->whereHas('company',  function ($q) use ($name) {
+                $q->where('name', $name);
+            });
+        })->paginate(10);
+        
         if (request()->ajax()) {
             return view('DashboardSuperAdmin.SuperAdmin.plan.Section.indexTable', compact('plans'));
         }
@@ -55,7 +63,7 @@ class SAPlanController extends Controller
 
         return redirect()->route('SAindex.plan');
     }
-   
+
     /**
      * Display the specified resource.
      */
@@ -105,5 +113,32 @@ class SAPlanController extends Controller
         $plan->delete();
         Session::flash('successMessage', translate('Deleted successfully'));
         return to_route('SAindex.plan');
+    }
+
+
+    public function getPlanDetails(Request $request)
+    {
+        $plan = Plan::find($request->plan_id);
+
+        if (!$plan) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Trip not found'
+            ], 404);
+        }
+
+
+        return response()->json([
+            'success' => true,
+            'plan' => [
+                'id' => $plan->id,
+                'name' => $plan->name,
+                'trips_number' => $plan->trips_number,
+                'type_bus' => $plan->type_bus,
+                'price' => $plan->price,
+                'to' => $plan->to,
+                'form' => $plan->form,
+            ],
+        ]);
     }
 }

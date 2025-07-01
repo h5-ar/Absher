@@ -41,6 +41,7 @@
                         routeName="add.user" />
                 </x-side.naveItem>
             </x-side.naveItem>
+
             <x-side.naveItem name="Trips" data_fether="map-pin">
                 <x-side.menuContent name="All Trips"
                     routeName="index" />
@@ -49,19 +50,40 @@
                 <x-side.menuContent name="Add A Vehicle Trip"
                     routeName="add.v" />
             </x-side.naveItem>
+
             <x-side.naveItem name="Buses" data_fether="truck">
                 <x-side.menuContent name="All Buses"
                     routeName="SAbus.index" />
-
                 <x-side.menuContent name="Add New Bus"
                     routeName="SAadd.bus" />
             </x-side.naveItem>
+
             <x-side.naveItem name="Plans" data_fether="file-text">
                 <x-side.menuContent name=" All Plans"
                     routeName="SAindex.plan" />
                 <x-side.menuContent name="Add New Plan"
                     routeName="SAadd.plan" />
+            </x-side.naveItem>
 
+            <x-side.naveItem name="Reservation" data_fether="file-text">
+                <x-side.menuContent name=" All Resrvations"
+                    routeName="SAindex.reservation" />
+                <x-side.menuContent name="Add New Resrvation"
+                    routeName="SAadd.reservation" />
+            </x-side.naveItem>
+
+            <x-side.naveItem name="Subscription" data_fether="file-text">
+                <x-side.menuContent name=" All Subscription"
+                    routeName="SAindex.subscription" />
+            </x-side.naveItem>
+
+            <x-side.naveItem name="Shipping" data_fether="file-text">
+                <x-side.menuContent name=" All Shipping"
+                    routeName="SAindex.shipping" />
+            </x-side.naveItem>
+            <x-side.naveItem name="Notifications" data_fether="file-text">
+                <x-side.menuContent name=" All Notifications"
+                    routeName="SAnotifications.index" />
             </x-side.naveItem>
         </ul>
     </div>

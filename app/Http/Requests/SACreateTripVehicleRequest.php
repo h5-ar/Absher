@@ -9,6 +9,8 @@ use App\Enums\Days;
 use Carbon\Carbon;
 use Illuminate\Validation\Validator;
 use App\Models\Trip;
+use App\Models\Bus;
+
 
 class SACreateTripVehicleRequest extends FormRequest
 {
@@ -48,6 +50,9 @@ class SACreateTripVehicleRequest extends FormRequest
             if ($this->input('day') !== $expectedDay) {
                 $validator->errors()->add('day', 'اليوم المدخل لا يتطابق مع التاريخ المختار.');
             }
+            if ($selectedDate->isPast() && !$selectedDate->isToday()) {
+                $validator->errors()->add('datetime', 'لا يمكن إنشاء رحلة في تاريخ مضى.');
+            }
         });
     }
 
@@ -57,6 +62,14 @@ class SACreateTripVehicleRequest extends FormRequest
     public function ValidatorBus($validator)
     {
         $validator->after(function (Validator $validator) {
+            $bus = Bus::where('id', $this->Bus)
+                ->where('Company_id', $this->company)
+                ->first();
+
+            if (!$bus) {
+                $validator->errors()->add('Bus', 'هذا الباص غير تابع للشركة المحددة.');
+                return;
+            }
             $exists = Trip::where('bus_id', $this->input('Bus'))
                 ->where('take_off_at', $this->input('datetime'))
                 ->exists();

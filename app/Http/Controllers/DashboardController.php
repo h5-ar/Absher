@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\Trip;
+use Carbon\Carbon;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
@@ -13,9 +16,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('Dashboard.Admin.dashboard');
+        $today = Carbon::today();
+        $todayTrips = Trip::with(['path', 'bus'])->whereDate('take_off_at', $today)->get();
+        return view('Dashboard.Admin.dashboard', compact('todayTrips'));
     }
-
     public function switchLang()
     {
         $lang = match (app()->getLocale()) {

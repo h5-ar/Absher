@@ -15,7 +15,6 @@
         <div class="card-body ">
             <div id="page-data">
                 @include('Dashboard.Admin.Reservation.Section.indexTable',['reservations' => $reservations])
-
             </div>
         </div>
     </div>

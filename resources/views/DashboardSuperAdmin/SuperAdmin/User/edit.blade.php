@@ -50,6 +50,25 @@
                             <x-inputs.h-input inputName="password_confirmation" inputId="password_confirmation" lable="Confirm Password"
                                 description="Enter User Password Again" placeholder="{{ translate('User Password') }}"
                                 type="password" value="{{ $user->password }}" isRequired="true" />
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-1 row">
+                                        <div class="col-2 col-sm-3"> <label class="col-form-label fs-5 fw-bolder isRequired"
+                                                for="gender">{{ translate('Statut User') }}</label>
+                                            <x-SVG.alert-circle description="Select Statut User" />
+                                        </div>
+                                        <div class="col-10 col-sm-9">
+
+                                            <select class="select2 form-select" name="statut_user" id="default-select">
+                                                <option value="Locked" {{ old('statut_user', $user->statut_user ?? 'Unlocked') == 'Locked' ? 'selected' : '' }}>Locked</option>
+                                                <option value="Unlocked" {{ old('statut_user', $user->statut_user ?? 'Unlocked') == 'Unlocked' ? 'selected' : '' }}>Unlocked</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-sm-9 offset-sm-3">
                                 <x-Button.submit />
                                 <x-Button.rest />

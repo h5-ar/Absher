@@ -14,9 +14,11 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $companies = Company::paginate();
+        $companies = Company::when($request->name, function ($query, $name) {
+            return $query->where('name', $name);
+        })->paginate(10);
         if (request()->ajax()) {
             return view('DashboardSuperAdmin.SuperAdmin.Comapny.Section.indexTable', compact('companies'));
         }
@@ -103,5 +105,31 @@ class CompanyController extends Controller
         $company->delete();
         Session::flash('successMessage', translate('Deleted successfully'));
         return to_route('company.index');
+    }
+
+    public function getCompanyDetails(Request $request)
+    {
+        $company = Company::find($request->company_id);
+
+        if (!$company) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Company not found'
+            ]);
+        }
+        return response()->json([
+            'success' => true,
+            'company' => [
+                'id' => $company->id,
+                'name' => $company->name,
+                'phone' => $company->phone,
+                'email' => $company->email,
+                'username' => $company->username,
+                'description' => $company->Description,
+                'managerFN' => $company->manager->first_name,
+                'managerLN' => $company->manager->last_name,
+
+            ],
+        ]);
     }
 }

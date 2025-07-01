@@ -2,7 +2,7 @@
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item me-auto">
-                <a class="navbar-brand" href="{{ route('super_admin.dashboard') }}">
+                <a class="navbar-brand" href="{{ route('dashboard') }}">
                     <h2 class="brand-text">{{ translate('Absher') }}</h2>
                 </a>
             </li>
@@ -42,11 +42,10 @@
 
             </x-side.naveItem>
             <x-side.naveItem name="Reservation" data_fether="file-text">
-                <x-side.menuContent name=" All Resrvation"
+                <x-side.menuContent name=" All Resrvations"
                     routeName="index.reservation" />
                 <x-side.menuContent name="Add New Resrvation"
                     routeName="add.reservation" />
-
             </x-side.naveItem>
             <x-side.naveItem name="Subscription" data_fether="file-text">
                 <x-side.menuContent name=" All Subscription"
@@ -54,11 +53,11 @@
             </x-side.naveItem>
             <x-side.naveItem name="Shipping" data_fether="file-text">
                 <x-side.menuContent name=" All Shipping"
-                    routeName="index.shipping" /> 
-                     <x-side.menuContent name="Add New Shipping"
-                    routeName="add.shipping" />
+                    routeName="index.shipping" />
             </x-side.naveItem>
-           
+            <x-side.menuContent name="Block User"
+                routeName="viewblock" />
+
         </ul>
     </div>
 </div>

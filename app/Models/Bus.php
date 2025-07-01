@@ -12,14 +12,14 @@ class Bus extends Model
 
     protected $fillable = [
         'type',
-        'seats_count', 
+        'seats_count',
     ];
     use HasFactory;
     public function company(): BelongsTo
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class, 'Company_id');
     }
-    
+
     public function trip(): HasMany
     {
         return $this->hasMany(Trip::class);

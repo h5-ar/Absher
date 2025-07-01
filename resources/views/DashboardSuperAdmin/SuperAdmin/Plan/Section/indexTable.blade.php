@@ -4,7 +4,7 @@
             <tr>
                 <th scope="col" class="text-nowrap w-10 fs-4 fw-bolder text-center">#</th>
                 <th scope="col" class="text-nowrap w-50 fs-4 fw-bolder text-center">
-                    {{ translate('Comapny Name') }}
+                    {{ translate('Company') }}
                 </th>
                 <th scope="col" class="text-nowrap w-50 fs-4 fw-bolder text-center">
                     {{ translate('Plan Name') }}

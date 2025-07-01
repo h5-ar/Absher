@@ -91,24 +91,8 @@
                 onMessage,
             } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-messaging.js";
 
-            // const firebaseConfig = {
-            //     apiKey: '{{ env('FIREBASE_DASHBOARD_API_KEY') }}',
-            //     authDomain: '{{ env('FIREBASE_DASHBOARD_AUTH_DOMAIN') }}',
-            //     projectId: '{{ env('FIREBASE_DASHBOARD_PROJECT_ID') }}',
-            //     storageBucket: '{{ env('FIREBASE_DASHBOARD_STORAGE_BUCKET') }}',
-            //     messagingSenderId: '{{ env('FIREBASE_DASHBOARD_MESSAGING_SENDER_ID') }}',
-            //     appId: '{{ env('FIREBASE_DASHBOARD_APP_ID') }}',
-            //     measurementId: '{{ env('FIREBASE_DASHBOARD_MEASUREMENT_ID') }}'
-            // };
-            const firebaseConfig = {
-                apiKey: "AIzaSyBwXHl16oTlQM4JETamUkPO6SJwA51uxUM",
-                authDomain: "deliveryapp-16e35.firebaseapp.com",
-                projectId: "deliveryapp-16e35",
-                storageBucket: "deliveryapp-16e35.appspot.com",
-                messagingSenderId: "445752029618",
-                appId: "1:445752029618:web:c764f00308cbf3e297b4ab",
-                measurementId: "G-JRJS412TKG"
-            };
+         
+           
 
 
             const app = initializeApp(firebaseConfig);
