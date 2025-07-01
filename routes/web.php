@@ -86,7 +86,7 @@ Route::middleware('auth:super_admin')->group(function () {
     Route::get('SuperAdmin/add/bus', [SABusController::class, 'create'])->name('SAadd.bus');
     Route::post('SuperAdmin/store', [SABusController::class, 'store'])->name('SAbus.store');
     Route::get('SuperAdmin/bus/index', [SABusController::class, 'index'])->name('SAbus.index');
-    Route::get('bus/index/{name}', [SABusController::class, 'index'])->name('bus.company.ByName');
+    Route::get('SuperAdmin/bus/index/{name}', [SABusController::class, 'index'])->name('bus.company.ByName');
     Route::get('SuperAdmin/bus/show', [SABusController::class, 'show'])->name('SAbus.show');
     Route::get('SuperAdmin/bus/edit/{id}', [SABusController::class, 'edit'])->name('SAbus.edit');
     Route::put('SuperAdmin/bus/update/{id}', [SABusController::class, 'update'])->name('SAbus.update');
@@ -147,7 +147,8 @@ Route::middleware('auth:company')->group(function () {
     Route::post('trip/storeQuick', [TripController::class, 'storeQuick'])->name('trip.storeQuick');
     Route::post('trip/storeVehicle', [TripController::class, 'storeVehicle'])->name('trip.storeVehicle');
     Route::get('/trips', [TripController::class, 'index'])->name('trip.index');
-    Route::get('/trips/filter', [TripController::class, 'filterTrip'])->name('trip.filter');
+    Route::get('/filter/trips', [TripController::class, 'filterTrip'])->name('trip.filter');
+    Route::get('/trips/filter', [TripController::class, 'filter'])->name('trips.filter');
 
     Route::get('add/bus', [BusController::class, 'create'])->name('add.bus');
     Route::post('store', [BusController::class, 'store'])->name('bus.store');
