@@ -17,14 +17,21 @@ class Plan extends Model
         'type_bus',
         'available',
         'price',
+        'form',
+        'to',
     ];
 
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
     }
-    public function subscription(): HasMany
+    public function subscriptions(): HasMany
     {
         return $this->hasMany(Subscription::class);
     }
+public function bus()
+{
+    return $this->belongsTo(Bus::class, 'bus_id'); 
+}
+
 }

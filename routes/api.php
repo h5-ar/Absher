@@ -3,9 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\ReservationController;
 use App\Http\Controllers\Api\TripController;
-use App\Http\Controllers\CompanySubscriptionController;
+use App\Http\Controllers\CompanysController;
+use App\Http\Controllers\ShippingController;
+use App\Http\Controllers\Api\ShippingsController;
+use App\Http\Controllers\Api\ReservationController;
+use App\Http\Controllers\Api\CompanySubscriptionController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,30 +40,51 @@ Route::prefix('subscriptions')->group(function () {
     });
 
 
-    Route::prefix('user/{userId}')->group(function () {
-        Route::get('/', [CompanySubscriptionController::class, 'getUserSubscriptions']);
-    });
+
+        Route::get('/usersub/{userId}', [CompanySubscriptionController::class, 'userSubscriptions']);
 
 
-    Route::post('/', [CompanySubscriptionController::class, 'store']);
+
+    Route::post('/storesub', [CompanySubscriptionController::class, 'store']);
 
 
-    Route::put('/{subscriptionId}/renew', [CompanySubscriptionController::class, 'renew']);
+    Route::post('/renew/{subscriptionId}/{userId}', [CompanySubscriptionController::class, 'renew']);
 
 
-    Route::put('/{subscriptionId}/cancel', [CompanySubscriptionController::class, 'cancel']);
+    Route::delete('/{subscriptionId}/{userId}/cancel', [CompanySubscriptionController::class, 'cancel']);
 
 });
 
-Route::middleware(['auth:sanctum'])->group(function (){
-     Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy']);
-      Route::put('reservation/{passengerId}', [ReservationController::class, 'Edit']);
-        Route::get('/reservations', [ReservationController::class, 'index']);
-     Route::post('/store-reservations', [ReservationController::class, 'store']);
+//Route::post('/Apreservations/{id}', [App\Http\Controllers\Api\ReservationController::class, 'sttore']);//euik
+   // Route::put('/reservation/{id}', [ReservationController::class, 'update']);
+    Route::delete('/reservations/{userId}/{reservationId}', [App\Http\Controllers\Api\ReservationController::class, 'destroy']);
+ Route::get('/myreservations/{userId}', [App\Http\Controllers\Api\ReservationController::class, 'esraa_Reservations']);
+    Route::post('/esstore', [App\Http\Controllers\Api\ReservationController::class, 'hastore']);
+    Route::put('/updatee/{reservationId}/{userId}', [App\Http\Controllers\Api\ReservationController::class, 'updatee']);
+
 
      Route::get('trips',[TripController::class,'index']);
-      Route::get('/trips/search', [TripController::class, 'show']);
+     Route::get('/trips/{trip_id}', [TripController::class, 'gettrips']);
+    Route::get('/trips', [TripController::class, 'index']);
+    Route::get('/trips/{trip}/available-seats', [TripController::class, 'availableSeats']);
 
 
 
-});
+//});
+
+Route::middleware('auth:sanctum')->get('/companies', [CompanysController::class, 'getCompaniesApi']);
+
+Route::middleware('auth:sanctum')->get('/companies/{id}', [CompanysController::class, 'show']);
+Route::middleware('auth:sanctum')->get('/getcompany/{id}', [CompanysController::class, 'hagetCompanyById']);
+
+Route::middleware('auth:sanctum')->get('shippings/user/{id}', [ShippingsController::class, 'index']);
+
+
+Route::middleware('auth:sanctum')->get('ship/{shipId}/{userId}', [App\Http\Controllers\Api\ShippingsController::class, 'show']);       // تفاصيل شحنة وحدة
+
+//Route::middleware('auth:sanctum')->post('/shippings/{userId}', [ShippingsController::class, 'store']);
+Route::post('/shippings/{userId}', [ShippingsController::class, 'store']);
+
+Route::middleware('auth:sanctum')->put('/shippings/{id}', [ShippingsController::class, 'update']);
+
+Route::middleware('auth:sanctum')->delete('/shippings/{id}/{userId}', [ShippingsController::class, 'destroy']);

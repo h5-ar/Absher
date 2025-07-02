@@ -34,16 +34,18 @@ class Company extends Authenticatable
     {
         return $this->hasMany(Bus::class);
     }
-    public function plan(): HasMany
+    public function plans(): HasMany
     {
         return $this->hasMany(Plan::class);
     }
-    public function trip(): HasMany
+    public function trips(): HasMany
     {
         return $this->hasMany(Trip::class);
     }
     public function subscriptions()
     {
         return $this->hasManyThrough(Subscription::class, Plan::class);
+
     }
+
 }

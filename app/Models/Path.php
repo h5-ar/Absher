@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Path extends Model
 {
     use HasFactory;
+protected $table = 'path';
 
     protected $appends = ['last_destination'];
 protected $casts = [

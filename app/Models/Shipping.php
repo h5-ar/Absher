@@ -29,7 +29,7 @@ class Shipping extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function item_Shipping(): HasMany
+    public function items(): HasMany
     {
         return $this->hasMany(ItemShipping::class);
     }
