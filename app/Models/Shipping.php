@@ -11,6 +11,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Shipping extends Model
 {
     use HasFactory;
+    protected $table = 'shipping';
+    protected $fillable = [
+
+        'shipment_status',
+        'user_id',
+        'national_number_user_to',
+        'phone_user_to',
+        'name_user_to',
+        'trip_id',
+    ];
     public function trip(): BelongsTo
     {
         return $this->belongsTo(Trip::class);
@@ -19,7 +29,7 @@ class Shipping extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function item_Shipping(): HasMany
+    public function items(): HasMany
     {
         return $this->hasMany(ItemShipping::class);
     }

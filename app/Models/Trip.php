@@ -31,7 +31,7 @@ class Trip extends Model
     {
         return $this->hasOne(Path::class);
     }
-    public function reservation(): HasMany
+    public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);
     }
@@ -43,4 +43,9 @@ class Trip extends Model
     {
         return $this->belongsTo(Company::class);
     }
+    public function reservedSeatsCount()
+    {
+        return $this->reservations()->sum('count_seat');
+    }
+
 }

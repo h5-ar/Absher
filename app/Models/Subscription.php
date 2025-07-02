@@ -9,11 +9,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Subscription extends Model
 {
+protected $casts = [
+    'start_at' => 'datetime',
+    'end_at' => 'datetime',
+];
 
     protected $table = 'subscriptions';
 
     use HasFactory;
-    public function plan(): BelongsTo
+    public function plans(): BelongsTo
     {
         return $this->belongsTo(Plan::class);
     }
@@ -24,5 +28,13 @@ class Subscription extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+     public function plan(): BelongsTo
+    {
+        return $this->belongsTo(Plan::class);
+    }
+     public function company(): BelongsTo
+    {
+        return $this->belongsTo(company::class);
     }
 }

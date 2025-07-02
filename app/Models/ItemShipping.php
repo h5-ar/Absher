@@ -10,7 +10,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ItemShipping extends Model
 {
+ 
     use HasFactory;
+    protected $table = 'item_shipping'; // هنا اسم جدولك الصحيح
+
+    protected $fillable = [
+        'material_value',
+        'description_item',
+        'shipping_id',
+        'size',
+    ];
     public function shipping(): BelongsTo
     {
         return $this->belongsTo(Shipping::class);

@@ -15,7 +15,7 @@ class Passenger extends Model
         'first_name',
         'father_name',
         'last_name',
-        'subscribtion_id',
+        'subscrpition_id',
         'seat_number'
     ];
     public function subscription(): BelongsTo

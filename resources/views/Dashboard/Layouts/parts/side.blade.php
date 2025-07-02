@@ -21,18 +21,16 @@
 
             <x-side.naveItem name="Trips" data_fether="map-pin">
                 <x-side.menuContent name="All Trips"
-                    routeName="trip.index" />
-                <x-side.menuContent name="Add A Quick Trip"
-                    routeName="add.quick" />
-                <x-side.menuContent name="Add A Vehicle Trip"
-                    routeName="add.vehicle" />
+                    routeName="index" />
+                <x-side.menuContent name="Add New Trip"
+                    routeName="add" />
             </x-side.naveItem>
-            <x-side.naveItem name="Buses" data_fether="truck">
+            <x-side.naveItem name="Buses" data_fether="layers">
                 <x-side.menuContent name="All Buses"
-                    routeName="bus.index" />
+                    routeName="dashboard" />
 
                 <x-side.menuContent name="Add New Bus"
-                    routeName="add.bus" />
+                    routeName="dashboard" />
             </x-side.naveItem>
             <x-side.naveItem name="Plans" data_fether="file-text">
                 <x-side.menuContent name=" All Plans"
@@ -54,7 +52,11 @@
             <x-side.naveItem name="Shipping" data_fether="file-text">
                 <x-side.menuContent name=" All Shipping"
                     routeName="index.shipping" />
+                     <x-side.menuContent name="Add New Shipping"
+                    routeName="add.shipping" />
+                    routeName="index.shipping" />
             </x-side.naveItem>
+
             <x-side.menuContent name="Block User"
                 routeName="viewblock" />
 

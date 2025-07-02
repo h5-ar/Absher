@@ -222,6 +222,7 @@ class TripController extends Controller
     public function filter(Request $request)
     {
         $type = $request->query('type', 'quick'); // القيمة الافتراضية 'quick'
+
         $today = now()->format('Y-m-d'); // تاريخ اليوم
 
         $trips = Trip::where('Company_id', Auth::id())
@@ -235,6 +236,7 @@ class TripController extends Controller
             })
             ->whereDate('take_off_at', '>=', $today) // إضافة شرط تاريخ الانطلاق من اليوم فصاعدًا
             ->get();
+
 
         return response()->json(['trips' => $trips]);
     }
