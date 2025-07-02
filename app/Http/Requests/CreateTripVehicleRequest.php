@@ -23,7 +23,7 @@ class CreateTripVehicleRequest extends FormRequest
 
             'price' => ['required', 'numeric'],
             'Bus' => ['required', 'exists:buses,id'],
-            'datetime' => ['required','date'],
+            'datetime' => ['required', 'date'],
             'day' => ['required', Rule::enum(Days::class)],
             'from' => ['required', Rule::enum(Governorates::class)],
             'to1' => ['required', Rule::enum(Governorates::class), 'different:from'],
@@ -47,6 +47,10 @@ class CreateTripVehicleRequest extends FormRequest
 
             if ($this->input('day') !== $expectedDay) {
                 $validator->errors()->add('day', 'اليوم المدخل لا يتطابق مع التاريخ المختار.');
+            }
+
+            if ($selectedDate->isPast() && !$selectedDate->isToday()) {
+                $validator->errors()->add('datetime', 'لا يمكن إنشاء رحلة في تاريخ مضى.');
             }
         });
     }

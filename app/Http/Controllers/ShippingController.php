@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ItemShipping;
 use App\Models\Shipping;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,8 +35,7 @@ class ShippingController extends Controller
      */
     public function create()
     {
-                return view('Dashboard.Admin.Shipping.create');
-
+        //
     }
 
     /**
@@ -76,5 +76,16 @@ class ShippingController extends Controller
     public function destroy(Shipping $shipping)
     {
         //
+    }
+    public function getItem(Request $request)
+    {
+        $shipmentId = $request->shipment_id;
+        $items = ItemShipping::where('shipping_id', $shipmentId)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'items' => $items
+        ]);
     }
 }

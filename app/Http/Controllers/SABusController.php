@@ -16,10 +16,15 @@ class SABusController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $buses = Bus::with('company')
+            ->when($request->name, function ($query, $name) {
+                return $query->whereHas('company',  function ($q) use ($name) {
+                    $q->where('name', $name);
+                });
+            })->paginate(10);
 
-        $buses = Bus::paginate(10);
         if (request()->ajax()) {
             return view('DashboardSuperAdmin.SuperAdmin.Bus.Section.indexTable', compact('buses'));
         }
@@ -52,7 +57,7 @@ class SABusController extends Controller
         return redirect()->route('SAbus.index');
     }
 
-  
+
     /**
      * Display the specified resource.
      */
@@ -76,7 +81,7 @@ class SABusController extends Controller
 
         $bus->update([
             'type' => $request['bustype'],
-            'company_id'=>$request['company'],
+            'company_id' => $request['company'],
             'seats_count' => $request['seats_count']
         ]);
         Session::flash('successMessage', translate('updated successfully'));

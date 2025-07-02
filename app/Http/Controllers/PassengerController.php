@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Passenger;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreatePassengerRequest;
+
 use Illuminate\Support\Facades\Session;
 
 use App\Models\Reservation;
@@ -51,7 +53,6 @@ class PassengerController extends Controller
     {
         $passenger = Passenger::with(['trip'])->findOrFail($id);
         $stations = [
-
             'from' => $passenger->reservation->trip->path->from,
             'to1' => $passenger->reservation->trip->path->to1,
             'to2' => $passenger->reservation->trip->path->to2,
@@ -76,7 +77,7 @@ class PassengerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(CreatePassengerRequest $request, $id)
     {
         $passenger = Passenger::findOrFail($id);
 
@@ -84,9 +85,10 @@ class PassengerController extends Controller
             'first_name' => $request['first_name'],
             'father_name' => $request['father_name'],
             'last_name' => $request['last_name'],
-            'subscribtion_id' => $request['subscribtion_id'] ?? null,
             'from' => $request['departure_point'],
-            'to' => $request['arrival_point']
+            'to' => $request['arrival_point'],
+            'seat_number' => $request['seat_number']
+
 
         ]);
         Session::flash('successMessage', translate('Updated successfully'));

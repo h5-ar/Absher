@@ -11,12 +11,17 @@ class Bus extends Model
 {
 protected $hidden = [''];
 
+    protected $fillable = [
+        'type',
+        'seats_count',
+    ];
     protected $fillable = ['number', 'seats', 'type', 'company_id'];
     use HasFactory;
     public function company(): BelongsTo
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class, 'Company_id');
     }
+
 
     public function trip(): HasMany
     {

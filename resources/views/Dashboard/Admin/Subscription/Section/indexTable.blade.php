@@ -19,9 +19,6 @@
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('End') }}
                 </th>
-                <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
-                    {{ translate('Actions') }}
-                </th>
             </tr>
         </thead>
         <tbody>
@@ -53,14 +50,11 @@
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ $subscription->end_at }}
                 </td>
-                <td class="text-nowrap w-30 text-capitalize fs-5 fw-bolder text-center">
-                    <x-Button.delete route="{{ route('subscription.delete',$subscription->id) }}" />
-
-                </td>
+                
             </tr>
             @empty
             <tr>
-                <td colspan="7" class="text-center fs-4 fw-bolder py-4">{{ translate('No Data') }}</td>
+                <td colspan="6" class="text-center fs-4 fw-bolder py-4">{{ translate('No Data') }}</td>
             </tr>
             @endforelse
         </tbody>

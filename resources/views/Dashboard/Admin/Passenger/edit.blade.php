@@ -15,6 +15,9 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
+                                <input type="hidden" name="passenger_id" value="{{ $passenger->id }}">
+                                <input type="hidden" name="reservation_id" value="{{ $passenger->reservation_id }}">
+
                                 <x-inputs.h-input
                                     inputName="first_name"
                                     inputId="first_name"
@@ -43,13 +46,6 @@
                                     type="number"
                                     value="{{ $passenger->seat_number }}" />
                                 <input type="hidden" name="passenger_id" value="{{ $passenger->id }}">
-
-                                <x-inputs.h-input
-                                    inputName="subscribtion_id"
-                                    inputId="subscribtion_id"
-                                    lable="{{ translate('Subscription Number') }}"
-                                    type="number"
-                                    value="{{ $passenger->subscribtion_id ?? '' }}" />
 
                                 <!-- Departure Point -->
                                 <div class="col-12">

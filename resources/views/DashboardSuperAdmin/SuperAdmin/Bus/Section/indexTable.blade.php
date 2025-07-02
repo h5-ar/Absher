@@ -25,7 +25,7 @@
                     {{ ++$key + ($buses->currentPage() - 1) * $buses->perPage() }}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{$bus->Company_id}}
+                    {{translate($bus->company->name)}}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ translate($bus->type)}}
