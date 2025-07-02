@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('phone', 10);
             $table->string('email')->unique();
             $table->string('username', 25);
-            $table->string('password', 25);
+            $table->string('password',25);
             $table->string('Description', 255);
             $table->string('image')->nullable(); // لحفظ مسار الصورة
             $table->foreignId('manager_id')->constrained('managers')->onDelete('cascade');

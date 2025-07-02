@@ -6,6 +6,7 @@ use App\Models\ItemShipping;
 use App\Models\Shipping;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 
 class ShippingController extends Controller
@@ -57,17 +58,26 @@ class ShippingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Shipping $shipping)
+   public function edit($id)
     {
-        //
+
+        $shipment = Shipping::findOrFail($id);
+
+        return view('Dashboard.Admin.Shipping.edit', compact('shipment'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Shipping $shipping)
+    public function update(Request $request, $id)
     {
-        //
+        $plan = Shipping::findOrFail($id);
+
+        $plan->update([
+            'shipment_status' => $request['shipment_status'],
+        ]);
+        Session::flash('successMessage', translate('Updated successfully'));
+        return to_route('index.shipping');
     }
 
     /**

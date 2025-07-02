@@ -21,7 +21,7 @@ use App\Http\Controllers\Api\CompanySubscriptionController;
 |
 */
 Route::post('/register',[AuthController::class,'register']);
-Route::post('/login',[AuthController::class,'login']);
+Route::post('/login',[App\Http\Controllers\Api\AuthController::class,'login']);
 Route::post('/check-otp',[AuthController::class,'checkCode']);
 Route::post('/getTripByData',[TripController::class,'/getTripByData']);
 Route::post('/getTripByCompany',[TripController::class,'/getTripByCompany']);
@@ -30,7 +30,7 @@ Route::prefix('subscriptions')->group(function () {
 
     Route::prefix('company/{companyId}')->group(function () {
 
-        Route::get('/active', [CompanySubscriptionController::class, 'getActiveSubscription']);
+        Route::get('/active', [App\Http\Controllers\Api\CompanySubscriptionController::class, 'getActiveSubscription']);
 
         Route::put('/{subscriptionId}/update-trips', [CompanySubscriptionController::class, 'updateRemainingTrips']);
 
@@ -59,7 +59,7 @@ Route::prefix('subscriptions')->group(function () {
    // Route::put('/reservation/{id}', [ReservationController::class, 'update']);
     Route::delete('/reservations/{userId}/{reservationId}', [App\Http\Controllers\Api\ReservationController::class, 'destroy']);
  Route::get('/myreservations/{userId}', [App\Http\Controllers\Api\ReservationController::class, 'esraa_Reservations']);
-    Route::post('/esstore', [App\Http\Controllers\Api\ReservationController::class, 'hastore']);
+    Route::post('/esstore/{userId}', [App\Http\Controllers\Api\ReservationController::class, 'hastore']);
     Route::put('/updatee/{reservationId}/{userId}', [App\Http\Controllers\Api\ReservationController::class, 'updatee']);
 
 
@@ -80,7 +80,7 @@ Route::middleware('auth:sanctum')->get('/getcompany/{id}', [CompanysController::
 Route::middleware('auth:sanctum')->get('shippings/user/{id}', [ShippingsController::class, 'index']);
 
 
-Route::middleware('auth:sanctum')->get('ship/{shipId}/{userId}', [App\Http\Controllers\Api\ShippingsController::class, 'show']);       // تفاصيل شحنة وحدة
+Route::middleware('auth:sanctum')->get('ship/{shipid}/{userId}', [App\Http\Controllers\Api\ShippingsController::class, 'show']);       // تفاصيل شحنة وحدة
 
 //Route::middleware('auth:sanctum')->post('/shippings/{userId}', [ShippingsController::class, 'store']);
 Route::post('/shippings/{userId}', [ShippingsController::class, 'store']);

@@ -20,7 +20,7 @@ class SAUpdateTripRequest extends FormRequest
         return [
             'company' => ['required'],
 
-            'price' => ['required', 'numeric'],
+            'price' => ['required', 'numeric', 'min:0'],
             'Bus' => ['required'],
             'datetime' => ['required', 'date'],
             'day' => ['required', Rule::enum(Days::class)],

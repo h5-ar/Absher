@@ -20,7 +20,6 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $company = Company::where('username', $request->username)->first();
-
         if (isset($company) && Hash::check($request->password, $company->password)) {
             auth()->login($company);
             return redirect()->route('dashboard');

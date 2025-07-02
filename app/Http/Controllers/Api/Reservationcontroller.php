@@ -7,11 +7,12 @@ use App\Models\Trip;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Subscription;
 use App\Models\Passenger;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-
+use Illuminate\Validation\Rules\Unique;
 
 class ReservationController extends Controller
 {
@@ -128,7 +129,7 @@ class ReservationController extends Controller
      }
 public function esraa_Reservations(Request $request,$userId )
 {
-    $userId = $request->user_id;
+   // $userId = $request->user_id;
     $reservations = Reservation::where('user_id', $userId)
         ->with(['trip.company', 'trip.path', 'passengers']) // جلب الشركة، المسار، الركاب
         ->latest()
@@ -472,7 +473,7 @@ $reservation = Reservation::where('id', $reservationId)
         'reservation' => $reservation
     ]);
 }
-public function hastore(Request $request)
+public function hastore(Request $request,$userId)
 {
     $syrianGovernorates = [
         'دمشق', 'ريف دمشق', 'حلب', 'حمص', 'حماة', 'اللاذقية',
@@ -480,16 +481,17 @@ public function hastore(Request $request)
         'الرقة', 'دير الزور', 'الحسكة'
     ];
 
-    $userId = $request->input('user_id');
+    //$userId = $request->input('user_id');
 
     $data = $request->validate([
+        'company_id'=>'required|exists:companies,id',
         'trip_id' => 'required|exists:trips,id',
         'passengers' => 'required|array|min:1',
         'passengers.*.first_name' => 'required|string',
         'passengers.*.father_name' => 'required|string',
         'passengers.*.last_name' => 'required|string',
         'passengers.*.National_number' => 'required|numeric|digits:11|unique:passengers,National_number',
-        'passengers.*.seat_number' => 'required|integer',
+        'passengers.*.seat_number' => 'required|integer|unique:passengers',
         'passengers.*.from' => ['required', 'string', Rule::in($syrianGovernorates)],
         'passengers.*.to' => ['required', 'string', Rule::in($syrianGovernorates)],
     ]);
@@ -516,6 +518,7 @@ public function hastore(Request $request)
     $reservation = Reservation::create([
         'user_id' => $userId,
         'trip_id' => $trip->id,
+         'company_id' => $data['company_id'],
         'count_seats' => $seatsRequested,
         // 'paidwy' => 'subscription', // يتم تحديده لاحقًا
     ]);

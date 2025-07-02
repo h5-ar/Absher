@@ -15,7 +15,7 @@
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('Username') }}
                 </th>
-               
+
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('Description') }}
                 </th>
@@ -45,7 +45,7 @@
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ $company->username}}
                 </td>
-              
+
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
                     {{ $company->Description}}
                 </td>
@@ -54,7 +54,6 @@
                 </td>
                 <td class="text-nowrap w-30 text-capitalize fs-5 fw-bolder text-center">
                     <x-Button.edit route="{{ route('edit.company', $company->id) }}" />
-                    <x-Button.delete route="{{ route('delete.company',$company->id) }}" />
                 </td>
             </tr>
             @empty

@@ -72,6 +72,8 @@ class SATripController extends Controller
         ]);
 
         Path::create([
+                                    'type' => $request->type,
+
             'from' => $request->from,
             'to1' => $request->to,
             'trip_id' => $tripId
@@ -91,6 +93,8 @@ class SATripController extends Controller
         ]);
 
         Path::create([
+                                    'type' => $request->type,
+
             'from' => $request->from,
             'to1' => $request->to1,
             'to2' => $request->to2,
@@ -160,8 +164,8 @@ class SATripController extends Controller
      */
     public function destroy($id)
     {
-        $trip = Trip::findOrFail($id);
-        $trip->path()->delete();
+       $trip = Trip::findOrFail($id);
+      
         $trip->delete();
         Session::flash('successMessage', translate('Deleted successfully'));
         return to_route('index');

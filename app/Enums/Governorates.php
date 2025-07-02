@@ -4,17 +4,17 @@ namespace App\Enums;
 
 enum Governorates: string
 {
-    case Damascus = 'Damascus';
-    case Aleppo = 'Aleppo';
-    case Homs = 'Homs';
-    case Hama = 'Hama';
-    case Latakia = 'Latakia';
-    case Tartus = 'Tartus';
-    case Idlib = 'Idlib';
-    case Deir_Ez_Zor = 'Deir Ez Zor';
-    case Raqqa = 'Raqqa';
-    case Hasakah = 'Hasakah';
-    case Daraa = 'Daraa';
-    case Suwayda = 'Suwayda';
-    case Quneitra = 'Quneitra';  
+    case Damascus = 'دمشق';
+    case Aleppo = 'حلب';
+    case Homs = 'حمص';
+    case Hama = 'حماة';
+    case Latakia = 'اللاذقية';
+    case Tartus = 'طرطوس';
+    case Idlib = 'ادلب';
+    case Deir_Ez_Zor = 'دير الزولر';
+    case Raqqa = 'الرقة';
+    case Hasakah = 'الحسكة';
+    case Daraa = 'درعا';
+    case Suwayda = 'السويداء';
+    case Quneitra = 'القنيطرة';
 }

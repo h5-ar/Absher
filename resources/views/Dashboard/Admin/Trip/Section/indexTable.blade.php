@@ -77,8 +77,15 @@
                 </td>
                 <td class="text-nowrap w-30 text-capitalize fs-5 fw-bolder text-center">
                     <x-Button.edit route="{{ route('trip.edit', $trip->id) }}" />
-                    <x-Button.delete route="{{ route('trip.delete',$trip->id) }}" />
-                </td>
+<form action="{{ route('trip.delete', $trip->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="btn btn-danger btn-sm"
+                            onclick="return confirm('هل أنت متأكد؟')">
+                            <i class="fas fa-trash"></i> حذف
+                        </button>
+                    </form>                </td>
             </tr>
             @empty
             <tr>

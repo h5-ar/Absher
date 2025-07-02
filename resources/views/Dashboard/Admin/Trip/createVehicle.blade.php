@@ -40,12 +40,30 @@
                                 description="Enter Price Trip" placeholder="{{ translate('Price Trip') }}"
                                     />
 
-                            <x-inputs.h-bus-select description="Select Bus" />
+<div class="row">
+                                <div class="col-12">
+                                    <div class="mb-1 row">
+                                        <div class="col-2 col-sm-3">
+                                            <label class="col-form-label fs-5 fw-bolder isRequired">{{ translate('Bus') }}</label>
 
+                                        </div>
+                                        <div class="col-10 col-sm-9">
+                                            <select class="select2 form-select rounded" name="Bus" id="Bus">
+                                                <option value="" disabled selected>{{ translate('Select Bus') }}</option>
+                                                @foreach ($buses as $bus)
+                                                <option class="form-control"
+                                                    value="{{($bus->id) }}">{{ translate($bus->id) }} {{ translate($bus->type) }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-
+<input type="hidden" name="type" value="interrupted">
                             <x-Date.time-input
-                                name="datetime" dateId="datetime" label="Date"    
+                                name="datetime" dateId="datetime" label="Date"
                                 description="Select Offer Start Date" enableTime="true"
                                 time_24hr="false"
                                 dateFormat="Y-m-d h:i K" />

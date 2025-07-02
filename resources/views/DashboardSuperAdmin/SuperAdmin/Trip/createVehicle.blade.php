@@ -36,6 +36,7 @@
                         action="{{ route('storeVehicle') }}">
                         @csrf
                         <div class="row">
+                            <input type="hidden" name="type" value="interrupted">
                             <x-inputs.h-input inputName="price" inputId="price" lable="Price"
                                 description="Enter Price Trip" placeholder="{{ translate('Price Trip') }}" />
 

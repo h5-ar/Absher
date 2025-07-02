@@ -241,8 +241,9 @@ public function getCompanyById($id)
     ]);
 }
 
-public function hagetCompanyById($id)
+public function hagetCompanyById($id,)
 {
+
     $company = Company::with([
         'trips.path',
         'trips.bus',
@@ -251,7 +252,8 @@ public function hagetCompanyById($id)
     ])->findOrFail($id);
 
     // تعديل بيانات الرحلات
-    $company->trips = $company->trips->map(function($trip) {
+    $company->trips = $company->trips->map(function($trip) use ($company) {
+    // ... باقي الكود
         $path = $trip->path;
 
         $toDestinations = collect([
@@ -287,6 +289,7 @@ public function hagetCompanyById($id)
 
         return [
             'id' => $trip->id,
+             'company_id' => $company->id,
             'price' => $trip->price,
             'take_off_at' => $trip->take_off_at,
             'trip_type' => $tripType,
@@ -297,11 +300,12 @@ public function hagetCompanyById($id)
             'bus' => $busData,
         ];
     });
-    
+
 
     // تعديل بيانات الخطط
     $plans = $company->plans->map(function($plan) {
         return [
+            'company_id'=>$plan->company_id,
             'id' => $plan->id,
             'name' => $plan->name,
             'trips_number' => $plan->trips_number,

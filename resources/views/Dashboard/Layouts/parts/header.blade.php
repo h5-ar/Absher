@@ -70,7 +70,7 @@
                             </a>
                             @endforeach
                             @if(Auth::User()->unreadNotifications->count() == 0)
-                            <div class="d-flex">
+<div class="d-flex">
                                 <div class="list-item d-flex align-items-start">
                                     <div class="list-item-body flex-grow-1">
                                         <p class="text-center">{{translate('No new notifications')}}</p>
@@ -79,66 +79,6 @@
                             </div>
                             @endif
                         </div>
-                        {{-- <div class="list-item d-flex align-items-center">
-                            <h6 class="fw-bolder me-auto mb-0">
-                                {{ translate('System Notifications') }}
-                        </h6>
-                        <div class="form-check form-check-primary form-switch">
-                            <input class="form-check-input" id="systemNotification" type="checkbox" checked>
-                            <label class="form-check-label" for="systemNotification"></label>
-                        </div>
-    </div> --}}
-    {{-- <div id="system-notifications">
-                            @forelse ($systemNotifications as $notification)
-                                <a class="d-flex notification-item"data-href="{{ $notification->data['redirectUrl'] }}" onclick="markAsRead(this)"data-notificationId="{{ $notification->id }}" data-read="false">
-    <div class="list-item d-flex align-items-start">
-        <div class="list-item-body flex-grow-1">
-            <p class="media-heading fw-bolder">{{ $notification->data['title'] }}</p>
-            <small class="notification-text">{{ $notification->data['body'] }}</small>
-        </div>
-    </div>
-    </a>
-    @empty
-    <div id="empty-system-notifications" class="d-flex">
-        <div class="list-item d-flex align-items-start">
-            <div class="list-item-body flex-grow-1">
-            </div>
-        </div>
-    </div>
-    @endforelse
-    </div> --}}
-    </li>
-
-    {{-- <li id="markAllAsReadBtn"
-                        class="dropdown-menu-footer @if ($unreadNotificationsCount <= 0) hidden @endif"><a
-                            onclick="markAllAsRead()" class="btn btn-primary w-100"
-                            style="cursor: pointer">{{ translate('Read all notifications') }}</a>
-    </li> --}}
-    </ul>
-    </li>
-
-    <li class="nav-item dropdown dropdown-user">
-        <a class="nav-link dropdown-toggle dropdown-user-link"
-            id="dropdown-user" href="" data-bs-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            <div class="user-nav d-sm-flex d-none">
-                <span class="user-name fw-bolder"></span>
-                <span class="user-status"></span>
-            </div>
-            <span class="avatar">
-                <img class="round" src="https://ui-avatars.com/api/?name={{auth()->user()->username}}" alt="avatar" height="40" width="40">
-                <span class="avatar-status-online"></span>
-            </span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
-            <a class="dropdown-item" href="{{ route('dashboard.profile.show') }}"><i class="me-50"
-                    data-feather="user"></i> {{ translate('Profile') }}</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ route('logout') }}"><i class="me-50"
-                    data-feather="power"></i>{{ translate('Logout') }}</a>
-        </div>
-    </li>
-    </ul>
                     </li>
                     @if(Auth::User()->unreadNotifications->count() > 0)
                     <li id="markAllAsReadBtn">
@@ -174,7 +114,6 @@
         </ul>
     </div>
 
-
 </nav>
 
 
@@ -191,7 +130,7 @@
                 $('#notification-count').text(0);
                 $('#unread-notifications-count').text(0);
 
-                $("#normal-notifications").html(`
+                $("#normal-notifications").html(
                     <div class="d-flex">
                         <div class="list-item d-flex align-items-start">
                             <div class="list-item-body flex-grow-1">
@@ -199,7 +138,7 @@
                             </div>
                         </div>
                     </div>
-                `);
+                );
 
                 $("#markAllAsReadBtn").addClass('d-none');
             }
@@ -225,9 +164,8 @@
                 $('#unread-notifications-count').text(unreadCount - 1);
 
                 $(elem).remove();
-
                 if ($('.notification-item').length === 0) {
-                    $("#normal-notifications").html(`
+                    $("#normal-notifications").html(
                         <div class="d-flex">
                             <div class="list-item d-flex align-items-start">
                                 <div class="list-item-body flex-grow-1">
@@ -235,7 +173,7 @@
                                 </div>
                             </div>
                         </div>
-                    `);
+                    );
                     $("#markAllAsReadBtn").addClass('d-none');
                 }
             },

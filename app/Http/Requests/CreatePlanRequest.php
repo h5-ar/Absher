@@ -25,7 +25,7 @@ class CreatePlanRequest extends FormRequest
             'bustype'  => ['required', 'string', Rule::enum(BusType::class)],
             'trips_number'  => ['required', 'integer', 'min:3'],
             'available' => ['required', 'string', Rule::enum(Available::class)],
-            'price' => ['required', 'numeric'],
+            'price' => ['required', 'numeric', 'min:0'],
             'from' => ['required', Rule::enum(Governorates::class)],
             'to' => ['required', Rule::enum(Governorates::class), 'different:from']
         ];

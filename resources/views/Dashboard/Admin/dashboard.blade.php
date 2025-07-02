@@ -33,36 +33,7 @@
         <section id="dashboard-ecommerce">
             <div class="row match-height">
                 <div class="col-lg-12 col-12">
-                    <div class="row match-height">
-                        <!-- Bar Chart - Orders -->
-                        <div class="col-lg-4 col-md-3 col-6">
-                            <div class="card">
-                                <div class="card-body pb-50">
-                                    <h6>{{ translate('Buses') }}</h6>
-                                    <h2 class="fw-bolder mb-1">{{ auth()->user()->bus()->count() }}</h2>
-                                    <div id="statistics-order-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-3 col-6">
-                            <div class="card card-tiny-line-stats">
-                                <div class="card-body pb-50">
-                                    <h6 class="nowrap">{{ translate('Trips') }}</h6>
-                                    <h2 class="fw-bolder mb-1">{{ auth()->user()->trip()->count() }}</h2>
-                                    <div id="statistics-profit-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-3 col-6">
-                            <div class="card card-tiny-line-stats">
-                                <div class="card-body pb-50">
-                                    <h6>{{ translate('Plans') }}</h6>
-                                    <h2 class="fw-bolder mb-1">{{ auth()->user()->plan()->count() }}</h2>
-                                    <div id="statistics-profit-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  
                 </div>
 
             </div>

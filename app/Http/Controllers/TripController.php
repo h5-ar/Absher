@@ -86,13 +86,12 @@ class TripController extends Controller
      */
     public function createQuick()
     {
-        $buses = Bus::all();
-
+$buses = Bus::where('Company_id', Auth::id())->get();
         return view('Dashboard.Admin.Trip.createQuick', compact('buses'));
     }
     public function createVehicle()
     {
-        $buses = Bus::all();
+$buses = Bus::where('Company_id', Auth::id())->get();
         return view('Dashboard.Admin.Trip.createVehicle', compact('buses'));
     }
 
@@ -112,6 +111,8 @@ class TripController extends Controller
         ]);
 
         Path::insert([
+                        'type' => $request->type,
+
             'from' => $request->from,
             'to1' => $request->to,
             'trip_id' => $tripId
@@ -139,6 +140,7 @@ class TripController extends Controller
         ]);
 
         Path::insert([
+                        'type' => $request->type,
             'from' => $request->from,
             'to1' => $request->to1,
             'to2' => $request->to2,
@@ -212,7 +214,13 @@ class TripController extends Controller
      */
     public function destroy($id)
     {
-        $trip = Trip::findOrFail($id);
+        $trip = Trip::with(['reservations.passengers', 'shipping', 'path'])->findOrFail($id);
+        foreach ($trip->reservation as $reservation) {
+            $reservation->passengers()->delete();
+        }
+        $trip->reservation()->delete();
+        $trip->shipping()->delete();
+
         $trip->path()->delete();
         $trip->delete();
         Session::flash('successMessage', translate('Deleted successfully'));

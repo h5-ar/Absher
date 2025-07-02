@@ -20,7 +20,7 @@ class CreateTripQuickRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'price' => ['required', 'numeric'],
+            'price' => ['required', 'numeric', 'min:0'],
             'Bus' => ['required', 'exists:buses,id'],
             'datetime' => ['required', 'date'],
             'day' => ['required', Rule::enum(Days::class)],

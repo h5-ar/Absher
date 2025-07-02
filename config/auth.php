@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'company',
         'passwords' => 'users',
     ],
 
@@ -90,9 +90,9 @@ return [
         ],
     ],
 
-    // 'users' => [
-    //     'driver' => 'database',
-    //     'table' => 'users',
+    //  'users' => [
+    //  'driver' => 'database',
+    //      'table' => 'users',
     // ],
     //],
     /*

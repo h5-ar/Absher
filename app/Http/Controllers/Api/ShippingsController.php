@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 
-use Carbon\Carbon;
+//use Carbon\Carbon;
 use App\Models\Trip;
 use App\Models\Shipping;
 use App\Models\ItemShipping;
@@ -86,13 +86,14 @@ public function store(Request $request,$userId)
    // عرض تفاصيل شحنة واحدة
   public function show(Request $request,$shipId, $userId)
 {
-     $userId = $request->user_id;
+    // $userId = $request->user_id;
     // $request->validate([
     //     'user_id' => 'required|exists:users,id',
     // ]);
 
     $shipping = Shipping::with(['items', 'trip.path'])
         ->where('id', $shipId)
+
         ->where('user_id', $userId)
         ->firstOrFail();
 
@@ -124,7 +125,43 @@ public function store(Request $request,$userId)
 
 
     // تحديث شحنة
-    public function update(Request $request, $id)
+//     public function update(Request $request, $id)
+// {
+//     $request->validate([
+//         'name_user_to' => 'required|string',
+//         'phone_to' => 'required|string',
+//         'national_number_to' => 'required|string',
+//         'items' => 'required|array|min:1',
+//         'items.*.id' => 'required|exists:item_shipping,id',
+//         'items.*.description_item' => 'required|string',
+//         'items.*.material_value' => 'required|string',
+//         'items.*.size' => 'required|in:صغير,متوسط,كبير',
+//     ]);
+
+//     $shipping = Shipping::with('items')->findOrFail($id);
+
+//     // تحديث بيانات المستلم
+//     $shipping->update([
+//         'name_user_to' => $request->name_user_to,
+//         'phone_to' => $request->phone_to,
+//         'national_number_to' => $request->national_number_to,
+//     ]);
+
+//     // تحديث العناصر
+//     foreach ($request->items as $itemData) {
+//         $item = $shipping->items()->where('id', $itemData['id'])->first();
+//         if ($item) {
+//             $item->update([
+//                 'description_item' => $itemData['description_item'],
+//                 'material_value' => $itemData['material_value'],
+//                 'size' => $itemData['size'],
+//             ]);
+//         }
+//     }
+
+//     return response()->json(['message' => 'تم تعديل الشحنة والعناصر بنجاح']);
+// }
+public function update(Request $request, $id)
 {
     $request->validate([
         'name_user_to' => 'required|string',
@@ -139,14 +176,21 @@ public function store(Request $request,$userId)
 
     $shipping = Shipping::with('items')->findOrFail($id);
 
-    // تحديث بيانات المستلم
+    // ✅ منع التعديل إذا كانت الحالة ليست "قيد المراجعة"
+    if ($shipping->shipment_status !== 'قيد المراجعة') {
+        return response()->json([
+            'message' => 'لا يمكن تعديل الشحنة، لأنها تم شحنها أو توصيلها أو لم تعد قيد المراجعة.'
+        ], 403);
+    }
+
+    // ✅ تحديث بيانات المستلم
     $shipping->update([
         'name_user_to' => $request->name_user_to,
         'phone_to' => $request->phone_to,
         'national_number_to' => $request->national_number_to,
     ]);
 
-    // تحديث العناصر
+    // ✅ تحديث العناصر
     foreach ($request->items as $itemData) {
         $item = $shipping->items()->where('id', $itemData['id'])->first();
         if ($item) {
@@ -160,7 +204,6 @@ public function store(Request $request,$userId)
 
     return response()->json(['message' => 'تم تعديل الشحنة والعناصر بنجاح']);
 }
-
     // حذف شحنة
    // public function destroy(Request $request, $shipId,$userId)
     //{
@@ -181,74 +224,73 @@ public function store(Request $request,$userId)
 
     //     return response()->json(['message' => 'تم حذف الشحنة بنجاح']);
 
-    public function sttore(Request $request): JsonResponse
+//     public function sttore(Request $request): JsonResponse
+// {
+
+//     // التحقق من صحة البيانات الواردة
+//     $request->validate([
+//         'trip_id' => 'required|exists:plans,id',
+//         'user_id' => 'required|exists:users,id',
+//     ]);
+
+//     $userId = $request->user_id;
+
+//     // جلب خطة الاشتراك مع التحقق إنها موجودة
+//     $ship = Trip::find($request->trip_id);
+
+//     if (!$ship) {
+//         return response()->json([
+//             'success' => false,
+//             'message' => 'الخطة غير موجودة.',
+//         ], 404);
+//     }
+
+//     // ممكن هنا تضيف تحقق إضافي: هل الشركة مرتبطة بالمستخدم؟ حسب حاجتك
+//  $shipping = Shipping::create([
+//         'user_id' => $userId,
+//         'trip_id' => $request->trip_id,
+//         'name_user_to' => $request->name_user_to,
+//         'phone_to' => $request->phone_to,
+//         'national_number_to' => $request->national_number_to,
+//     ]);
+//      foreach ($request->items as $item) {
+//         $shipping->items()->create($item);
+//     }
+//     // إنشاء الاشتراك الجديد
+//     // $shipp = Shipping::create([
+//     //     'user_id' => $userId,
+//     //     'trip_id' => $shipp->id,
+//     //     'start_at' => now(),
+//     //     'end_at' => now()->addDays($plan->duration_days ?? 30), // إذا duration_days موجودة في plans
+//     // ]);
+
+//     return response()->json([
+//         'success' => true,
+//         'message' => 'تم إنشاء الاشتراك بنجاح',
+//        //'data' => $shipping,
+//     ], 201);}
+
+
+ public function destroy(Request $request, $shipId, $userId)
 {
+    $ship = Shipping::where('id', $shipId)
+        ->where('user_id', $userId)
+        ->firstOrFail();
 
-    // التحقق من صحة البيانات الواردة
-    $request->validate([
-        'trip_id' => 'required|exists:plans,id',
-        'user_id' => 'required|exists:users,id',
-    ]);
-
-    $userId = $request->user_id;
-
-    // جلب خطة الاشتراك مع التحقق إنها موجودة
-    $ship = Trip::find($request->trip_id);
-
-    if (!$ship) {
+    // التحقق من حالة الشحنة
+    if ($ship->shipment_status !== 'قيد المراجعة') {
         return response()->json([
             'success' => false,
-            'message' => 'الخطة غير موجودة.',
-        ], 404);
-    }
-
-    // ممكن هنا تضيف تحقق إضافي: هل الشركة مرتبطة بالمستخدم؟ حسب حاجتك
- $shipping = Shipping::create([
-        'user_id' => $userId,
-        'trip_id' => $request->trip_id,
-        'name_user_to' => $request->name_user_to,
-        'phone_to' => $request->phone_to,
-        'national_number_to' => $request->national_number_to,
-    ]);
-     foreach ($request->items as $item) {
-        $shipping->items()->create($item);
-    }
-    // إنشاء الاشتراك الجديد
-    // $shipp = Shipping::create([
-    //     'user_id' => $userId,
-    //     'trip_id' => $shipp->id,
-    //     'start_at' => now(),
-    //     'end_at' => now()->addDays($plan->duration_days ?? 30), // إذا duration_days موجودة في plans
-    // ]);
-
-    return response()->json([
-        'success' => true,
-        'message' => 'تم إنشاء الاشتراك بنجاح',
-       //'data' => $shipping,
-    ], 201);}
-public function destroy(Request $request, $shipId,$userId)
-    {
-    $ship = Shipping::findOrFail($shipId);
-
-    // التحقق: هل مضى أكثر من 24 ساعة؟
-    $createdAt = Carbon::parse($ship->created_at);
-    if ($createdAt->diffInHours(now()) > 24) {
-        return response()->json([
-            'success' => false,
-            'message' => 'لا يمكن حذف الشحنة بعد مرور 24 ساعة من انشاؤها.'
+            'message' => 'لا يمكن حذف الشحنة إلا إذا كانت حالتها "قيد المراجعة".'
         ], 403);
     }
 
-
+    // حذف الشحنة
     $ship->delete();
 
     return response()->json([
         'success' => true,
         'message' => 'تم حذف الشحنة بنجاح.'
     ]);
-
-
-    }
-
 }
-
+}

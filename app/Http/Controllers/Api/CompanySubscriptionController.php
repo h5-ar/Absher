@@ -113,14 +113,15 @@ public function store(Request $request): JsonResponse
 {
 
 
-    $request->validate([
+   $request->validate([
+          'company_id'=>'required|exists:companies,id',
         'plan_id' => 'required|exists:plans,id',
         'user_id' => 'required|exists:users,id',
     ]);
 
     $userId = $request->user_id;
 
-    
+
     $plan = Plan::find($request->plan_id);
 
     if (!$plan) {
@@ -133,6 +134,7 @@ public function store(Request $request): JsonResponse
 
     $subscription = Subscription::create([
         'user_id' => $userId,
+
         'plan_id' => $plan->id,
         'rest_trips' => $plan->trips_number,
         'start_at' => now(),

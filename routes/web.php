@@ -45,7 +45,7 @@ use App\Http\Controllers\NotificationController;
 Route::post('change-lang', [SuperAdminController::class, 'switchLang'])->name('dashboard.set.lang');
 
 Route::get('/', [AuthController::class, 'index'])->name('login');
-Route::post('login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('login', [App\Http\Controllers\AuthController::class, 'login'])->name('login.submit');
 Route::middleware('auth:super_admin')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('dashboard/superadmin', [SuperAdminController::class, 'index'])->name('super_admin.dashboard');
@@ -143,8 +143,9 @@ Route::middleware('auth:company')->group(function () {
     Route::get('add/vehicle', [TripController::class, 'createVehicle'])->name('add.vehicle');
     Route::get('trip/edit/{id}', [TripController::class, 'edit'])->name('trip.edit');
     Route::put('trip/update/{id}', [TripController::class, 'update'])->name('trip.update');
-    Route::delete('trip/delete/{id}', [TripController::class, 'destroy'])->name('trip.delete');
-    Route::post('trip/storeQuick', [TripController::class, 'storeQuick'])->name('trip.storeQuick');
+Route::delete('trips/{trip}', [TripController::class, 'destroy'])
+        ->name('trip.delete');
+            Route::post('trip/storeQuick', [TripController::class, 'storeQuick'])->name('trip.storeQuick');
     Route::post('trip/storeVehicle', [TripController::class, 'storeVehicle'])->name('trip.storeVehicle');
     Route::get('/trips', [TripController::class, 'index'])->name('trip.index');
     Route::get('/filter/trips', [TripController::class, 'filterTrip'])->name('trip.filter');
@@ -191,6 +192,8 @@ Route::middleware('auth:company')->group(function () {
 
     Route::get('shipping/index', [ShippingController::class, 'index'])->name('index.shipping');
     Route::get('/shipment/item', [ShippingController::class, 'getItem'])->name('shipment.items');
+    Route::get('/shipment/edit/{id}', [ShippingController::class, 'edit'])->name('shipment.edit');
+    Route::put('/shipment/update/{id}', [ShippingController::class, 'update'])->name('shipment.update');
 
     Route::get('/block', [NotificationController::class, 'viewBlock'])->name('viewblock');
     Route::post('/block/user', [NotificationController::class, 'Block'])->name('block');

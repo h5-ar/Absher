@@ -99,9 +99,10 @@ class BusController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+public function destroy($id)
     {
         $bus = Bus::findOrFail($id);
+        $bus->trip()->delete();
 
         $bus->delete();
 

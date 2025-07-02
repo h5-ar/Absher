@@ -19,7 +19,7 @@ class UpdateTripRequest extends FormRequest
     {
         return [
 
-            'price' => ['required', 'numeric'],
+            'price' => ['required', 'numeric', 'min:0'],
             'Bus' => ['required'],
             'datetime' => ['required'],
             'day' => ['required', Rule::enum(Days::class)],

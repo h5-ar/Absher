@@ -38,7 +38,7 @@
                         <div class="row">
                             <x-inputs.h-input inputName="price" inputId="price" lable="Price"
                                 description="Enter Price Trip" placeholder="{{ translate('Price Trip') }}" />
-
+<input type="hidden" name="type" value="fast">
                             <x-inputs.h-company-select description="Select Company" />
 
                             <x-inputs.h-bus-select description="Select Bus" />

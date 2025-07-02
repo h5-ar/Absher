@@ -23,7 +23,7 @@ class SACreateTripVehicleRequest extends FormRequest
     {
         return [
             'company' => ['required'],
-            'price' => ['required', 'numeric'],
+            'price' => ['required', 'numeric', 'min:0'],
             'Bus' => ['required', 'exists:buses,id'],
             'datetime' => ['required', 'date'],
             'day' => ['required', Rule::enum(Days::class)],
