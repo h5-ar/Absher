@@ -38,29 +38,7 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        return view(
-            'Dashboard.Admin.Subscription.create'
-        );
-    }
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(CreateSubscription $request)
-    {
-
-        $plan = Plan::findOrFail($request->plan_id);
-
-        Subscription::create([
-            'plan_id' => $request->plan_id,
-            'rest_trips' => $plan->trips_number,
-            'start_at' => Carbon::now(),
-            'end_at' => Carbon::now()->addDays(30),
-            'booking_source' => 'wep',
-        ]);
-
-        Session::flash('successMessage', translate('Added successfully'));
-
-        return redirect()->route('index.subscription');
+        //
     }
 
     /**
@@ -92,10 +70,6 @@ class SubscriptionController extends Controller
      */
     public function destroy($id)
     {
-        $subscription = Subscription::findOrFail($id);
-
-        $subscription->delete();
-        Session::flash('successMessage', translate('Deleted successfully'));
-        return to_route('index.subscription');
+        //
     }
 }

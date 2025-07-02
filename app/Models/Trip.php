@@ -7,11 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Notifications\Notifiable;
+
 
 
 class Trip extends Model
 {
+    use Notifiable;
     use HasFactory;
+    
     protected $fillable = [
         'price',
         'bus_id',

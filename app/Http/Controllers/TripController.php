@@ -11,6 +11,12 @@ use App\Http\Requests\CreateTripVehicleRequest;
 use App\Http\Requests\CreateTripQuickRequest;
 use App\Http\Requests\UpdateTripRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdatePlanRequest;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\CreateTripNotification;
+use App\Models\Company;
+use App\Models\User;
+
 
 class TripController extends Controller
 {
@@ -44,21 +50,36 @@ class TripController extends Controller
     }
 
 
-
-    public function index()
+    public function index(Request $request)
     {
-        $trips = Trip::where('Company_id', Auth::id())->with('path')->paginate(10);
-        if (request()->ajax()) {
-            return view(
-                'Dashboard.Admin.Trip.Section.indexTable',
-                compact('trips')
-            );
+        $trips = Trip::where('Company_id', Auth::id())
+            ->when($request->day, function ($query, $day) {
+                return $query->where('day', $day);
+            })
+            ->when($request->governorate, function ($query, $governorate) {
+                return $query->whereHas('path', function ($q) use ($governorate) {
+                    $q->where('from', $governorate)
+                        ->orWhere('to1', $governorate)
+                        ->orWhere('to2', $governorate)
+                        ->orWhere('to3', $governorate)
+                        ->orWhere('to4', $governorate)
+                        ->orWhere('to5', $governorate);
+                });
+            })
+            ->with('path')
+            ->paginate(10);
+
+        if ($request->ajax()) {
+            return view('Dashboard.Admin.Trip.Section.indexTable', compact('trips'));
         }
-        return view(
-            'Dashboard.Admin.Trip.index',
-            compact('trips')
-        );
+
+        return view('Dashboard.Admin.Trip.index', compact('trips'));
     }
+    public function filterTrip(Request $request)
+    {
+        return $this->index($request);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -95,6 +116,13 @@ class TripController extends Controller
             'to1' => $request->to,
             'trip_id' => $tripId
         ]);
+
+        $trip = Trip::where('id', $tripId);
+        $company = Company::where('id', Auth::id())->first();
+        $user = User::get();
+
+        Notification::send($user, new CreateTripNotification($company, $trip));
+
         Session::flash('successMessage', translate('Add successfully'));
 
         return redirect()->route('trip.index');
@@ -119,6 +147,13 @@ class TripController extends Controller
             'to5' => $request->to5,
             'trip_id' => $tripId
         ]);
+
+        $trip = Trip::where('id', $tripId);
+        $company = Company::where('id', Auth::id())->first();
+        $user = User::get();
+
+        Notification::send($user, new CreateTripNotification($company, $trip));
+
         Session::flash('successMessage', translate('Add successfully'));
 
         return redirect()->route('trip.index');
@@ -188,6 +223,8 @@ class TripController extends Controller
     {
         $type = $request->query('type', 'quick'); // القيمة الافتراضية 'quick'
 
+        $today = now()->format('Y-m-d'); // تاريخ اليوم
+
         $trips = Trip::where('Company_id', Auth::id())
             ->with('path')
             ->whereHas('path', function ($query) use ($type) {
@@ -197,7 +234,9 @@ class TripController extends Controller
                     $query->whereNull('to2'); // رحلات مباشرة
                 }
             })
+            ->whereDate('take_off_at', '>=', $today) // إضافة شرط تاريخ الانطلاق من اليوم فصاعدًا
             ->get();
+
 
         return response()->json(['trips' => $trips]);
     }

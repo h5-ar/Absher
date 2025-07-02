@@ -215,7 +215,7 @@
 
         // حدث تغيير عدد المقاعد
         document.getElementById('seatsCount').addEventListener('input', function() {
-            currentPassengerCount = parseInt(this.value) || 0;
+            currentPassengerCount = parseInt(this.value);
             updatePassengerFields();
         });
 

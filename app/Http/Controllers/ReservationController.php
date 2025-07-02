@@ -117,30 +117,7 @@ class ReservationController extends Controller
 
     public function update(CreateAdminReservation $request, $id)
     {
-        $reservation = Reservation::findOrFail($id);
-        $reservation->update([
-            'trip_id' => $request->trip_id,
-            'count_seats' => $request->seats_count,
-        ]);
-        // تحديث بيانات الركاب
-        foreach ($request->passengers as $passengerData) {
-            Passenger::updateOrCreate(
-                [
-                    'reservation_id' => $reservation->id,
-                    'seat_number' => $passengerData['seat_number'],
-                ],
-                [
-                    'first_name' => $passengerData['first_name'],
-                    'father_name' => $passengerData['father_name'],
-                    'last_name' => $passengerData['last_name'],
-                    'subscription_id' => $passengerData['subscription_id'] ?? null,
-                    'from' => $passengerData['departure_point'] ?? null,
-                    'to' => $passengerData['arrival_point'] ?? null
-                ]
-            );
-        }
-        Session::flash('successMessage', translate('Updated successfully'));
-        return redirect()->route('index.reservation');
+        //
     }
 
     /**
@@ -154,31 +131,5 @@ class ReservationController extends Controller
         $reservation->delete();
         Session::flash('successMessage', translate('Deleted successfully'));
         return to_route('index.reservation');
-    }
-
-    public function getTripsForSelection()
-    {
-        $trips = Trip::select(
-            'id',
-            'from',
-            'to',
-            'departure_date as date',
-            'available_seats'
-        )->get();
-
-        return response()->json($trips);
-    }
-
-    public function getTrips()
-    {
-        $trips = Trip::select(
-            'id',
-            'from',
-            'to',
-            'departure_date as date',
-            'available_seats'
-        )->get();
-
-        return response()->json($trips);
     }
 }

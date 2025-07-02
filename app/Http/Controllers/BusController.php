@@ -16,12 +16,18 @@ class BusController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $buses = Bus::where('Company_id', Auth::id())->paginate(10);
-        if (request()->ajax()) {
+        $buses = Bus::where('Company_id', Auth::id())
+            ->when($request->type, function ($query, $type) {
+                return $query->where('type', $type);
+            })
+            ->paginate(10);
+
+        if ($request->ajax()) {
             return view('Dashboard.Admin.Bus.Section.indexTable', compact('buses'));
         }
+
         return view('Dashboard.Admin.Bus.index', compact('buses'));
     }
 

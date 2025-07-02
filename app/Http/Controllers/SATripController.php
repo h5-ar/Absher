@@ -22,9 +22,13 @@ class SATripController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $trips = Trip::paginate(10);
+        $trips = Trip::when($request->name, function ($query, $name) {
+            return $query->whereHas('company',  function ($q) use ($name) {
+                $q->where('name', $name);
+            });
+        })->paginate(10);
         if (request()->ajax()) {
             return view(
                 'DashboardSuperAdmin.SuperAdmin.Trip.Section.indexTable',
@@ -58,7 +62,7 @@ class SATripController extends Controller
     public function storeQuick(SACreateTripQuickRequest $request)
     {
         $tripId = Trip::insertGetId([
-            'company_id'=>$request->company,
+            'company_id' => $request->company,
 
             'price' => $request->price,
             'bus_id' => $request->Bus,
@@ -79,7 +83,7 @@ class SATripController extends Controller
     public function storeVehicle(SACreateTripVehicleRequest $request)
     {
         $tripId = Trip::insertGetId([
-            'company_id'=>$request->company,
+            'company_id' => $request->company,
             'price' => $request->price,
             'bus_id' => $request->Bus,
             'take_off_at' => date('Y-m-d H:i:s', strtotime($request->datetime)),
@@ -115,11 +119,11 @@ class SATripController extends Controller
      */
     public function edit($id)
     {
-        
+
         $trip = Trip::with('path')->findOrFail($id);
         $buses = Bus::all();
-        $companies=Company::all();
-        return view('DashboardSuperAdmin.SuperAdmin.Trip.edit', compact('trip', 'buses','companies'));
+        $companies = Company::all();
+        return view('DashboardSuperAdmin.SuperAdmin.Trip.edit', compact('trip', 'buses', 'companies'));
     }
 
     /**
@@ -130,7 +134,7 @@ class SATripController extends Controller
         $trip = Trip::findOrFail($tripId);
 
         $trip->update([
-            'company_id'=>$request['company'],
+            'company_id' => $request['company'],
 
             'price' => $request['price'],
             'bus_id' => $request['Bus'],
@@ -161,5 +165,52 @@ class SATripController extends Controller
         $trip->delete();
         Session::flash('successMessage', translate('Deleted successfully'));
         return to_route('index');
+    }
+
+    public function filter(Request $request)
+    {
+        $company_id = $request->input('company'); // الحصول على company_id من الطلب
+        $type = $request->query('type', 'quick'); // القيمة الافتراضية 'quick'
+        $today = now()->format('Y-m-d');
+
+        $trips = Trip::where('Company_id', $company_id) // استخدام company_id بدلاً من Auth::id()
+            ->with('path')
+            ->whereHas('path', function ($query) use ($type) {
+                if ($type === 'vehicle') {
+                    $query->whereNotNull('to2');
+                } else {
+                    $query->whereNull('to2');
+                }
+            })
+            ->whereDate('take_off_at', '>=', $today)
+            ->get();
+
+        return response()->json(['trips' => $trips]);
+    }
+
+    public function getTripDetails(Request $request)
+    {
+        $trip = Trip::with(['path', 'bus'])->find($request->trip_id);
+
+        if (!$trip) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Trip not found'
+            ], 404);
+        }
+
+
+        return response()->json([
+            'success' => true,
+            'trip' => [
+                'id' => $trip->id,
+                'from' => $trip->path->from,
+                'to' => $trip->path->getLastDestinationAttribute(),
+                'date' => $trip->take_off_at,
+                'day' => $trip->day,
+                'bus_number' => $trip->bus_id,
+                'price' => $trip->price,
+            ],
+        ]);
     }
 }

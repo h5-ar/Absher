@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Models\Passenger;
+use App\Models\Trip;
+use App\Models\Reservation;
+
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 
@@ -12,7 +15,11 @@ class CreateAdminReservation extends FormRequest
     {
         return [
             'trip_id' => 'required|exists:trips,id',
-            'seats_count' => 'required|integer|min:1',
+            'seats_count' => [
+                'required',
+                'integer',
+                'min:1',
+            ],
             'passengers' => 'required|array',
             'passengers.*.first_name' => 'required|string',
             'passengers.*.father_name' => 'required|string',
@@ -31,6 +38,18 @@ class CreateAdminReservation extends FormRequest
         $validator->after(function ($validator) {
             $tripId = $this->input('trip_id');
             $passengers = $this->input('passengers');
+
+            $trip = Trip::with('bus')->find($tripId);
+            $reservedSeats = Reservation::where('trip_id', $tripId)
+                ->sum('count_seats');
+
+            $availableSeats = $trip->bus->seats_count - $reservedSeats;
+            if ($this->input('seats_count') > $availableSeats) {
+                $validator->errors()->add(
+                    "seats_count",
+                    "لا يوجد مقاعد كافية. المقاعد المتاحة: {$availableSeats}"
+                );
+            }
 
             foreach ($passengers as $index => $passenger) {
                 $seatNumber = $passenger['seat_number'];

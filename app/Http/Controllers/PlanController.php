@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Plan;
+use App\Models\Company;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CreatePlanRequest;
 use App\Http\Requests\UpdatePlanRequest;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\CreatePlanNotification;
 
 
 
@@ -19,9 +23,14 @@ class PlanController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $plans = Plan::where('Company_id', Auth::id())->paginate(10);
+        $plans = Plan::query()
+            ->when($request->name, function ($query, $name) {
+                return $query->where('name', 'like', '%' . $name . '%');
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
         if (request()->ajax()) {
             return view('Dashboard.Admin.plan.Section.indexTable', compact('plans'));
         }
@@ -42,7 +51,7 @@ class PlanController extends Controller
     public function store(CreatePlanRequest $request)
     {
         $companyId = $this->getLoggedInCompanyId();
-        Plan::create(
+        $plan = Plan::create(
             [
                 'name' => $request->name,
                 'trips_number' => $request->trips_number,
@@ -54,6 +63,12 @@ class PlanController extends Controller
                 'form' => $request->from
             ]
         );
+
+        $company = Company::where('id', Auth::id())->first();
+        $user = User::get();
+
+        Notification::send($user, new CreatePlanNotification($company, $plan));
+
         Session::flash('successMessage', translate('Add successfully'));
 
         return redirect()->route('index.plan');
@@ -138,7 +153,7 @@ class PlanController extends Controller
             ],
         ]);
     }
-     public function getAllPlan()
+    public function getAllPlan()
     {
         $plans = Plan::where('Company_id', Auth::id())->get();
         return response()->json(['plans' => $plans]);

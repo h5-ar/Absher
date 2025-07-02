@@ -17,15 +17,3 @@
     </div>
 </x-Content.normal>
 @endsection
-
-@section('modal')
-<x-Modals.delete message="Are you sure to delete this Subscription ?"></x-Modals.delete>
-@endsection
-
-@push('layout-scripts')
-<script>
-    function openDeleteModal(elment) {
-        $("#deleteFormModal").attr("action", $(elment).attr('deleteUrl'));
-    }
-</script>
-@endpush

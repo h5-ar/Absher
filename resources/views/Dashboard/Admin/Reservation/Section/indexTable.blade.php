@@ -12,8 +12,6 @@
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('Seats Count') }}
                 </th>
-
-
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('Actions') }}
                 </th>
@@ -42,7 +40,6 @@
                 </td>
 
                 <td class="text-nowrap w-30 text-capitalize fs-5 fw-bolder text-center">
-                    <x-Button.edit route="{{ route('reservation.edit', $reservation->id) }}" />
                     <x-Button.delete route="{{ route('reservation.delete', $reservation->id) }}" />
                     <button class="btn btn-link text-body  p-0 view-passengers-btn"
                         data-reservation-id="{{ $reservation->id }}"
@@ -371,6 +368,7 @@
                 }
             });
         }
+
         $(document).on('click', '.view-passengers-btn', function() {
             const reservationId = $(this).data('reservation-id');
             const row = $(this).closest('tr');
@@ -379,15 +377,13 @@
             loadPassengers(reservationId, userName);
             $('#passengersModal').modal('show');
         });
-        $(document).on('click', '.user-name-btn', function(e) {
-            e.preventDefault();
+        $(document).on('click', '.user-name-btn', function() {
             const userId = $(this).data('user-id');
             loadUserDetails(userId);
             $('#userModal').modal('show');
         });
 
-        $(document).on('click', '.trip-info-btn', function(e) {
-            e.preventDefault();
+        $(document).on('click', '.trip-info-btn', function() {
             const tripId = $(this).data('trip-id');
             loadTripDetails(tripId);
             $('#tripModal').modal('show');

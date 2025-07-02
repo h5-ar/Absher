@@ -57,7 +57,7 @@
                     <div class="auth-inner row m-0">
 
 
-                        <h2 class="brand-logo ms-1" style="color:rgb(225,127,38)">
+                        <h2 class="brand-logo ms-1" style="color:#65B1AB">
                             <a class="brand-text ms-1" href="#"> Absher</a>
                         </h2>
 
@@ -120,7 +120,7 @@
                                                 for="remember-me">{{ translate('Remember Me') }}</label>
                             </div>
                         </div> --}}
-                        <button class="btn w-100" style="background:rgb(225,127,38);color:white"
+                        <button class="btn w-100" style="background:#65B1AB;color:white"
                             tabindex="4">{{ translate('Sign in') }}</button>
                         </form>
 
