@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Shipping;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ShippingController extends Controller
 {
@@ -12,7 +14,19 @@ class ShippingController extends Controller
      */
     public function index()
     {
-        //
+        $shipments = Shipping::whereHas('trip', function ($query) {
+            $query->where('company_id', Auth::id());
+        })->with('trip')->paginate(10);
+        if (request()->ajax()) {
+            return view(
+                'Dashboard.Admin.Shipping.Section.indexTable',
+                compact('shipments')
+            );
+        }
+        return view(
+            'Dashboard.Admin.Shipping.index',
+            compact('shipments')
+        );
     }
 
     /**
@@ -20,7 +34,8 @@ class ShippingController extends Controller
      */
     public function create()
     {
-        //
+                return view('Dashboard.Admin.Shipping.create');
+
     }
 
     /**

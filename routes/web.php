@@ -1,25 +1,22 @@
 <?php
 
-use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BusController;
 use Illuminate\Support\Facades\Session;
+
+use App\Http\Controllers\ShippingController;
+use App\Http\Controllers\BusController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\UserController;
-
-
 use App\Http\Controllers\SuperAdminController;
-
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\SATripController;
 use App\Http\Controllers\SABusController;
 use App\Http\Controllers\SAPlanController;
-
-
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReservationController;
 
@@ -95,6 +92,7 @@ Route::middleware('auth:company')->group(function () {
     Route::get('dashboard/profile/show', [DashboardController::class, 'profile'])->name('dashboard.profile.show');
     Route::get('dashboard/profile/edit/{id}', [DashboardController::class, 'editprofile'])->name('dashboard.profile.edit');
     Route::put('dashboard/profile/update/{id}', [DashboardController::class, 'updateprofile'])->name('dashboard.profile.update');
+
     Route::get('add/quick', [TripController::class, 'createQuick'])->name('add.quick');
     Route::get('add/vehicle', [TripController::class, 'createVehicle'])->name('add.vehicle');
     Route::get('trip/index', [TripController::class, 'index'])->name('trip.index');
@@ -103,7 +101,6 @@ Route::middleware('auth:company')->group(function () {
     Route::delete('trip/delete/{id}', [TripController::class, 'destroy'])->name('trip.delete');
     Route::post('trip/storeQuick', [TripController::class, 'storeQuick'])->name('trip.storeQuick');
     Route::post('trip/storeVehicle', [TripController::class, 'storeVehicle'])->name('trip.storeVehicle');
-
     Route::get('/trips/filter', [TripController::class, 'filter'])->name('trips.filter');
 
     Route::get('add/bus', [BusController::class, 'create'])->name('add.bus');
@@ -129,27 +126,29 @@ Route::middleware('auth:company')->group(function () {
     Route::delete('reservation/delete/{id}', [ReservationController::class, 'destroy'])->name('reservation.delete');
     Route::get('reservation/add', [ReservationController::class, 'create'])->name('add.reservation');
     Route::post('reservation/store', [ReservationController::class, 'storeAdmin'])->name('storeAdmin.reservation');
-
-    // routes/web.php
     Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
     Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
 
-    Route::group(['prefix' => 'api', 'as' => 'api.'], function () {
-        Route::get('/trips', [App\Http\Controllers\TripController::class, 'getTrips'])->name('trips');
-    });
-    Route::get('/trips', [TripController::class, 'getTrips']);
-
     Route::get('passenger/index', [PassengerController::class, 'index'])->name('index.passenger');
     Route::get('passenger/edit/{id}', [PassengerController::class, 'edit'])->name('passenger.edit');
-    Route::delete('passenger/delete/{id}', [PassengerController::class, 'destroy'])->name('passenger.delete');
+    Route::put('passenger/update/{id}', [PassengerController::class, 'update'])->name('passenger.update');
 
-
-
-    // للحصول على تفاصيل المستخدم
+    Route::delete('passenger/delete/{id}/{reservation_id}', [PassengerController::class, 'destroy'])
+        ->name('passenger.delete');
     Route::get('/user/details', [UserController::class, 'getUserDetails'])->name('user.details');
-
-    // للحصول على تفاصيل الرحلة
     Route::get('/trip/details', [TripController::class, 'getTripDetails'])->name('trip.details');
+    Route::get('/plan/details', [PlanController::class, 'getPlanDetails'])->name('plan.details');
+    Route::get('/plans/getAllPlan', [PlanController::class, 'getAllPlan'])->name('all.plans');
+
+    Route::get('subscribtion/index', [SubscriptionController::class, 'index'])->name('index.subscription');
+    Route::delete('shisubscriptionpping/delete/{id}', [SubscriptionController::class, 'destroy'])->name('subscription.delete');
+
+    Route::get('shipping/add', [ShippingController::class, 'create'])->name('add.shipping');
+    Route::get('shipping/index', [ShippingController::class, 'index'])->name('index.shipping');
+    Route::post('shipping/store', [ShippingController::class, 'store'])->name('store.shipping');
+    Route::get('shipping/edit/{id}', [ShippingController::class, 'edit'])->name('shipping.edit');
+    Route::put('shipping/update/{id}', [ShippingController::class, 'update'])->name('shipping.update');
+    Route::delete('shipping/delete/{id}', [ShippingController::class, 'destroy'])->name('shipping.delete');
 });
 Route::post('set-theme', function () {
     Session::put('theme', request()->get('theme'));

@@ -54,7 +54,7 @@ class User extends Authenticatable
     }
     public function subscribtion(): HasMany
     {
-        return $this->hasMany(Subscribtion::class);
+        return $this->hasMany(Subscription::class);
     }
     public function shipping(): HasMany
     {

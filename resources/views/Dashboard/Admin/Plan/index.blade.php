@@ -18,8 +18,9 @@
     </x-Content.normal>
 @endsection
 
+
 @section('modal')
-    <x-Modals.delete message="Are you sure to delete this category ?"></x-Modals.delete>
+    <x-Modals.delete message="Are you sure to delete this Plan ?"></x-Modals.delete>
 @endsection
 
 @push('layout-scripts')

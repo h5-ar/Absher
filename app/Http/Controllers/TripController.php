@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CreateTripVehicleRequest;
 use App\Http\Requests\CreateTripQuickRequest;
 use App\Http\Requests\UpdateTripRequest;
-
-
-
 use Illuminate\Http\Request;
 
 class TripController extends Controller

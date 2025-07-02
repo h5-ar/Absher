@@ -66,7 +66,7 @@ class ReservationController extends Controller
                 'father_name' => $passenger['father_name'],
                 'last_name' => $passenger['last_name'],
                 'seat_number' => $passenger['seat_number'],
-                'subscribtion_id' => $passenger['subscribtion_id'] ?? null,
+                'subscription_id' => $passenger['subscription_id'] ?? null,
                 'from' => $trip->path->from,
                 'to' => $trip->path->getLastDestinationAttribute()
             ]);
@@ -88,26 +88,59 @@ class ReservationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+
     public function edit($id)
     {
+        $reservation = Reservation::with(['trip', 'passengers'])->findOrFail($id);
 
-        $reservation = Reservation::findOrFail($id);
-        return view('Dashboard.Admin.Reservation.edit', compact('reservation'));
+        $stations = [
+            'from' => $reservation->trip->path->from,
+            'to1' => $reservation->trip->path->to1,
+            'to2' => $reservation->trip->path->to2,
+            'to3' => $reservation->trip->path->to3,
+            'to4' => $reservation->trip->path->to4,
+            'to5' => $reservation->trip->path->to5,
+        ];
+
+        // إزالة القيم الفارغة والمكررة
+        $uniqueStations = array_unique(array_filter($stations));
+
+
+        return view('Dashboard.Admin.Reservation.edit', [
+            'reservation' => $reservation,
+            'stations' => $stations
+        ]);
     }
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+
+    public function update(CreateAdminReservation $request, $id)
     {
         $reservation = Reservation::findOrFail($id);
-
         $reservation->update([
-
-            'count_seats' => $request['count_seats'],
-
+            'trip_id' => $request->trip_id,
+            'count_seats' => $request->seats_count,
         ]);
+        // تحديث بيانات الركاب
+        foreach ($request->passengers as $passengerData) {
+            Passenger::updateOrCreate(
+                [
+                    'reservation_id' => $reservation->id,
+                    'seat_number' => $passengerData['seat_number'],
+                ],
+                [
+                    'first_name' => $passengerData['first_name'],
+                    'father_name' => $passengerData['father_name'],
+                    'last_name' => $passengerData['last_name'],
+                    'subscription_id' => $passengerData['subscription_id'] ?? null,
+                    'from' => $passengerData['departure_point'] ?? null,
+                    'to' => $passengerData['arrival_point'] ?? null
+                ]
+            );
+        }
         Session::flash('successMessage', translate('Updated successfully'));
-        return to_route('index.reservation');
+        return redirect()->route('index.reservation');
     }
 
     /**
@@ -148,6 +181,4 @@ class ReservationController extends Controller
 
         return response()->json($trips);
     }
-
-
 }

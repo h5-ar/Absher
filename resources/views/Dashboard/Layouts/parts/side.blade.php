@@ -2,7 +2,7 @@
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item me-auto">
-                <a class="navbar-brand" href="{{ route('dashboard') }}">
+                <a class="navbar-brand" href="{{ route('super_admin.dashboard') }}">
                     <h2 class="brand-text">{{ translate('Absher') }}</h2>
                 </a>
             </li>
@@ -18,7 +18,8 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <x-side.naveItem name="Trips" data_fether="layers">
+
+            <x-side.naveItem name="Trips" data_fether="map-pin">
                 <x-side.menuContent name="All Trips"
                     routeName="index" />
                 <x-side.menuContent name="Add New Trip"
@@ -31,12 +32,31 @@
                 <x-side.menuContent name="Add New Bus"
                     routeName="dashboard" />
             </x-side.naveItem>
-            <x-side.naveItem name="Subscribtions" data_fether="layers">
-                <x-side.menuContent name="Add New Subscribtion"
-                    routeName="dashboard" />
-                <x-side.menuContent name="All Subscribtions"
-                    routeName="dashboard" />
+            <x-side.naveItem name="Plans" data_fether="file-text">
+                <x-side.menuContent name=" All Plans"
+                    routeName="index.plan" />
+                <x-side.menuContent name="Add New Plan"
+                    routeName="add.plan" />
+
             </x-side.naveItem>
+            <x-side.naveItem name="Reservation" data_fether="file-text">
+                <x-side.menuContent name=" All Resrvation"
+                    routeName="index.reservation" />
+                <x-side.menuContent name="Add New Resrvation"
+                    routeName="add.reservation" />
+
+            </x-side.naveItem>
+            <x-side.naveItem name="Subscription" data_fether="file-text">
+                <x-side.menuContent name=" All Subscription"
+                    routeName="index.subscription" />
+            </x-side.naveItem>
+            <x-side.naveItem name="Shipping" data_fether="file-text">
+                <x-side.menuContent name=" All Shipping"
+                    routeName="index.shipping" />
+                     <x-side.menuContent name="Add New Shipping"
+                    routeName="add.shipping" />
+            </x-side.naveItem>
+
         </ul>
     </div>
 </div>
