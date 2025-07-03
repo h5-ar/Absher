@@ -61,8 +61,11 @@ class SATripController extends Controller
      */
     public function storeQuick(SACreateTripQuickRequest $request)
     {
+        $bus = Bus::findOrFail($request->Bus);
+
         $tripId = Trip::insertGetId([
             'company_id' => $request->company,
+            'available_seats' => $bus->seats_count,
 
             'price' => $request->price,
             'bus_id' => $request->Bus,
@@ -72,7 +75,7 @@ class SATripController extends Controller
         ]);
 
         Path::create([
-                                    'type' => $request->type,
+            'type' => $request->type,
 
             'from' => $request->from,
             'to1' => $request->to,
@@ -84,7 +87,11 @@ class SATripController extends Controller
     }
     public function storeVehicle(SACreateTripVehicleRequest $request)
     {
+        $bus = Bus::findOrFail($request->Bus);
+
         $tripId = Trip::insertGetId([
+            'available_seats' => $bus->seats_count,
+
             'company_id' => $request->company,
             'price' => $request->price,
             'bus_id' => $request->Bus,
@@ -93,7 +100,7 @@ class SATripController extends Controller
         ]);
 
         Path::create([
-                                    'type' => $request->type,
+            'type' => $request->type,
 
             'from' => $request->from,
             'to1' => $request->to1,
@@ -164,8 +171,8 @@ class SATripController extends Controller
      */
     public function destroy($id)
     {
-       $trip = Trip::findOrFail($id);
-      
+        $trip = Trip::findOrFail($id);
+
         $trip->delete();
         Session::flash('successMessage', translate('Deleted successfully'));
         return to_route('index');

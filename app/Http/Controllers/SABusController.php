@@ -94,7 +94,6 @@ class SABusController extends Controller
     public function destroy($id)
     {
         $bus = Bus::findOrFail($id);
-
         $bus->delete();
 
         Session::flash('successMessage', translate('Deleted successfully'));

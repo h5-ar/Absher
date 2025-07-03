@@ -31,9 +31,15 @@
                                     lable="{{ translate('Father Name') }}"
                                     type="text"
                                     value="{{ $passenger->father_name }}" />
-
                                 <x-inputs.h-input
-                                    inputName="last_name"
+                                    inputName="National_number"
+                                    inputId="National_number"
+                                    lable="{{ translate('National Number') }}"
+                                    type="text"
+                                    value="{{ $passenger->National_number }}" 
+                                     onkeypress="return isNumberKey(event,10)"/>
+                                <x-inputs.h-input
+                                    inputName=" last_name"
                                     inputId="last_name"
                                     lable="{{ translate('Last Name') }}"
                                     type="text"

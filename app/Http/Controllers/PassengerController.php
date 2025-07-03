@@ -82,6 +82,7 @@ class PassengerController extends Controller
         $passenger = Passenger::findOrFail($id);
 
         $passenger->update([
+            'National_number' => $request['National_number'],
             'first_name' => $request['first_name'],
             'father_name' => $request['father_name'],
             'last_name' => $request['last_name'],

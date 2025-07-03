@@ -18,9 +18,7 @@
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('National Number Recipient') }}
                 </th>
-                <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
-                    {{ translate('Size') }}
-                </th>
+
                 <th scope="col" class="text-nowrap w-30 fs-4 fw-bolder text-center">
                     {{ translate('Shipment Status') }}
                 </th>
@@ -51,17 +49,13 @@
                     {{ $shipment->user->first_name}} {{$shipment->user->last_name}}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{ $shipment->name_user_to }}
+                    {{ $shipment->name_user_to}}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{ translate($shipment->phone_user_to	)}}
+                    {{ translate($shipment->phone_to	)}}
                 </td>
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{ $shipment->national_number_user_to }}
-                </td>
-
-                <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
-                    {{ translate($shipment->size)}}
+                    {{ $shipment->national_number_to }}
                 </td>
 
                 <td class="text-nowrap w-50 text-capitalize fs-4 fw-bolder text-center">
@@ -83,7 +77,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="9" class="text-center fs-4 fw-bolder"> {{ translate('No Data') }} </td>
+                <td colspan="8" class="text-center fs-4 fw-bolder"> {{ translate('No Data') }} </td>
             </tr>
             @endforelse
 
@@ -152,6 +146,8 @@
 
                                 <th class="text-nowrap w-10 fs-4 fw-bolder text-center">{{ translate('Shipment No') }}</th>
                                 <th class="text-nowrap w-20 fs-4 fw-bolder text-center">{{ translate('Material Item') }}</th>
+                                <th class="text-nowrap w-20 fs-4 fw-bolder text-center">{{ translate('Size') }}</th>
+
                                 <th class="text-nowrap w-20 fs-4 fw-bolder text-center">{{ translate('Description Item') }}</th>
                             </tr>
 
@@ -337,6 +333,8 @@
                             <tr>
                                 <td class="text-nowrap fs-5 fw-bolder text-center">${item.shipping_id}</td>
                                 <td class="text-nowrap fs-5 fw-bolder text-center">${item.material_value}</td>
+                                 <td class="text-nowrap fs-5 fw-bolder text-center">${item.size}</td>
+
                                 <td class="text-nowrap fs-5 fw-bolder text-center">${item.description_item}</td>
                                    </tr>
                         `;

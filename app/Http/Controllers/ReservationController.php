@@ -31,7 +31,7 @@ class ReservationController extends Controller
         $reservationId = $request->input('reservation_id');
 
         $passengers = Passenger::where('reservation_id', $reservationId)
-            ->select('id', 'reservation_id', 'first_name', 'father_name', 'last_name', 'seat_number', 'from', 'to')
+            ->select('id', 'reservation_id', 'first_name', 'father_name','National_number', 'last_name', 'seat_number', 'from', 'to')
             ->get();
 
         return response()->json([
@@ -65,6 +65,7 @@ class ReservationController extends Controller
                 'first_name' => $passenger['first_name'],
                 'father_name' => $passenger['father_name'],
                 'last_name' => $passenger['last_name'],
+                'National_number'=>$passenger['National_number'],
                 'seat_number' => $passenger['seat_number'],
                 'subscription_id' => $passenger['subscription_id'] ?? null,
                 'from' => $trip->path->from,

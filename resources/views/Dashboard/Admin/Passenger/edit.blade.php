@@ -40,6 +40,14 @@
                                     value="{{ $passenger->last_name }}" />
 
                                 <x-inputs.h-input
+                                    inputName="National_number"
+                                    inputId="National_number"
+                                    lable="{{ translate('National Number') }}"
+                                    type="text"
+                                    value="{{ $passenger->National_number }}"
+                                     onkeypress="return isNumberKey(event,10)" />
+
+                                <x-inputs.h-input
                                     inputName="seat_number"
                                     inputId="seat_number"
                                     lable="{{ translate('Seat Number') }}"

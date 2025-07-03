@@ -86,12 +86,12 @@ class TripController extends Controller
      */
     public function createQuick()
     {
-$buses = Bus::where('Company_id', Auth::id())->get();
+        $buses = Bus::where('Company_id', Auth::id())->get();
         return view('Dashboard.Admin.Trip.createQuick', compact('buses'));
     }
     public function createVehicle()
     {
-$buses = Bus::where('Company_id', Auth::id())->get();
+        $buses = Bus::where('Company_id', Auth::id())->get();
         return view('Dashboard.Admin.Trip.createVehicle', compact('buses'));
     }
 
@@ -100,8 +100,10 @@ $buses = Bus::where('Company_id', Auth::id())->get();
      */
     public function storeQuick(CreateTripQuickRequest $request)
     {
+        $bus = Bus::findOrFail($request->Bus);
         $companyId = $this->getLoggedInCompanyId();
         $tripId = Trip::insertGetId([
+            'available_seats' => $bus->seats_count,
             'price' => $request->price,
             'bus_id' => $request->Bus,
             'company_id' => $companyId,
@@ -111,7 +113,7 @@ $buses = Bus::where('Company_id', Auth::id())->get();
         ]);
 
         Path::insert([
-                        'type' => $request->type,
+            'type' => $request->type,
 
             'from' => $request->from,
             'to1' => $request->to,
@@ -130,8 +132,12 @@ $buses = Bus::where('Company_id', Auth::id())->get();
     }
     public function storeVehicle(CreateTripVehicleRequest $request)
     {
+        $bus = Bus::findOrFail($request->Bus);
+
         $companyId = $this->getLoggedInCompanyId();
         $tripId = Trip::insertGetId([
+            'available_seats' => $bus->seats_count,
+
             'price' => $request->price,
             'bus_id' => $request->Bus,
             'company_id' => $companyId,
@@ -140,7 +146,7 @@ $buses = Bus::where('Company_id', Auth::id())->get();
         ]);
 
         Path::insert([
-                        'type' => $request->type,
+            'type' => $request->type,
             'from' => $request->from,
             'to1' => $request->to1,
             'to2' => $request->to2,
@@ -215,13 +221,6 @@ $buses = Bus::where('Company_id', Auth::id())->get();
     public function destroy($id)
     {
         $trip = Trip::with(['reservations.passengers', 'shipping', 'path'])->findOrFail($id);
-        foreach ($trip->reservation as $reservation) {
-            $reservation->passengers()->delete();
-        }
-        $trip->reservation()->delete();
-        $trip->shipping()->delete();
-
-        $trip->path()->delete();
         $trip->delete();
         Session::flash('successMessage', translate('Deleted successfully'));
         return to_route('trip.index');
