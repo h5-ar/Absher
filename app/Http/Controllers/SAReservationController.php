@@ -46,6 +46,7 @@ class SAReservationController extends Controller
         $trip = Trip::findOrFail($request->trip_id);
         foreach ($request->passengers as $passenger) {
             $passengerr = Passenger::create([
+                'National_number'=>$passenger['National_number'],
                 'reservation_id' => $reservationId,
                 'first_name' => $passenger['first_name'],
                 'father_name' => $passenger['father_name'],
@@ -145,7 +146,7 @@ class SAReservationController extends Controller
         $reservationId = $request->input('reservation_id');
 
         $passengers = Passenger::where('reservation_id', $reservationId)
-            ->select('id', 'reservation_id', 'first_name', 'father_name', 'last_name', 'seat_number', 'from', 'to')
+            ->select('id', 'reservation_id', 'first_name', 'father_name','National_number','last_name', 'seat_number', 'from', 'to')
             ->get();
 
         return response()->json([

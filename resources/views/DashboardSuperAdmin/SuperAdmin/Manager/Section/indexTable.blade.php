@@ -34,7 +34,6 @@
                 </td>
                 <td class="text-nowrap w-30 text-capitalize fs-5 fw-bolder text-center">
                     <x-Button.edit route="{{ route('edit.manager', $manager->id) }}" />
-                    <x-Button.delete route="{{ route('delete.manager',$manager->id) }}" />
                 </td>
             </tr>
             @empty

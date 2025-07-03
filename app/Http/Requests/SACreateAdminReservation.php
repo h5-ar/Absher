@@ -14,6 +14,8 @@ class SACreateAdminReservation extends FormRequest
     {
         return [
             'trip_id' => 'required|exists:trips,id',
+            'National_number' => 'required'|'min:10',
+
             'seats_count' => 'required|integer|min:1',
             'passengers' => 'required|array',
             'passengers.*.first_name' => 'required|string',

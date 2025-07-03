@@ -102,7 +102,7 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         $company = Company::findOrFail($id);
-    
+
         $company->delete();
         Session::flash('successMessage', translate('Deleted successfully'));
         return to_route('company.index');

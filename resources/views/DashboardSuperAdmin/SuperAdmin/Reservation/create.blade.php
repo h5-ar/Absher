@@ -304,7 +304,13 @@
                             lable="{{ translate('Last Name') }}"
                             type="text"
                             />
-                   
+                    <x-inputs.h-input
+                            inputName="passengers[${passengerNumber}][National_number]"
+                            inputId="passenger_${passengerNumber}_National_number"
+                            lable="{{ translate('National Number') }}"
+                            type="text"
+                            placeholder="09XXXXXXXX" onkeypress="return isNumberKey(event,10)"
+                                                            />
                         <x-inputs.h-input
                             inputName="passengers[${passengerNumber}][seat_number]"
                             inputId="passenger_${passengerNumber}_seat_number"

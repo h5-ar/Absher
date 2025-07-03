@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('trips', function (Blueprint $table) {
+            $table->dropForeign(['bus_id']);
 
-    Schema::table('trips', function (Blueprint $table) {
-        $table->integer('available_seats')->after('take_off_at')->default(0);
-        });
+            $table->foreign('bus_id')
+                ->references('id')
+                ->on('buses')
+                ->onDelete('cascade');
         });
     }
 
@@ -25,9 +27,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('trips', function (Blueprint $table) {
-            Schema::table('trips', function (Blueprint $table) {
-        $table->dropColumn('available_seats');
-    });
+            //
         });
     }
 };

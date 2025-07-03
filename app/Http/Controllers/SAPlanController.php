@@ -110,7 +110,6 @@ class SAPlanController extends Controller
     public function destroy($id)
     {
         $plan = Plan::findOrFail($id);
-        $plan->subscription()->delete();
         $plan->delete();
         Session::flash('successMessage', translate('Deleted successfully'));
         return to_route('SAindex.plan');

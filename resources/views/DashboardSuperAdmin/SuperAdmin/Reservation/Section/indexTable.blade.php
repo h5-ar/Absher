@@ -95,6 +95,8 @@
                                 <th class="text-nowrap w-20 fs-4 fw-bolder text-center">{{ translate('First Name') }}</th>
                                 <th class="text-nowrap w-20 fs-4 fw-bolder text-center">{{ translate('Father Name') }}</th>
                                 <th class="text-nowrap w-20 fs-4 fw-bolder text-center">{{ translate('Last Name') }}</th>
+                                <th class="text-nowrap w-20 fs-4 fw-bolder text-center">{{ translate('Nationa Number') }}</th>
+
                                 <th class="text-nowrap w-15 fs-4 fw-bolder text-center">{{ translate('Seat Number') }}</th>
                                 <th class="text-nowrap w-15 fs-4 fw-bolder text-center">{{ translate('From') }}</th>
                                 <th class="text-nowrap w-15 fs-4 fw-bolder text-center">{{ translate('To') }}</th>
@@ -234,6 +236,7 @@
                                 <td class="text-nowrap fs-5 fw-bolder text-center">${passenger.first_name}</td>
                                 <td class="text-nowrap fs-5 fw-bolder text-center">${passenger.father_name}</td>
                                 <td class="text-nowrap fs-5 fw-bolder text-center">${passenger.last_name}</td>
+                                <td class="text-nowrap fs-5 fw-bolder text-center">${passenger.National_number}</td>
                                 <td class="text-nowrap fs-5 fw-bolder text-center">${passenger.seat_number}</td>
                                 <td class="text-nowrap fs-5 fw-bolder text-center">${passenger.from}</td>
                                 <td class="text-nowrap fs-5 fw-bolder text-center">${passenger.to}</td>

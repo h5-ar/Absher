@@ -22,7 +22,7 @@
                             <div class="col-sm-9">
                                 <div class="input-group">
                                     <input type="text" id="trip_select" class="form-control trip-input" readonly
-                                        placeholder="{{ translate('Enter To Select Trip') }}"onclick="showTripsModal()">
+                                        placeholder="{{ translate('Enter To Select Trip') }}" onclick="showTripsModal()">
                                 </div>
                             </div>
                         </div>
@@ -262,6 +262,7 @@
                             type="text"
                             
                              />
+                             
               
                         <x-inputs.h-input
                             inputName="passengers[${passengerNumber}][father_name]"
@@ -276,7 +277,13 @@
                             lable="{{ translate('Last Name') }}"
                             type="text"
                             />
-                   
+                   <x-inputs.h-input
+                            inputName="passengers[${passengerNumber}][National_number]"
+                            inputId="passenger_${passengerNumber}_National_number"
+                            lable="{{ translate('National Number') }}"
+                            type="text"
+                            placeholder="09XXXXXXXX" onkeypress="return isNumberKey(event,10)"
+                                                            />
                         <x-inputs.h-input
                             inputName="passengers[${passengerNumber}][seat_number]"
                             inputId="passenger_${passengerNumber}_seat_number"
