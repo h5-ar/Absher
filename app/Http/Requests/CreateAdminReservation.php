@@ -15,7 +15,6 @@ class CreateAdminReservation extends FormRequest
     {
         return [
             'trip_id' => 'required|exists:trips,id',
-            'National_number'=>'required'|'min:10',
             'seats_count' => [
                 'required',
                 'integer',
@@ -25,6 +24,8 @@ class CreateAdminReservation extends FormRequest
             'passengers.*.first_name' => 'required|string',
             'passengers.*.father_name' => 'required|string',
             'passengers.*.last_name' => 'required|string',
+            'passengers.*.National_number' => 'required|unique:passengers,National_number',
+
             'passengers.*.departure_point' => 'required|different:passengers.*.arrival_point',
             'passengers.*.arrival_point' => 'required|different:passengers.*.departure_point',
 

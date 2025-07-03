@@ -15,6 +15,7 @@ class CreatePassengerRequest extends FormRequest
     {
         return [
             'reservation_id' => 'required|exists:reservations,id', // تأكد من وجود الحجز
+            'National_number' => 'required',
             'first_name' => 'required|string',
             'father_name' => 'required|string',
             'last_name' => 'required|string',
@@ -37,7 +38,7 @@ class CreatePassengerRequest extends FormRequest
                 $q->where('trip_id', $tripId);
             })
                 ->where('seat_number', $seatNumber)->where('id', '!=', $passengerId);
-                
+
             if ($query->exists()) {
                 $validator->errors()->add(
                     "seat_number",

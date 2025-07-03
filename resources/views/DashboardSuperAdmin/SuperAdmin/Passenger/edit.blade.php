@@ -36,7 +36,8 @@
                                     inputId="National_number"
                                     lable="{{ translate('National Number') }}"
                                     type="text"
-                                    value="{{ $passenger->National_number }}" />
+                                    value="{{ $passenger->National_number }}" 
+                                     onkeypress="return isNumberKey(event,10)"/>
                                 <x-inputs.h-input
                                     inputName=" last_name"
                                     inputId="last_name"

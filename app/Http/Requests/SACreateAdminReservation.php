@@ -14,13 +14,14 @@ class SACreateAdminReservation extends FormRequest
     {
         return [
             'trip_id' => 'required|exists:trips,id',
-            'National_number' => 'required'|'min:10',
 
             'seats_count' => 'required|integer|min:1',
             'passengers' => 'required|array',
             'passengers.*.first_name' => 'required|string',
             'passengers.*.father_name' => 'required|string',
             'passengers.*.last_name' => 'required|string',
+            'passengers.*.National_number' => 'required|unique:passengers,National_number',
+
             'passengers.*.departure_point' => 'required|different:passengers.*.arrival_point',
             'passengers.*.arrival_point' => 'required|different:passengers.*.departure_point',
             'passengers.*.seat_number' => 'required|string',
