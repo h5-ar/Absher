@@ -70,7 +70,7 @@
                             </a>
                             @endforeach
                             @if(Auth::User()->unreadNotifications->count() == 0)
-<div class="d-flex">
+                            <div class="d-flex">
                                 <div class="list-item d-flex align-items-start">
                                     <div class="list-item-body flex-grow-1">
                                         <p class="text-center">{{translate('No new notifications')}}</p>
@@ -130,7 +130,7 @@
                 $('#notification-count').text(0);
                 $('#unread-notifications-count').text(0);
 
-                $("#normal-notifications").html(
+                $("#normal-notifications").html(`
                     <div class="d-flex">
                         <div class="list-item d-flex align-items-start">
                             <div class="list-item-body flex-grow-1">
@@ -138,7 +138,7 @@
                             </div>
                         </div>
                     </div>
-                );
+                `);
 
                 $("#markAllAsReadBtn").addClass('d-none');
             }
@@ -164,8 +164,9 @@
                 $('#unread-notifications-count').text(unreadCount - 1);
 
                 $(elem).remove();
+
                 if ($('.notification-item').length === 0) {
-                    $("#normal-notifications").html(
+                    $("#normal-notifications").html(`
                         <div class="d-flex">
                             <div class="list-item d-flex align-items-start">
                                 <div class="list-item-body flex-grow-1">
@@ -173,7 +174,7 @@
                                 </div>
                             </div>
                         </div>
-                    );
+                    `);
                     $("#markAllAsReadBtn").addClass('d-none');
                 }
             },

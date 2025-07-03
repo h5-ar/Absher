@@ -60,7 +60,7 @@ Route::prefix('subscriptions')->group(function () {
     Route::delete('/reservations/{userId}/{reservationId}', [App\Http\Controllers\Api\ReservationController::class, 'destroy']);
  Route::get('/myreservations/{userId}', [App\Http\Controllers\Api\ReservationController::class, 'esraa_Reservations']);
     Route::post('/esstore/{userId}', [App\Http\Controllers\Api\ReservationController::class, 'hastore']);
-    Route::put('/updatee/{reservationId}/{userId}', [App\Http\Controllers\Api\ReservationController::class, 'updatee']);
+    Route::put('/updatee/{reservationId}/{userId}', [App\Http\Controllers\Api\ReservationController::class, 'updatePassengers']);
 
 
      Route::get('trips',[TripController::class,'index']);

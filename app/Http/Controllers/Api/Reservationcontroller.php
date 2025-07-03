@@ -109,8 +109,8 @@ class ReservationController extends Controller
             'passengers.*.last_name' => 'sometimes|string',
             'passengers.*.National_number' => 'sometimes|numeric|digits:11',
             'passengers.*.seat_number' => 'sometimes|integer',
-            'passengers.*.from' => 'sometimes|string',
-            'passengers.*.to' => 'sometimes|string',
+          //  'passengers.*.from' => 'sometimes|string',
+          //  'passengers.*.to' => 'sometimes|string',
         ]);
 
         if (isset($data['count_seats'])) {
@@ -155,8 +155,19 @@ public function esraa_Reservations(Request $request,$userId )
         ])->filter()->values()->all();
 
         $seatNumbers = $reservation->passengers->pluck('seat_number')->filter()->values();
-
+ $passengers = $reservation->passengers->map(function ($p) {
+            return [
+                'first_name' => $p->first_name,
+                'father_name' => $p->father_name,
+                'last_name' => $p->last_name,
+                'national_number' => $p->National_number,
+                'seat_number' => $p->seat_number,
+                'from' => $p->from,
+                'to' => $p->to,
+            ];
+        });
         return [
+            
             'reservation_id' => $reservation->id,
             'trip_id' => $trip->id,
             'company_name' => $companyName,
@@ -164,6 +175,7 @@ public function esraa_Reservations(Request $request,$userId )
             'to' => $to,
             'take_off_at' => $trip->take_off_at,
             'seat_numbers' => $seatNumbers,
+            'passengers' => $passengers,
         ];
     })->filter()->values(); // حذف العناصر null الناتجة عن الرحلات غير الصالحة
 
@@ -402,6 +414,70 @@ $trip->decrement('available_seats', $seatsRequested);
 
 
 }
+public function updateReservationWithPassengers(Request $request, $userId, $reservationId)
+{
+    $reservation = Reservation::where('id', $reservationId)
+        ->where('user_id', $userId)
+        ->with('passengers')
+        ->firstOrFail();
+$request->replace($request->except(['count_seats', 'paidwy']));
+
+    $request->validate([
+      ////  'count_seats' => 'required|integer|min:1',
+       // 'paidwy' => 'required|in:cach,subscription',
+        'passengers' => 'required|array|min:1',
+        'passengers.*.id' => 'required|exists:passengers,id',
+        'passengers.*.name' => 'required|string|max:255',
+        'passengers.*.phone' => 'required|string|max:20',
+        'passengers.*.national_number' => 'required|string|max:20',
+        'passengers.*.seat_number' => 'required|integer|min:1',
+    ]);
+
+    // $oldCount = $reservation->count_seats;
+    // $newCount = $request->count_seats;
+    // $diff = $newCount - $oldCount;
+
+    // $trip = $reservation->trip;
+
+    // if ($diff > 0 && $trip->available_seats < $diff) {
+    //     return response()->json([
+    //         'success' => false,
+    //         'message' => 'عدد الكراسي المتاحة لا يكفي.'
+    //     ], 422);
+    // }
+
+    // تعديل عدد الكراسي المتاحة في الرحلة
+    // $trip->available_seats -= $diff;
+    // $trip->save();
+
+    // // تعديل بيانات الحجز
+    // $reservation->update([
+    //     'count_seats' => $newCount,
+    //     'paidwy' => $request->paidwy,
+    // ]);
+
+    // تعديل بيانات كل مسافر
+    foreach ($request->passengers as $passengerData) {
+        $passenger = Passenger::where('id', $passengerData['id'])
+            ->where('reservation_id', $reservation->id)
+            ->first();
+
+        if ($passenger) {
+            $passenger->update([
+                'name' => $passengerData['name'],
+                'phone' => $passengerData['phone'],
+                'national_number' => $passengerData['national_number'],
+                'seat_number' => $passengerData['seat_number'],
+            ]);
+        }
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'تم تحديث الحجز والمسافرين بنجاح.',
+        'reservation' => $reservation->load('passengers')
+    ]);
+}
 public function updatee(Request $request, $reservationId,$userId)
 {
     // من التطبيق نفسه، يجي user_id من غير auth رسمي
@@ -453,7 +529,7 @@ $reservation = Reservation::where('id', $reservationId)
 
       $request->validate([
       //  'user_id' => 'nullable|exists:users,id',
-        'trip_id' => 'required|exists:trips,id',
+       // 'trip_id' => 'required|exists:trips,id',
         'count_seats' => 'required|integer|min:1',
         'paidwy' => 'required|in:cach,subscription',
     ]);
@@ -462,7 +538,7 @@ $reservation = Reservation::where('id', $reservationId)
 
     $reservation->update([
       //  'user_id' => $request->user_id,
-        'trip_id' => $request->trip_id,
+        //'trip_id' => $request->trip_id,
         'count_seats' => $request->count_seats,
         'paidwy' => $request->paidwy,
     ]);
@@ -537,7 +613,7 @@ public function hastore(Request $request,$userId)
             'National_number' => $passenger['National_number'],
             'seat_number' => $passenger['seat_number'],
             'from' => $passenger['from'],
-            'to' => $passenger['to'],
+           'to' => $passenger['to'],
             'subscription_id' => $subscription?->id,
         ]);
 
@@ -561,4 +637,43 @@ public function hastore(Request $request,$userId)
 ], 201);
 
 }
+public function updatePassengers(Request $request, $reservationId)
+{
+    $reservation = Reservation::with('passengers')->findOrFail($reservationId);
+
+    $request->validate([
+        'passengers' => 'required|array|min:1',
+        'passengers.*.id' => 'required|exists:passengers,id',
+        'passengers.*.first_name' => 'required|string',
+        'passengers.*.father_name' => 'required|string',
+        'passengers.*.last_name' => 'required|string',
+       // 'passengers.*.phone' => 'required|string|max:20',
+        'passengers.*.national_number' => 'required|string|max:20',
+        'passengers.*.seat_number' => 'required|integer|min:1',
+    ]);
+
+    foreach ($request->passengers as $passengerData) {
+        $passenger = Passenger::where('id', $passengerData['id'])
+            ->where('reservation_id', $reservation->id)
+            ->first();
+
+        if ($passenger) {
+            $passenger->update([
+                'first_name' => $passengerData['first_name'],
+                'father_name' => $passengerData['father_name'],
+                'last_name' => $passengerData['last_name'],
+                //'phone' => $passengerData['phone'],
+                'national_number' => $passengerData['national_number'],
+                'seat_number' => $passengerData['seat_number'],
+            ]);
+        }
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'تم تحديث بيانات المسافرين بنجاح.',
+        'passengers' => $reservation->fresh()->passengers
+    ]);
+}
+
 }
