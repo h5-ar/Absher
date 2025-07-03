@@ -115,13 +115,21 @@ class NotificationController extends Controller
         ]);
 
         $company = Company::where('id', Auth::id())->first();
-        $user = User::where('email', $request->email)->firstOrFail();
+        $user = User::where('email', $request->email)->first(); // تغيير من firstOrFail() إلى first()
+
+        if (!$user) {
+            Session::flash('successMessage', translate('لم يتم العثوم على المستخدم تاكد من البريد الالكتروني'));
+
+            return redirect()->back()
+                ->withInput();
+        }
+
         $reason = $request->reason;
 
         $super_admins = SuperAdmin::distinct('email')->get();
         Notification::send($super_admins, new BlockUserNotification($company, $user, $reason));
+        Session::flash('successMessage', translate('تم إرسال الإشعار بنجاح إلى المشرفين العامين'));
 
-        return redirect()->route('dashboard')
-            ->with('success', 'تم إرسال الإشعار بنجاح إلى المشرفين العامين');
+        return redirect()->route('dashboard');
     }
 }
